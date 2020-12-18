@@ -1,0 +1,85 @@
+.cards{
+    width: 100%;
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    margin-bottom: 15%;
+
+    & p{
+        margin: 0px;
+        font-weight: bold;
+        color: white;
+        width: max-content;
+
+    }
+
+    & .cards__body1{
+        padding: 20px;
+        background-image: url("../../../assets/Clip_iu.png");
+        // background: radial-gradient(farthest-side ellipse at 10% 0,
+        //  #646cb3 20%, #0c3d79);
+         margin: 10px;
+         background-repeat: no-repeat;
+    background-size: cover;
+         border-radius: 10px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+        //  margin-right: 30px;
+         padding-left: 11%;
+         padding-right: 11%
+       
+    }
+    & .cards__body2{
+        padding: 20px;
+        background-image: url("../../../assets/Clip_i.png");
+        // background: radial-gradient(farthest-side ellipse at 10% 0,
+        //  #eb1433 20%, #b90649);
+         margin: 10px;
+         background-repeat: no-repeat;
+    background-size: cover;
+         border-radius: 10px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         
+         padding-left: 11%;
+         padding-right: 11%
+    }
+    & .cards__body3{
+        padding: 20px;
+        background-image: url("../../../assets/Clip_ja.png");
+        // background: radial-gradient(farthest-side ellipse at 10% 0,
+        //  #fd7604 20%, #b16627);
+         margin: 10px;
+         background-repeat: no-repeat;
+    background-size: cover;
+         border-radius: 10px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+        //  margin-right: 30px;
+         padding-left: 11%;
+         padding-right: 11%
+    }
+    & .cards__body4{
+        padding: 20px;
+        background-image: url("../../../assets/Clip_jc.png");
+        // background: radial-gradient(farthest-side ellipse at 10% 0,
+        //  #70d6a8 20%, #8de783);
+        background-repeat: no-repeat;
+    background-size: cover;
+         border-radius: 10px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         margin: 10px;
+         
+         padding-left: 11%;
+         padding-right: 11%
+    }
+}

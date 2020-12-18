@@ -1,0 +1,366 @@
+
+
+.main {
+  margin-left: 15% !important;
+  margin-right: 15% !important;
+  margin-top: 2%;
+
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & .main__resultcard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  & .main__header {
+    border-bottom: 1px solid #e6d9d9;
+    padding-bottom: 1%;
+    width: 98%; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    & span{
+      margin: 0px;
+      margin-bottom: -1%;
+      border: 0.3px solid #ff8100;
+      width: 8%;
+      border-bottom-width: 0px;
+  
+    }
+  }
+  & .total-result1 {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 1px 4px 0px black;
+    margin-top: 7%;
+    & h1 {
+      margin: 0px;
+      color: #4ac1e8;
+      margin-top: 2px;
+      border-radius: 5px;
+    }
+    & h3 {
+      margin: 0px;
+    }
+    
+
+    & .card1 {
+      height: 100%;
+    //   margin-top: 4%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('../../assets/volume_bg.png');
+      background-position: center;
+      background-repeat: no-repeat;
+     
+      background-size: 130px 120px;
+      & p {
+        color: white;
+        background: linear-gradient(
+          262deg,
+          rgba(14, 192, 232, 1) 58%,
+          rgba(67, 133, 227, 1) 97%
+        );
+        margin-top: 5%;
+        border-radius: 5px;
+        padding: 2%;
+        margin-bottom: 5%;
+        padding-left: 6px;
+    padding-right: 6px;
+      }
+      
+    }
+    & .card2 {
+      height: 100%;
+    //   margin-top: 4%;
+    margin-right: -1%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        262deg,
+        rgba(14, 192, 232, 1) 58%,
+        rgba(67, 133, 227, 1) 97%
+      );
+
+      & h3{
+        margin-top: 5%;
+        color: white;
+      }
+
+      & .volume{
+        width: 90%; 
+        margin-bottom: 5%;
+        margin-top:4%;
+        border-radius: 5px;
+        background-color: #4ac1e8;
+        // background: linear-gradient(262deg, #029efd 58%, #a8e9ff 97%);
+      }
+    }
+  }
+  & .total-result2 {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 1px 4px 0px black;
+    margin-top: 7%;
+    & h1 {
+      margin: 0px;
+      color: #eb4137;
+      margin-top: 2px;
+      border-radius: 5px;
+    }
+    & h3 {
+      margin: 0px;
+    }
+    
+
+    & .card1 {
+      height: 100%;
+    //   margin-top: 4%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('../../assets/volume_bg.png');
+      background-position: center;
+      background-repeat: no-repeat;
+     
+      background-size: 130px 120px;
+      & p {
+        background: linear-gradient(262deg, 
+        #ffa0a0 15%, #ff253a 85%);
+        margin-top: 5%;
+        border-radius: 5px;
+        padding: 2%;
+        margin-bottom: 5%;
+        color: white;
+        padding-left: 6px;
+    padding-right: 6px;
+      }
+      
+    }
+    & .card2 {
+      height: 100%;
+    //   margin-top: 4%;
+    margin-right: -1%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #ff8290;
+      // background: linear-gradient(262deg, #ffa0a0 15%, #ff253a 85%);
+
+      & h3{
+        margin-top: 5%;
+        color: white;
+      }
+
+      & .volume{
+        width: 90%; 
+        margin-bottom: 5%;
+        margin-top:4%;
+        border-radius: 5px;
+        
+        background: linear-gradient(262deg, #f36586 58%, #e6b7b7 97%);
+      }
+    }
+  }
+  & .main__refferral-link{
+    margin-top: 2%;
+    background: linear-gradient(262deg, #cceb6a 20%, #82d885 57%);
+    border-radius: 5px;
+    width: 99%;
+    & p{
+      margin: 1%;
+      color: white;
+      & span{
+        font-weight: 600;
+      }
+    }
+  }
+  & .main__deposit{
+    background-color: #19193a;
+    margin-top: 3%;
+    padding: 2%;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 99%;
+
+    & .deposit-icon{
+      border-radius: 50%;
+      padding: 10px;
+      background-color: white;
+      float: none;
+      height: fit-content;
+      width: fit-content;
+     
+      margin-right: 8px;
+    }
+
+    & .deposit__button{
+      margin-left: 1%;
+      font-weight: 600;
+      padding: 9px !important;
+      border: none !important;
+      border-radius: 20px !important;
+      // width: fit-content;
+      
+    
+      background-image: linear-gradient(to right, #eb4657, #ec6a66);
+  }
+
+    & h6{
+      font-weight: 600;
+      margin-right: 5%;
+    }
+
+    & .input-box{
+      // width: 60% !important;
+      background: transparent;
+      border-radius: 30px;
+    }
+  }
+  
+  & .withdraw{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    margin-top: -30%;
+    margin-bottom: 10%;
+    & .withdraw__heading{
+      color: #ef263b;
+      border: 1px solid #e56d69;
+      height: fit-content;
+      padding: 10px;
+      border-radius: 20px;
+      width: fit-content;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    & span{
+      border-bottom: 1px solid #e8d1cf;
+    width: 100%;
+    margin-top: 3%;
+    }
+    & .withdraw-cards{
+      margin-top: 2%;
+      max-width: 48% !important;
+      padding: 0px !important;
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.1);
+
+
+    }
+    & .spn{
+      width: 0% !important;
+      border: none !important;
+      margin-left: 4%;
+    }
+  }
+  & .levels{
+    background-color: #002771;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 101%;
+    & .level-icon{
+      height: fit-content;
+    width: fit-content;
+    padding: 30px;
+    background: linear-gradient(
+          262deg,
+          rgba(14, 192, 232, 1) 58%,
+          rgba(67, 133, 227, 1) 97%
+        );
+    
+    border-radius: 50%;
+    margin-top: -60px;
+    }
+
+    & .level-box{
+      width: 100%;
+      padding: 3%;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 1%;
+
+      & .box{
+        background-color: #001338;
+        height: fit-content;
+        padding: 5px;
+        color: white;
+        margin: 1%;
+      }
+    }
+  }
+}
+
+.cards{
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  width: 102%;
+}
+
+// .withdraw-cards{
+//   margin-top: 2%;
+//   max-width: 48% !important;
+//   padding: 0px !important;
+//   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.1);
+
+
+// }
+
+@media(min-width:600px){
+  
+  .input-box{
+    width: 50% !important;
+    
+  }
+  .main__resultcard{
+    
+  }
+  
+  
+}
+
+@media(max-width:600px){
+  .levels{
+    margin-top: 15%;
+  }
+  
+  .main__deposit{
+    & img{
+      height: 25px !important;
+    }
+    .input-box{
+      width: 100% !important;
+      margin-top: 4%;
+      margin-bottom: 4%;
+    }
+    .deposit__button{
+      width: 100%;
+    }
+
+  }
+}
+
+
+

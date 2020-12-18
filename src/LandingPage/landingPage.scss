@@ -1,0 +1,10 @@
+.header-component{ 
+    height: 30vh;
+    background-color: #05133a;
+    // background-image: url("../assets/bg3.jpg");
+
+    & h1{
+        color: white !important;
+        width: 90% !important;
+    }
+}

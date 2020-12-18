@@ -1,0 +1,146 @@
+.body-main{
+    color: white;
+    padding: 0px !important;
+    
+
+}
+.body-main__content{
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px !important;
+  & h1{
+    font-size: 75px;
+    font-weight: 100;
+    margin: 0px;
+  } 
+  & h2{
+      margin: 0px;
+      font-weight: bolder;
+    font-size: 42px;
+    margin-bottom: 2rem;
+
+  }
+  & span{
+    color: #eb475c;
+  }
+}
+
+.body-main__list{
+    padding: 5px;
+    display: flex;
+    height: fit-content;
+    background-color: #02124cb8;
+    z-index: 1;
+    text-align: start !important;
+   
+    margin-top: 2%;
+    border-left: 3px solid #184fda;
+
+    & p{
+        margin-top: 5px;
+        color: white;
+    font-weight: bolder;
+    font-family: system-ui;
+    }
+    
+}
+
+.body-main__button{
+    margin-top: 5%;
+    border: none !important;
+    border-radius: 20px !important;
+    width: 50%;
+    height: 3rem;
+    font-weight: 600 !important;
+  
+    background-image: linear-gradient(to right, #eb4657, #ec6a66);
+}
+.body-main__footer{
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: #010c2a;
+    margin-top: 5% !important;
+    height: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    margin-left: 0px !important;
+    
+}
+.footer-body{
+    
+    width: 100%;
+    align-items: center;
+    height: fit-content;
+    
+}
+.footer-content{
+    display: flex;
+    align-items: center;
+    // border-left: 2px solid #39475b;
+    height: 60%;
+    // justify-content: center;
+    // margin-bottom: 5%;
+
+    & p{
+        font-weight: 600;
+    }
+}
+.body-main__cards{
+    margin-top: 5%;
+    height: fit-content;
+    padding-left: 15%;
+    padding-right: 15%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+}
+.youtube-vid{
+    background-color: white;
+    // margin-left: -30% !important;
+    // margin-right: -30% !important;
+    margin-top: 5% !important;
+    height: fit-content;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 10%;
+    background-image: url("../../assets/youtube_bg.png");
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+}
+.body-main__bitcoin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.body1{
+    display: flex;
+    justify-content: center;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding-right: 15%;
+    padding-left: 15%;
+   
+    background-image: url("../../assets/header-img.jpg");
+    background-size: cover;
+    // background-position: bottom;
+}
+
+@media(max-width:700px){
+    .footer-content{
+        margin-bottom: 5%;
+        border: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .body-main__button{
+        width: 100% !important;
+    }
+}

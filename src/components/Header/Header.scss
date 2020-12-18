@@ -1,0 +1,79 @@
+.header{
+    color: white;
+    height: fit-content;
+    display: flex;
+    padding: 0px !important;
+    border-bottom: 1px solid #242759;
+    
+    background-color: #05133a;
+    
+}
+.header__logo{
+    display: flex;
+    align-items: center;
+}
+.header__containt{
+    display: flex;
+    align-items: center;
+    padding: 0px !important;
+    justify-content: center;
+    // max-width: 55% !important;
+
+    & p{
+        margin: 0px;
+    }
+}
+
+.header__containt-report{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0px !important;
+}
+.header__containt-dailyreport{
+    display: flex;
+    // align-items: center;
+    border: 1px solid blue;
+    border-radius: 20px;
+    font-size: small;
+    height: fit-content;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    justify-content: center;
+    margin-right: 10px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-top: 4%;
+    margin-bottom: 4%;
+
+    
+
+   
+}
+.header__containt-weeklyreport{
+    display: flex;
+    // align-items: center;
+     border: 1px solid #eb475b;
+    border-radius: 20px;
+    font-size: small;
+    margin-right: 10px;
+  
+    height: fit-content;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    
+    
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    justify-content: center;
+   
+}
+.header-row{
+    width: 100%;
+  padding-left: 15%;
+  padding-right: 15%;
+    margin-top: 1%;
+    // margin-bottom: 3%;
+}
+

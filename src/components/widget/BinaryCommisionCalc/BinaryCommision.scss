@@ -1,0 +1,29 @@
+.binarycommision{
+    background: linear-gradient(262deg,
+    #0259f6 8%, #1242ad  98%);
+    height: fit-content;
+    color: white;
+    padding: 10px;
+   
+    
+    & h1{
+        height: 5vh;
+        margin: 2%;
+    }
+    
+}
+.binary-body{
+    border-top: 1px solid;
+    margin-top: 2%;
+    padding-top: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    text-align: initial;
+    width: 100%;
+    margin-left: 5px !important;
+    
+    & h6{
+        font-weight: 600;
+    }
+}
