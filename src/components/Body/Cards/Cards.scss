@@ -16,8 +16,8 @@
     & .cards__body1{
         padding: 20px;
         background-image: url("../../../assets/Clip_iu.png");
-        // background: radial-gradient(farthest-side ellipse at 10% 0,
-        //  #646cb3 20%, #0c3d79);
+     //    background: radial-gradient(farthest-side ellipse at 10% 0,
+     //     #646cb3 20%, #0c3d79);
          margin: 10px;
          background-repeat: no-repeat;
     background-size: cover;
@@ -68,8 +68,8 @@
     & .cards__body4{
         padding: 20px;
         background-image: url("../../../assets/Clip_jc.png");
-        // background: radial-gradient(farthest-side ellipse at 10% 0,
-        //  #70d6a8 20%, #8de783);
+     //    background: radial-gradient(farthest-side ellipse at 10% 0,
+     //     #70d6a8 20%, #8de783);
         background-repeat: no-repeat;
     background-size: cover;
          border-radius: 10px;
@@ -82,4 +82,11 @@
          padding-left: 11%;
          padding-right: 11%
     }
+}
+@media(max-width:700px){
+     .cards{
+          & p{
+               width: fit-content;
+          }
+     }
 }

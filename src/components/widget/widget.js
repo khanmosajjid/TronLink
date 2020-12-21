@@ -52,8 +52,10 @@ export default class Widget extends Component {
               <Col className="details-requirements" style={{padding: "0px" }}>
                 <img src={this.props.icon1} style={{ height: "20px" }}></img>
 
-                <p>
+                <p style={{marginLeft:"5px"}}>
+                  <span style={{fontWeight:"600"}}>
                   Requirements:
+                  </span>
                   <span
                     style={{ color: "" + this.props.color, fontWeight: "600" }}
                   >
@@ -72,7 +74,7 @@ export default class Widget extends Component {
               >
                 <img src={this.props.icon2} style={{ height: "20px" }}></img>
 
-                <p style={{ fontWeight: "600" }}>
+                <p style={{ fontWeight: "600" ,marginLeft:"5px"}}>
                   Commission upto {this.props.levelNumber} Levels
                 </p>
               </Col>
@@ -100,6 +102,26 @@ export default class Widget extends Component {
                   </Col>
                 )
               )}
+            </Row>
+            <Row style={{ width: "100%" }}>
+              <Col
+                className="details-requirements"
+                style={{padding: "0px" }}
+              >
+                <img src={this.props.binaryCommisionIcon} style={{ height: "20px" }}></img>
+
+                <p style={{ fontWeight: "600",marginLeft:"5px" }}>
+                  {this.props.binaryCommision} <span
+                        style={{
+                          color: "" + this.props.color,
+                          fontWeight: "600",
+                        }}
+                      >
+                        {this.props.binaryCommisionPerc}
+                      </span>
+                      {this.props.binaryCommisionInfo}
+                </p>
+              </Col>
             </Row>
           </Col>
         </Row>

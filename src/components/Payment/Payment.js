@@ -94,6 +94,10 @@ export default class Payment extends Component{
                     <Widget 
                      icon1={level_icon_1a}
                      icon2={level_icon_1b}
+                     binaryCommision="Binary Commision: "
+                     binaryCommisionIcon={level_icon_1b}
+                     binaryCommisionPerc="0.50% "
+                     binaryCommisionInfo="of your team deposit Volume every Week"
                     levelNumber="7"
                     levelAmmount="10 million"
                     levelName="Titanium"
@@ -112,6 +116,10 @@ export default class Payment extends Component{
                    bgStartColor="#f19539"
                    bgEndColor="#f3037e"
                    image={level6}
+                   binaryCommision="Binary Commision: "
+                   binaryCommisionIcon={level_icon_4b}
+                   binaryCommisionPerc="0.50% "
+                   binaryCommisionInfo="of your team deposit Volume every Week"
                    ></Widget>
                    <Widget 
                     icon1={level_icon_2a}
@@ -123,6 +131,10 @@ export default class Payment extends Component{
                     bgStartColor="#dc7107"
                     bgEndColor="#f39d03"
                     image={level7}
+                    binaryCommision="Binary Commision: "
+                    binaryCommisionIcon={level_icon_2b}
+                    binaryCommisionPerc="0.50% "
+                    binaryCommisionInfo="of your team deposit Volume every Week"
                    ></Widget>
                  
                    <Widget 
@@ -135,6 +147,10 @@ export default class Payment extends Component{
                    bgStartColor="#a9dc07"
                    bgEndColor="#a3e09b "
                    image={level8}
+                   binaryCommision="Binary Commision: "
+                   binaryCommisionIcon={level_icon_3b}
+                   binaryCommisionPerc="0.50% "
+                   binaryCommisionInfo="of your team deposit Volume every Week"
                    ></Widget>
                     
                    <Widget 
@@ -147,6 +163,10 @@ export default class Payment extends Component{
                    bgStartColor="#f19539"
                    bgEndColor="#f3037e"
                    image={level9}
+                   binaryCommision="Binary Commision: "
+                   binaryCommisionIcon={level_icon_4b}
+                   binaryCommisionPerc="0.50% "
+                   binaryCommisionInfo="of your team deposit Volume every Week"
                    ></Widget>
                    
                    

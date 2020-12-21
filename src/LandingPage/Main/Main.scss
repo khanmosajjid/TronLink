@@ -239,7 +239,7 @@
   & .withdraw{
     padding: 10px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: center;
     height: fit-content;
     margin-top: -30%;
@@ -253,6 +253,7 @@
       width: fit-content;
       padding-left: 25px;
       padding-right: 25px;
+      background: transparent;
     }
     & span{
       border-bottom: 1px solid #e8d1cf;

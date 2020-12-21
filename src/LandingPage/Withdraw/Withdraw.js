@@ -22,7 +22,7 @@ export default class Withdraw extends Component{
                     </Col>
                     <Col lg={9} xs={12} style={{padding:"0px !important"}} className="card-body">
                          <h6>{this.props.heading}</h6>
-                         <h2 style={{color:""+this.props.color}}>0</h2>
+                         <h2 style={{color:""+this.props.color}}>{this.props.data}</h2>
                     </Col>
                 </Row>
             </Container>

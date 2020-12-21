@@ -19,6 +19,9 @@ import volumebg from "../../assets/volume_bg.png";
 
 import Card from "../../components/Body/Cards/Cards";
 export default class Main extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div className="main">
@@ -118,20 +121,26 @@ export default class Main extends Component {
             card2Name="Basic Profit"
             card3Name="Personal Deposit Bonus"
             card4Name="Availble Account Balance"
-            card1Data="0"
-            card2Data="0"
-            card3Data="0"
+            card1Data={this.props.userDailyProfit}
+            card2Data={this.props.userBasicProfit}
+            card3Data={this.props.userPersonalDepositProfit}
             card4Data="0"
           ></Card>
         </Row>
         <Row className="withdraw">
-          <div className="withdraw__heading">
+          <Button
+            className="withdraw__heading"
+            onClick={() => {
+              this.props.withdraw();
+            }}
+          >
             <h5>Withraw Funds</h5>
-          </div>
+          </Button>
           <span></span>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Earned From Daily Profits"
+              data={this.props.totalEarnedFromDailyProfit}
               icon={icon1}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -142,6 +151,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Earning Cap"
+              data="200%"
               icon={icon8}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -152,6 +162,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Refferal Commision Earned"
+              data={this.props.totalReferralCommissionEarned}
               icon={icon9}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -161,7 +172,8 @@ export default class Main extends Component {
           <span className="spn"></span>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
-              heading="Refferals Lefel Unlocked"
+              heading="Refferals Level Unlocked"
+              data={this.props.referralLevelsUnlocked}
               icon={icon7}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -172,6 +184,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Team Deposit Volume in 10 levels"
+              data={this.props.totalTeamDepositVolume}
               icon={icon6}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -192,6 +205,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Binary Qualification"
+              data={this.props.referralLevelsUnlocked >= 7 ? "Yes" : "No"}
               icon={icon3}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -202,6 +216,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Binar Commision Earned so far"
+              data={this.props.binaryCommissionEarnedSoFar}
               icon={icon2}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -212,6 +227,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Refferals"
+              data={this.props.referrals}
               icon={icon4}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -222,6 +238,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Team Members"
+              data={this.props.totalTeamMembers}
               icon={icon10}
               color="#dc5063"
               bgStartColor="#f19539"
