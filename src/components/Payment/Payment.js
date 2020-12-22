@@ -40,7 +40,7 @@ export default class Payment extends Component{
                         <span>Example :</span>
                         If you deposit 9900trx you will earn 1% daily.
                         If your deposit is 100k your daily profit will increse
-                        to 1.02% and it will increase 0.02% for every 100k in your deposti
+                        to 1.02% and it will increase 0.02% for every 100k in your deposit
 
                     </p>
                     <h3>Referral Commision</h3>
@@ -50,7 +50,7 @@ export default class Payment extends Component{
                    <Widget levelName="Starter"
                    icon1={level_icon_1a}
                    icon2={level_icon_1b}
-                   levelAmmount="100"
+                   levelamount="100"
                    levelNumber="3"
                    color="#0492ff"
                    bgStartColor="#92b0d6"
@@ -62,7 +62,7 @@ export default class Payment extends Component{
                     icon2={level_icon_4b}
                    levelName="Bronze"
                    levelNumber="4"
-                   levelAmmount="100k"
+                   levelamount="100k"
                    color="#ff3c5e"
                    bgStartColor="#f19539"
                    bgEndColor="#f3037e"
@@ -72,7 +72,7 @@ export default class Payment extends Component{
                     icon1={level_icon_2a}
                     icon2={level_icon_2b}
                    levelNumber="5"
-                   levelAmmount="1 million"
+                   levelamount="1 million"
                    levelName="Platinum"
                    color="#ff9600"
                     bgStartColor="#dc7107"
@@ -84,7 +84,7 @@ export default class Payment extends Component{
                     icon1={level_icon_3a}
                     icon2={level_icon_3b}
                    levelNumber="6"
-                   levelAmmount="5 million"
+                   levelamount="5 million"
                    levelName="Premium"
                    color="#51ce91"
                    bgStartColor="#a9dc07"
@@ -99,7 +99,7 @@ export default class Payment extends Component{
                      binaryCommisionPerc="0.50% "
                      binaryCommisionInfo="of your team deposit Volume every Week"
                     levelNumber="7"
-                    levelAmmount="10 million"
+                    levelamount="10 million"
                     levelName="Titanium"
                     color="#0492ff"
                    bgStartColor="#92b0d6"
@@ -110,7 +110,7 @@ export default class Payment extends Component{
                     icon1={level_icon_4a}
                     icon2={level_icon_4b}
                    levelNumber="8"
-                   levelAmmount="50 million"
+                   levelamount="50 million"
                    levelName="Silver"
                    color="#ff3c5e"
                    bgStartColor="#f19539"
@@ -125,7 +125,7 @@ export default class Payment extends Component{
                     icon1={level_icon_2a}
                     icon2={level_icon_2b}
                    levelNumber="8"
-                   levelAmmount="50 million"
+                   levelamount="50 million"
                    levelName="Gold"
                    color="#ff9600"
                     bgStartColor="#dc7107"
@@ -141,7 +141,7 @@ export default class Payment extends Component{
                     icon1={level_icon_3a}
                     icon2={level_icon_3b}
                    levelNumber="9"
-                   levelAmmount="100 million"
+                   levelamount="100 million"
                    levelName="Diamond"
                    color="#51ce91"
                    bgStartColor="#a9dc07"
@@ -157,7 +157,7 @@ export default class Payment extends Component{
                     icon1={level_icon_4a}
                     icon2={level_icon_4b}
                    levelNumber="10"
-                   levelAmmount="50 million"
+                   levelamount="50 million"
                    levelName="Super Gold"
                    color="#ff3c5e"
                    bgStartColor="#f19539"
@@ -172,7 +172,17 @@ export default class Payment extends Component{
                    
                    <BinaryCommision></BinaryCommision>
                   <Row className="payment-button">
-                  <Button className="widget__button">Participate now</Button>
+                  <Button 
+                  
+                  onClick={() => {
+                    // var refferal = document.getElementById("refferal").value;
+                    // this.props.invest(refferal, 1000000000);
+                    // togglePopup();
+                    window.location.href = "/stats";
+    
+                  }}
+                  
+                  className="widget__button">Participate now</Button>
                       </Row>  
                 </Row>
         
