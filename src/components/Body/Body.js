@@ -201,11 +201,11 @@ function Body(props) {
           card1Name="Total Deposit"
           card2Name="Total Members"
           card3Name="Total Withdrawn"
-          card4Name="Ammount in Trading Pool"
-          card1Data={props.totalDepositAmount}
-          card2Data={props.totalMembers}
-          card3Data={props.totalWithdraw}
-          card4Data="$123"
+          card4Name="Amount in Trading Pool"
+          card1Data={props.totalDepositAmount?props.totalDepositAmount:0}
+          card2Data={props.totalMembers?props.totalMembers:0}
+          card3Data={props.totalWithdraw?props.totalWithdraw:0}
+          card4Data={props.tradingPool?props.tradingPool:0}
         ></Cards>
       </Row>
       <Row style={{ marginBottom: "-5%", marginTop: "-7%" }}>

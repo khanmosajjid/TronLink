@@ -128,10 +128,13 @@ function Main(props) {
           <Input
             type="text"
             name="amount"
+            id="amount"
             className="input-box"
             placeholder="Enter Amount"
           />
-          <Button className="deposit__button">Confirm Deposit</Button>
+          <Button className="deposit__button" onClick={()=>{
+            props.invest("TYPGbv47eFGBCDvjrPZNgXs3JfrqPMTWS9",document.getElementById("amount").value*1000000);
+          }}>Confirm Deposit</Button>
         </Row>
         <Row className="cards">
           <Card
@@ -139,9 +142,9 @@ function Main(props) {
             card2Name="Basic Profit"
             card3Name="Personal Deposit Bonus"
             card4Name="Availble Account Balance"
-            card1Data={props.userDailyProfit}
+            card1Data={props.userPersonalDepositProfit?props.userPersonalDepositProfit+1.2:0}
             card2Data="1.2%"
-            card3Data={props.userPersonalDepositProfit}
+            card3Data={props.userPersonalDepositProfit?props.userPersonalDepositProfit:0}
             card4Data="0"
           ></Card>
         </Row>
@@ -214,7 +217,7 @@ function Main(props) {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Earning Cap"
-              data="200%"
+              data={(2*props.userTotalDeposits-props.totalEarnedFromDailyProfit)>0?(2*props.userTotalDeposits-props.totalEarnedFromDailyProfit):0}
               icon={icon8}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -278,7 +281,7 @@ function Main(props) {
           <span className="spn"></span>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
-              heading="Binar Commision Earned so far"
+              heading="Binary Commision Earned so far"
               data={props.binaryCommissionEarnedSoFar}
               icon={icon2}
               color="#2696e5"
@@ -310,8 +313,8 @@ function Main(props) {
           </Col>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
-              heading="Active deposit Sums"
-              data={props.referrals}
+              heading="Active deposit Amount"
+              data={props.userTotalActiveDeposits?props.userTotalActiveDeposits:0}
               icon={icon4}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -321,8 +324,8 @@ function Main(props) {
           <span className="spn"></span>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
-              heading="Number of active deposit"
-              data={props.totalTeamMembers}
+              heading="Number of total deposits"
+              data={props.noOfTotalDeposits?props.noOfTotalDeposits:0}
               icon={icon10}
               color="#dc5063"
               bgStartColor="#f19539"
