@@ -25,6 +25,8 @@ export default class LandingPage extends Component{
                 totalTeamDepositVolume={this.props.totalTeamDepositVolume}
                 binaryCommissionEarnedSoFar={this.props.binaryCommissionEarnedSoFar}
                 referrals={this.props.referrals}
+                invest={this.props.invest}
+
                 totalTeamMembers={this.props.totalTeamMembers}
                 withdraw={this.props.withdraw}
                 userDailyProfit={this.props.userDailyProfit}

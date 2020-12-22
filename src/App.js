@@ -15,6 +15,21 @@ import {
   Link
 } from "react-router-dom";
 import TronWeb from "tronweb";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
+
+
+
+
+
+
+
+
+
+
 const FOUNDATION_ADDRESS = "TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg";
 
 class App extends Component {
@@ -133,66 +148,123 @@ class App extends Component {
     this.setState({ InitError: true });
   }
 
-  async invest(referrer, entryFees) {
+  async invest(entryFees) {
     this.setState({ loading: true });
-    Utils.contract
-      .invest(referrer)
-      .send({
-        from: window.tronWeb.defaultAddress.base58,
-        callValue: entryFees,
-        shouldPollResponse: true,
-      })
-      .then((receipt) => {
-        console.log("success");
-        console.log(receipt);
-      })
-      .catch((err) => {
-        console.log("error while investing", err);
-      });
+    if(window.tronWeb){
+
+      let refAddress= "TEaAXWNLvucDoGjKtpC1n8PspB3i4LuPyq";
+      refAddress="TW2r84AGcSKEVFAgdQF4Jpmtr1TNsbuvjt"
+      try{
+        Utils.contract
+        .invest(refAddress)
+        .send({
+          from: window.tronWeb.defaultAddress.base58,
+          callValue: entryFees*10**6,
+          shouldPollResponse: true,
+        })
+        .then((receipt) => {
+          console.log("success");
+          console.log(receipt);
+        })
+        .catch((err) => {
+          console.log("error while investing", err);
+        });
+      }catch(error){
+        toast.error(error.message);
+
+
+        console.log("Fddddffd",error)
+      }
+
+    }
+
   }
+
+
+  makeRoundOf(num){
+    return (num/10**6).toFixed(2)
+  }
+
+
 
   async getUserInfo(addr) {
     const totalUsers = (
       await this.state.contract.getTotalVolume().call()
     ).toNumber();
     console.log("users", totalUsers);
-    const userDailyProfit = (
+    let userDailyProfit = (
       await this.state.contract.getUserDailyProfit(addr).call()
     ).toNumber();
+
+
+    userDailyProfit = this.makeRoundOf(userDailyProfit)
     console.log("daily", userDailyProfit);
-    const userBasicProfit =(await this.state.contract
+    let userBasicProfit =(await this.state.contract
       .getBasicProfit(addr)
       .call()).toNumber();
-    const userPersonalDepositProfit = (await this.state.contract
+      userBasicProfit = this.makeRoundOf(userBasicProfit)
+
+    
+    let userPersonalDepositProfit = (await this.state.contract
       .getPersonalDepositProfit(addr)
       .call()).toNumber();
-    const totalEarnedFromDailyProfit = (await this.state.contract
+
+
+      userPersonalDepositProfit = this.makeRoundOf(userPersonalDepositProfit)
+    let totalEarnedFromDailyProfit = (await this.state.contract
       .totalEarnedFromDailyProfit(addr)
       .call()).toNumber();
-    const totalReferralCommissionEarned = (await this.state.contract
+
+      totalEarnedFromDailyProfit = this.makeRoundOf(totalEarnedFromDailyProfit)
+
+    let totalReferralCommissionEarned = (await this.state.contract
       .getTotalReferralCommissionEarned(addr)
       .call()).toNumber();
-    const referralLevelsUnlocked = (await this.state.contract
+      totalReferralCommissionEarned = this.makeRoundOf(totalReferralCommissionEarned)
+
+
+
+    let referralLevelsUnlocked = (await this.state.contract
       .getReferralsLevelsUnlocked(addr)
       .call()).toNumber();
-    const totalTeamDepositVolume = (await this.state.contract
+
+      // referralLevelsUnlocked = this.makeRoundOf(referralLevelsUnlocked)
+
+    let totalTeamDepositVolume = (await this.state.contract
       .getTotalTeamDepositVolume(addr)
       .call()).toNumber();
-    const binaryCommissionEarnedSoFar = (await this.state.contract
+      totalTeamDepositVolume = this.makeRoundOf(totalTeamDepositVolume)
+
+
+    let binaryCommissionEarnedSoFar = (await this.state.contract
       .getBinaryCommissionEarnedSoFar(addr)
       .call()).toNumber();
-    const referrals = (await this.state.contract.getReferrals(addr).call()).toNumber();
-    const totalTeamMembers = (await this.state.contract
+
+      binaryCommissionEarnedSoFar = this.makeRoundOf(binaryCommissionEarnedSoFar)
+
+    let referrals = (await this.state.contract.getReferrals(addr).call()).toNumber();
+    let totalTeamMembers = (await this.state.contract
       .getTotalTeamMembers(addr)
       .call()).toNumber();
 
-    const totalDepositAmount = (
+      // totalTeamMembers = this.makeRoundOf(totalTeamMembers)
+
+
+    let totalDepositAmount = (
       await this.state.contract.getTotalDepositsAmount().call()
     ).toNumber();
+
+
+    totalDepositAmount = this.makeRoundOf(totalDepositAmount)
+
     console.log(totalDepositAmount + "it is total ammmount");
-    const totalWithdrawn = (
+    let totalWithdrawn = ((
       await this.state.contract.getTotalWithdrawn().call()
-    ).toNumber();
+    ).toNumber());
+
+
+    totalWithdrawn = this.makeRoundOf(totalWithdrawn)
+
     console.log(totalWithdrawn, " is total Withdrawn");
 
     let payload = {
@@ -216,7 +288,7 @@ class App extends Component {
   }
 
   async getLevelWiseCount(addr, level) {
-    const levelWiseCount = (
+    let levelWiseCount = (
       await this.state.contract.getLevelWiseCount(addr, level).call()
     ).toNumber();
     return levelWiseCount;
@@ -248,7 +320,7 @@ class App extends Component {
         ></Main>
         </Route>
         
-        <Route exact path="/landing">
+        <Route exact path="/stats">
         <LandingPage
         totalEarnedFromDailyProfit={this.state.totalEarnedFromDailyProfit}
         totalReferralCommissionEarned={this.state.totalReferralCommissionEarned}
@@ -258,6 +330,8 @@ class App extends Component {
         referrals={this.state.referrals}
         totalTeamMembers={this.state.totalTeamMembers}
         withdraw={this.withdraw}
+        invest={this.invest}
+
         userDailyProfit={this.state.userDailyProfit}
         userBasicProfit={this.state.userBasicProfit}
         userPersonalDepositProfit={this.state.userPersonalDepositProfit}
@@ -273,7 +347,8 @@ class App extends Component {
   </Router>
         
        
-        
+  <ToastContainer />
+
       </div>
     );
   }

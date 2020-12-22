@@ -59,7 +59,7 @@ export default class Widget extends Component {
                   <span
                     style={{ color: "" + this.props.color, fontWeight: "600" }}
                   >
-                    {this.props.levelAmmount}
+                    {this.props.levelamount}
                   </span>
                   TRX Deposit (you must deposit 100 TRX in order to earn from
                   your referrals)

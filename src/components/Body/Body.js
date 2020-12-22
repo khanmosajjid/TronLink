@@ -48,7 +48,7 @@ function Body(props) {
                   color: "#184fda",
                 }}
               ></Icon>
-              <p>Earn 200% on your investement</p>
+              <p>Earn 200% on your investment</p>
             </Col>
             <Col lg={12} className="body-main__list">
               <Icon
@@ -111,13 +111,14 @@ function Body(props) {
                 and weekly
               </p>
             </Col>
-            <input id="refferal"></input>
             <Button
               className="body-main__button"
               onClick={() => {
                 // var refferal = document.getElementById("refferal").value;
                 // this.props.invest(refferal, 1000000000);
-                togglePopup();
+                // togglePopup();
+                window.location.href = "/stats";
+
               }}
             >
               Participate now
@@ -201,7 +202,7 @@ function Body(props) {
           card1Name="Total Deposit"
           card2Name="Total Members"
           card3Name="Total Withdrawn"
-          card4Name="Ammount in Trading Pool"
+          card4Name="amount in Trading Pool"
           card1Data={props.totalDepositAmount}
           card2Data={props.totalMembers}
           card3Data={props.totalWithdraw}

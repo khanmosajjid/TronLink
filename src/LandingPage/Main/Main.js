@@ -16,12 +16,39 @@ import icon10 from "../../assets/icon10.png";
 import icon11 from "../../assets/icon11.png";
 import deposit from "../../assets/deposit.png";
 import volumebg from "../../assets/volume_bg.png";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Card from "../../components/Body/Cards/Cards";
 export default class Main extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      depositAmount:0
+    }
   }
+
+
+  makeDeposit(){
+    let depositAmount = this.state.depositAmount
+
+    //todo 1000 krna h
+    if(depositAmount<100){
+      //Show error
+
+      toast.error("Minimum Deposit Amount is 1000trx!");
+    }else{
+      this.makeDepositTransaction(depositAmount)
+    }
+  }
+
+
+  makeDepositTransaction=(amount)=>{
+
+    console.log("propos12",this.props)
+    this.props.invest(amount)
+  }
+
+
   render() {
     return (
       <div className="main">
@@ -108,12 +135,17 @@ export default class Main extends Component {
           <h6>Make A Deposit</h6>
           <Label for="amount"></Label>
           <Input
+          onChange={(t)=>{
+            this.setState({depositAmount:t.target.value})
+          }}
             type="text"
             name="amount"
             className="input-box"
             placeholder="Enter Amount"
           />
-          <Button className="deposit__button">Confirm Deposit</Button>
+          <Button className="deposit__button" onClick={()=>{
+            this.makeDeposit()
+          }}>Confirm Deposit</Button>
         </Row>
         <Row className="cards">
           <Card
@@ -284,6 +316,9 @@ export default class Main extends Component {
             </Col>
           </Row>
         </Row>
+
+        <ToastContainer />
+
       </div>
     );
   }
