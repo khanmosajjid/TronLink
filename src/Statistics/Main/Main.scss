@@ -254,11 +254,13 @@
       padding-left: 25px;
       padding-right: 25px;
       background: transparent;
+      margin-right: 10px;
     }
     & span{
       border-bottom: 1px solid #e8d1cf;
-    width: 100%;
-    margin-top: 3%;
+    // width: 100%;
+    // margin-top: 3%;
+    color:white
     }
     & .withdraw-cards{
       margin-top: 2%;

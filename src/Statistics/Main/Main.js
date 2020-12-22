@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Container, Row, Col, Label, Input, Button } from "reactstrap";
+import React from "react";
+import {useState} from "react";
+import { Container, Row, Col, Label, Input, Button, Table } from "reactstrap";
 import "./Main.scss";
 import { Icon } from "semantic-ui-react";
 import Withdraw from "../Withdraw/Withdraw";
@@ -16,13 +17,30 @@ import icon10 from "../../assets/icon10.png";
 import icon11 from "../../assets/icon11.png";
 import deposit from "../../assets/deposit.png";
 import volumebg from "../../assets/volume_bg.png";
+import Popup from "../../components/Popup/Popup";
 
 import Card from "../../components/Body/Cards/Cards";
-export default class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
+function Main(props) {
+  // constructor(props) {
+  //   super(props);
+  //   props = {
+  //     isOpen: false,
+  //   };
+  //   this.togglePopup = this.togglePopup.bind(this);
+  // }
+
+  // togglePopup() {
+  //   this.setState({ isOpen: !props.isOpen });
+  //   // alert("popup");
+  //   console.log(props.isOpen);
+  // }
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+
     return (
       <div className="main">
         <Row className="main__header">
@@ -121,9 +139,9 @@ export default class Main extends Component {
             card2Name="Basic Profit"
             card3Name="Personal Deposit Bonus"
             card4Name="Availble Account Balance"
-            card1Data={this.props.userDailyProfit}
-            card2Data={this.props.userBasicProfit}
-            card3Data={this.props.userPersonalDepositProfit}
+            card1Data={props.userDailyProfit}
+            card2Data="1.2%"
+            card3Data={props.userPersonalDepositProfit}
             card4Data="0"
           ></Card>
         </Row>
@@ -131,16 +149,61 @@ export default class Main extends Component {
           <Button
             className="withdraw__heading"
             onClick={() => {
-              this.props.withdraw();
+              props.withdraw();
             }}
           >
             <h5>Withraw Funds</h5>
           </Button>
+          <Button className="withdraw__heading">
+            <h5>View Active Investment</h5>
+          </Button>
+          <Button className="withdraw__heading" onClick={togglePopup}>
+            <h5>View Expired Investment</h5>
+          </Button>
+          {isOpen && (
+            <Popup backGround="white"
+              content={
+                <>
+                  <Table hover responsive>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </>
+              }
+              handleClose={togglePopup}
+            />
+          )}
           <span></span>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Earned From Daily Profits"
-              data={this.props.totalEarnedFromDailyProfit}
+              data={props.totalEarnedFromDailyProfit}
               icon={icon1}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -162,7 +225,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Refferal Commision Earned"
-              data={this.props.totalReferralCommissionEarned}
+              data={props.totalReferralCommissionEarned}
               icon={icon9}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -173,7 +236,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Refferals Level Unlocked"
-              data={this.props.referralLevelsUnlocked}
+              data={props.referralLevelsUnlocked}
               icon={icon7}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -184,7 +247,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Team Deposit Volume in 10 levels"
-              data={this.props.totalTeamDepositVolume}
+              data={props.totalTeamDepositVolume}
               icon={icon6}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -205,7 +268,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Binary Qualification"
-              data={this.props.referralLevelsUnlocked >= 7 ? "Yes" : "No"}
+              data={props.referralLevelsUnlocked >= 7 ? "Yes" : "No"}
               icon={icon3}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -216,7 +279,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Binar Commision Earned so far"
-              data={this.props.binaryCommissionEarnedSoFar}
+              data={props.binaryCommissionEarnedSoFar}
               icon={icon2}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -227,7 +290,7 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Refferals"
-              data={this.props.referrals}
+              data={props.referrals}
               icon={icon4}
               color="#2696e5"
               bgStartColor="#79dbfb "
@@ -238,7 +301,28 @@ export default class Main extends Component {
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Total Team Members"
-              data={this.props.totalTeamMembers}
+              data={props.totalTeamMembers}
+              icon={icon10}
+              color="#dc5063"
+              bgStartColor="#f19539"
+              bgEndColor="#f3037e"
+            ></Withdraw>
+          </Col>
+          <Col lg={6} xs={6} className="withdraw-cards">
+            <Withdraw
+              heading="Active deposit Sums"
+              data={props.referrals}
+              icon={icon4}
+              color="#2696e5"
+              bgStartColor="#79dbfb "
+              bgEndColor="#2794e5"
+            ></Withdraw>
+          </Col>
+          <span className="spn"></span>
+          <Col lg={6} xs={6} className="withdraw-cards">
+            <Withdraw
+              heading="Number of active deposit"
+              data={props.totalTeamMembers}
               icon={icon10}
               color="#dc5063"
               bgStartColor="#f19539"
@@ -287,4 +371,4 @@ export default class Main extends Component {
       </div>
     );
   }
-}
+export default Main;

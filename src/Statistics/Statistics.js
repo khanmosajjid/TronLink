@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './landingPage.scss';
+import './Statistics.scss';
 import Header from '../components/Header/Header'
 import Main from './Main/Main';
 import Promotional from './PromotionalBanner/Promotion';
@@ -28,7 +28,6 @@ export default class LandingPage extends Component{
                 totalTeamMembers={this.props.totalTeamMembers}
                 withdraw={this.props.withdraw}
                 userDailyProfit={this.props.userDailyProfit}
-        userBasicProfit={this.props.userBasicProfit}
         userPersonalDepositProfit={this.props.userPersonalDepositProfit}
                 ></Main>
                 <Promotional></Promotional>

@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import Payment from "./components/Payment/Payment";
 import Footer from "./components/Footer/Footer";
 import Main from "./components/Main";
-import LandingPage from "./LandingPage/landingPage";
+import Statistics from "./Statistics/Statistics";
 import Utils from "./utils";
 import { Component } from "react";
 import {
@@ -160,11 +160,9 @@ class App extends Component {
       await this.state.contract.getUserDailyProfit(addr).call()
     ).toNumber();
     console.log("daily", userDailyProfit);
-    const userBasicProfit =(await this.state.contract
-      .getBasicProfit(addr)
-      .call()).toNumber();
+
     const userPersonalDepositProfit = (await this.state.contract
-      .getPersonalDepositProfit(addr)
+      .getExtraProfit(addr)
       .call()).toNumber();
     const totalEarnedFromDailyProfit = (await this.state.contract
       .totalEarnedFromDailyProfit(addr)
@@ -198,7 +196,6 @@ class App extends Component {
     let payload = {
       totalUsers: totalUsers,
       userDailyProfit: userDailyProfit,
-      userBasicProfit: userBasicProfit,
       userPersonalDepositProfit: userPersonalDepositProfit,
       totalEarnedFromDailyProfit: totalEarnedFromDailyProfit,
       totalReferralCommissionEarned: totalReferralCommissionEarned,
@@ -249,7 +246,7 @@ class App extends Component {
         </Route>
         
         <Route exact path="/landing">
-        <LandingPage
+        <Statistics
         totalEarnedFromDailyProfit={this.state.totalEarnedFromDailyProfit}
         totalReferralCommissionEarned={this.state.totalReferralCommissionEarned}
         referralLevelsUnlocked={this.state.referralLevelsUnlocked}
@@ -259,9 +256,8 @@ class App extends Component {
         totalTeamMembers={this.state.totalTeamMembers}
         withdraw={this.withdraw}
         userDailyProfit={this.state.userDailyProfit}
-        userBasicProfit={this.state.userBasicProfit}
         userPersonalDepositProfit={this.state.userPersonalDepositProfit}
-        ></LandingPage>
+        ></Statistics>
         </Route>
        
        

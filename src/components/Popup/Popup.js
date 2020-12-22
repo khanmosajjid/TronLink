@@ -10,7 +10,7 @@ const Popup = (props) => {
     // }
   return (
     <div className="popup-box">
-      <div className="box">
+      <div className="box" style={{backgroundColor:""+props.backGround}}>
         <span className="close-icon" onClick={props.handleClose}>
           x
         </span>

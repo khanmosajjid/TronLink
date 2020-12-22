@@ -123,7 +123,7 @@ function Body(props) {
               Participate now
             </Button>
             {isOpen && (
-              <Popup
+              <Popup backGround="#4b9afb"
                 content={
                   <>
                     <h2>Wallet Statistics</h2>
