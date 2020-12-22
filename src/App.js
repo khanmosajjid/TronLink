@@ -10,6 +10,21 @@ import Utils from "./utils";
 import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TronWeb from "tronweb";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
+
+
+
+
+
+
+
+
+
+
 const FOUNDATION_ADDRESS = "TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg";
 
 class App extends Component {
@@ -125,74 +140,132 @@ class App extends Component {
     this.setState({ InitError: true });
   }
 
-  async invest(referrer, entryFees) {
+  async invest(entryFees) {
     this.setState({ loading: true });
-    Utils.contract
-      .invest(referrer)
-      .send({
-        from: window.tronWeb.defaultAddress.base58,
-        callValue: entryFees,
-        shouldPollResponse: true,
-      })
-      .then((receipt) => {
-        console.log("success");
-        console.log(receipt);
-      })
-      .catch((err) => {
-        console.log("error while investing", err);
-      });
+    if(window.tronWeb){
+
+      let refAddress= "TEaAXWNLvucDoGjKtpC1n8PspB3i4LuPyq";
+      refAddress="TW2r84AGcSKEVFAgdQF4Jpmtr1TNsbuvjt"
+      try{
+        Utils.contract
+        .invest(refAddress)
+        .send({
+          from: window.tronWeb.defaultAddress.base58,
+          callValue: entryFees*10**6,
+          shouldPollResponse: true,
+        })
+        .then((receipt) => {
+          console.log("success");
+          console.log(receipt);
+        })
+        .catch((err) => {
+          console.log("error while investing", err);
+        });
+      }catch(error){
+        toast.error(error.message);
+
+
+        console.log("Fddddffd",error)
+      }
+
+    }
+
   }
+
+
+  makeRoundOf(num){
+    return (num/10**6).toFixed(2)
+  }
+
+
 
   async getUserInfo(addr) {
     const totalUsers = (
       await this.state.contract.getTotalVolume().call()
     ).toNumber();
     console.log("users", totalUsers);
-    const userDailyProfit = (
+    let userDailyProfit = (
       await this.state.contract.getUserDailyProfit(addr).call()
     ).toNumber();
+
+
+    userDailyProfit = this.makeRoundOf(userDailyProfit)
     console.log("daily", userDailyProfit);
+    // let userBasicProfit =(await this.state.contract
+    //   .getBasicProfit(addr)
+    //   .call()).toNumber();
+      // userBasicProfit = this.makeRoundOf(userBasicProfit)
 
-    const userPersonalDepositProfit = (
-      await this.state.contract.getExtraProfit(addr).call()
-    ).toNumber();
-    const totalEarnedFromDailyProfit = (
-      await this.state.contract.totalEarnedFromDailyProfit(addr).call()
-    ).toNumber();
-    const totalReferralCommissionEarned = (
-      await this.state.contract.getTotalReferralCommissionEarned(addr).call()
-    ).toNumber();
-    const referralLevelsUnlocked = (
-      await this.state.contract.getReferralsLevelsUnlocked(addr).call()
-    ).toNumber();
-    const totalTeamDepositVolume = (
-      await this.state.contract.getTotalTeamDepositVolume(addr).call()
-    ).toNumber();
-    const binaryCommissionEarnedSoFar = (
-      await this.state.contract.getBinaryCommissionEarnedSoFar(addr).call()
-    ).toNumber();
-    const referrals = (
-      await this.state.contract.getReferrals(addr).call()
-    ).toNumber();
-    const totalTeamMembers = (
-      await this.state.contract.getTotalTeamMembers(addr).call()
-    ).toNumber();
+    
+    let userPersonalDepositProfit = (await this.state.contract
+      .getExtraProfit(addr)
+      .call()).toNumber()/100;
 
-    const totalDepositAmount = (
+    let totalEarnedFromDailyProfit = (await this.state.contract
+      .totalEarnedFromDailyProfit(addr)
+      .call()).toNumber();
+
+      totalEarnedFromDailyProfit = this.makeRoundOf(totalEarnedFromDailyProfit)
+
+    let totalReferralCommissionEarned = (await this.state.contract
+      .getTotalReferralCommissionEarned(addr)
+      .call()).toNumber();
+      totalReferralCommissionEarned = this.makeRoundOf(totalReferralCommissionEarned)
+
+
+
+    let referralLevelsUnlocked = (await this.state.contract
+      .getReferralsLevelsUnlocked(addr)
+      .call()).toNumber();
+
+      // referralLevelsUnlocked = this.makeRoundOf(referralLevelsUnlocked)
+
+    let totalTeamDepositVolume = (await this.state.contract
+      .getTotalTeamDepositVolume(addr)
+      .call()).toNumber();
+      totalTeamDepositVolume = this.makeRoundOf(totalTeamDepositVolume)
+
+
+    let binaryCommissionEarnedSoFar = (await this.state.contract
+      .getBinaryCommissionEarnedSoFar(addr)
+      .call()).toNumber();
+
+      binaryCommissionEarnedSoFar = this.makeRoundOf(binaryCommissionEarnedSoFar);
+
+    let referrals = (await this.state.contract.getReferrals(addr).call()).toNumber();
+    let totalTeamMembers = (await this.state.contract
+      .getTotalTeamMembers(addr)
+      .call()).toNumber();
+
+      // totalTeamMembers = this.makeRoundOf(totalTeamMembers)
+
+
+    let totalDepositAmount = (
       await this.state.contract.getTotalDepositsAmount().call()
     ).toNumber();
-    console.log(totalDepositAmount + "it is total ammmount");
-    const totalWithdrawn = (
-      await this.state.contract.getTotalWithdrawn().call()
-    ).toNumber();
-    console.log(totalWithdrawn, " is total Withdrawn");
-    const userTotalActiveDeposits = (
-      await this.state.contract.getUserTotalActiveDeposits().call()
-    ).toNumber();
-    const noOfTotalDeposits = (
-      await this.state.contract.getUserTotalNumberOfDeposits().call()
-    ).toNumber();
 
+
+    totalDepositAmount = this.makeRoundOf(totalDepositAmount)
+
+    console.log(totalDepositAmount + "it is total ammmount");
+    let totalWithdrawn = ((
+      await this.state.contract.getTotalWithdrawn().call()
+    ).toNumber());
+
+
+    totalWithdrawn = this.makeRoundOf(totalWithdrawn)
+
+    console.log(totalWithdrawn, " is total Withdrawn");
+    let userTotalActiveDeposits = (
+      await this.state.contract.getUserTotalActiveDeposits(addr).call()
+    ).toNumber();
+    userTotalActiveDeposits = this.makeRoundOf(userTotalActiveDeposits);
+    let noOfTotalDeposits = (
+      await this.state.contract.getUserTotalNumberOfDeposits(addr).call()
+    ).toNumber();
+    noOfTotalDeposits = this.makeRoundOf(noOfTotalDeposits);
+    let binaryBalanceLeftForWithdrawl = (await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()).toNumber();
+    binaryBalanceLeftForWithdrawl = this.makeRoundOf(binaryBalanceLeftForWithdrawl)
     let payload = {
       userTotalActiveDeposits: userTotalActiveDeposits,
       noOfTotalDeposits: noOfTotalDeposits,
@@ -208,6 +281,7 @@ class App extends Component {
       totalTeamMembers: totalTeamMembers,
       totalDepositAmount: totalDepositAmount,
       totalWithdrawn: totalWithdrawn,
+      
     };
     console.log("Payload is ", payload);
 
@@ -215,7 +289,7 @@ class App extends Component {
   }
 
   async getLevelWiseCount(addr, level) {
-    const levelWiseCount = (
+    let levelWiseCount = (
       await this.state.contract.getLevelWiseCount(addr, level).call()
     ).toNumber();
     return levelWiseCount;
@@ -244,10 +318,12 @@ class App extends Component {
                 totalWithdraw={this.state.totalWithdrawn}
                 invest={this.invest}
               ></Main>
+
             </Route>
 
-            <Route exact path="/landing">
+            <Route exact path="/dashboard">
               <Statistics
+               invest={this.invest}
                 totalEarnedFromDailyProfit={
                   this.state.totalEarnedFromDailyProfit
                 }
