@@ -138,18 +138,19 @@ function Main(props) {
         <h6>Make A Deposit</h6>
         <Label for="amount"></Label>
         <Input
-          onChange={(t) => {
-            setDepositAmount(t.target.value);
-          }}
+          // onChange={(t) => {
+          //   setDepositAmount(t.target.value);
+          // }}
           type="text"
           name="amount"
+          id = "amount"
           className="input-box"
           placeholder="Enter Amount"
         />
         <Button
           className="deposit__button"
           onClick={() => {
-            makeDeposit();
+            props.invest(document.getElementById("amount").value);
           }}
         >
           Confirm Deposit
@@ -164,7 +165,7 @@ function Main(props) {
           card1Data={1.2 + props.userPersonalDepositProfit + " %"}
           card2Data="1.2%"
           card3Data={props.userPersonalDepositProfit}
-          card4Data="0"
+          card4Data={props.userDailyProfit}
         ></Card>
       </Row>
       <Row className="withdraw">
@@ -237,7 +238,7 @@ function Main(props) {
         <Col lg={6} xs={6} className="withdraw-cards">
           <Withdraw
             heading="Earning Cap"
-            data="200%"
+            data={(2*props.userTotalDeposits-props.totalEarnedFromDailyProfit)>0?(2*props.userTotalDeposits-props.totalEarnedFromDailyProfit):0}
             icon={icon8}
             color="#dc5063"
             bgStartColor="#f19539"
@@ -301,7 +302,7 @@ function Main(props) {
         <span className="spn"></span>
         <Col lg={6} xs={6} className="withdraw-cards">
           <Withdraw
-            heading="Binar Commision Earned so far"
+            heading="Binary Commision Earned so far"
             data={props.binaryCommissionEarnedSoFar}
             icon={icon2}
             color="#2696e5"

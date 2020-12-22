@@ -123,13 +123,14 @@ class App extends Component {
 		this.setState({ InitError: true });
 	}
 
-	async invest(referrer, entryFees) {
+	//refferer
+	async invest(entryFees) {
 		this.setState({ loading: true });
 		Utils.contract
-			.invest(referrer)
+			.invest('TYPGbv47eFGBCDvjrPZNgXs3JfrqPMTWS9')
 			.send({
 				from: window.tronWeb.defaultAddress.base58,
-				callValue: entryFees,
+				callValue: entryFees*1000000,
 				shouldPollResponse: true
 			})
 			.then((receipt) => {
@@ -160,9 +161,11 @@ class App extends Component {
 	}
 
 	async getUserInfo(addr) {
-		const userDailyProfit = (await this.state.contract.getUserDailyProfit(addr).call()).toNumber() / 1000000;
+		let userDailyProfit = (await this.state.contract.getUserDailyProfit(addr).call()).toNumber() / 1000000;
 		console.log('daily', userDailyProfit);
-
+		const getBinaryBalanceLeftForWithdrawl =
+			(await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()).toNumber() / 1000000;
+		userDailyProfit = userDailyProfit + getBinaryBalanceLeftForWithdrawl;
 		const userPersonalDepositProfit = (await this.state.contract.getExtraProfit(addr).call()).toNumber() / 100;
 		const totalEarnedFromDailyProfit =
 			(await this.state.contract.totalEarnedFromDailyProfit(addr).call()).toNumber() / 1000000;
@@ -196,8 +199,8 @@ class App extends Component {
 			totalTeamMembers: totalTeamMembers
 		};
 		console.log('Payload is ', payload);
-		let binaryBalance = (await this.state.contract.getBinaryBalance(addr).call()).toNumber();
-		console.log('binaryyyy', binaryBalance);
+		let contractBalance = (await this.state.contract.getContractBalance().call()).toNumber()/1000000;
+		console.log('contract balance', contractBalance);
 		this.setState(payload);
 	}
 

@@ -414,7 +414,10 @@ contract MyTron{
 		if(totalAmount>0){
 		    user.checkpoint = block.timestamp;
 		}
-
+        uint256 contractBalance = address(this).balance;
+        if (contractBalance < totalAmount) {
+			totalAmount = contractBalance;
+		}
 		user.dailyProfitEarned = user.dailyProfitEarned.add(totalAmount);
 			
 		uint256 binaryBalance;
@@ -428,7 +431,7 @@ contract MyTron{
         totalAmount = totalAmount.add(binaryBalance);
 		require(totalAmount > 0, "User has no dividends");
 
-		uint256 contractBalance = address(this).balance;
+		
 		if (contractBalance < totalAmount) {
 			totalAmount = contractBalance;
 		}
