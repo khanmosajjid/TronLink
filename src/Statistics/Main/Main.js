@@ -16,6 +16,7 @@ import icon9 from "../../assets/icon9.png";
 import icon10 from "../../assets/icon10.png";
 import icon11 from "../../assets/icon11.png";
 import deposit from "../../assets/deposit.png";
+import QRCode from "qrcode.react";
 
 import Popup from "../../components/Popup/Popup";
 import { ToastContainer, toast } from "react-toastify";
@@ -38,6 +39,7 @@ function Main(props) {
   // }
   const [isOpen, setIsOpen] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
+  const [tableHeading, setTableHeading] = useState("Active Deposit");
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -68,59 +70,42 @@ function Main(props) {
         <span></span>
       </Row>
       <Row className="main__resultcard">
-        <Col lg={6} xs={12} style={{ maxWidth: "47%" }}>
+        <Col lg={8} xs={12}>
           <Row className="total-result1">
-            <Col lg={6} className="card1">
-              <h1>+ 0.41%</h1>
-              <h3>Total Result</h3>
-              <p>01 Dec 2020</p>
+            <Col lg={4} className="card1">
+              <QRCode value="https://trontiply.com/?ref=walletaddress" />
             </Col>
-            <Col lg={6} className="card2">
-              <h3>Digital License</h3>
+            <Col lg={8} className="card2">
+              <h3>Refferral Link</h3>
               <div className="volume">
-                <p style={{ margin: "0px", color: "white" }}>Total Volume</p>
-                <p style={{ margin: "0px", color: "white", fontWeight: "600" }}>
-                  746392989
+                <p
+                  id="link"
+                  style={{ margin: "0px", color: "white", fontWeight: "600" }}
+                  onClick={() => {
+                    var link = document.getElementById("link").textContent;
+                    console.log("link", link);
+                    toast.success(" Refferal Link copy to clipboard");
+                  }}
+                >
+                  {props.account}
                 </p>
               </div>
-              <div className="volume">
-                <p style={{ margin: "0px", color: "white" }}>
-                  Total Transaction
-                </p>
-                <p style={{ margin: "0px", color: "white", fontWeight: "600" }}>
-                  438
-                </p>
+              <div className="volume2">
+                <Button
+                  className="copy-address"
+                  onClick={() => {
+                    var link = document.getElementById("link").textContent;
+                    console.log("link", link);
+                    toast.success(" Refferal Link copy to clipboard");
+                  }}
+                >
+                  <h5>Copy</h5>
+                </Button>
               </div>
             </Col>
           </Row>
         </Col>
         <span style={{ marginLeft: "2%", marginRight: "2%" }}></span>
-        <Col lg={6} xs={12} style={{ maxWidth: "47%" }}>
-          <Row className="total-result2">
-            <Col lg={6} className="card1">
-              <h1>+ 1.00%</h1>
-              <h3>Total Result</h3>
-              <p>01 Dec 2020</p>
-            </Col>
-            <Col lg={6} className="card2">
-              <h3>Digital License</h3>
-              <div className="volume">
-                <p style={{ margin: "0px", color: "white" }}>Total Volume</p>
-                <p style={{ margin: "0px", color: "white", fontWeight: "600" }}>
-                  746392989
-                </p>
-              </div>
-              <div className="volume">
-                <p style={{ margin: "0px", color: "white" }}>
-                  Total Transaction
-                </p>
-                <p style={{ margin: "0px", color: "white", fontWeight: "600" }}>
-                  438
-                </p>
-              </div>
-            </Col>
-          </Row>
-        </Col>
       </Row>
       <Row className="main__refferral-link">
         <p>
@@ -143,7 +128,7 @@ function Main(props) {
           // }}
           type="text"
           name="amount"
-          id = "amount"
+          id="amount"
           className="input-box"
           placeholder="Enter Amount"
         />
@@ -177,10 +162,22 @@ function Main(props) {
         >
           <h5>Withraw Funds</h5>
         </Button>
-        <Button className="withdraw__heading">
+        <Button
+          className="withdraw__heading"
+          onClick={() => {
+            setTableHeading("Active Deposit");
+            togglePopup();
+          }}
+        >
           <h5>View Active Investment</h5>
         </Button>
-        <Button className="withdraw__heading" onClick={togglePopup}>
+        <Button
+          className="withdraw__heading"
+          onClick={() => {
+            setTableHeading("Expired Deposit");
+            togglePopup();
+          }}
+        >
           <h5>View Expired Investment</h5>
         </Button>
         {isOpen && (
@@ -188,33 +185,26 @@ function Main(props) {
             backGround="white"
             content={
               <>
+                <h1>{tableHeading}</h1>
                 <Table hover responsive>
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Username</th>
+                      <th>Date</th>
+                      <th>Ammount</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <th scope="row">1</th>
                       <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
                     </tr>
                     <tr>
                       <th scope="row">2</th>
                       <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
                     </tr>
                     <tr>
                       <th scope="row">3</th>
                       <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -238,7 +228,11 @@ function Main(props) {
         <Col lg={6} xs={6} className="withdraw-cards">
           <Withdraw
             heading="Earning Cap"
-            data={(2*props.userTotalDeposits-props.totalEarnedFromDailyProfit)>0?(2*props.userTotalDeposits-props.totalEarnedFromDailyProfit):0}
+            data={
+              2 * props.userTotalDeposits - props.totalEarnedFromDailyProfit > 0
+                ? 2 * props.userTotalDeposits - props.totalEarnedFromDailyProfit
+                : 0
+            }
             icon={icon8}
             color="#dc5063"
             bgStartColor="#f19539"
@@ -375,7 +369,7 @@ function Main(props) {
           <Col lg={2} xs={3} className="box">
             Level 1
           </Col>
-          <span className="spn"></span>
+          {/* <span className="spn"></span>
           <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Binary Commision Earned so far"
@@ -385,34 +379,38 @@ function Main(props) {
               bgStartColor="#79dbfb "
               bgEndColor="#2794e5"
             ></Withdraw>
-          </Col>
+          </Col> */}
           <Col lg={2} xs={3} className="box">
             Level 1
           </Col>
           <Col lg={2} xs={3} className="box">
             Level 1
           </Col>
-          <Col lg={6} xs={6} className="withdraw-cards">
+          {/* <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Active deposit Amount"
-              data={props.userTotalActiveDeposits?props.userTotalActiveDeposits:0}
+              data={
+                props.userTotalActiveDeposits
+                  ? props.userTotalActiveDeposits
+                  : 0
+              }
               icon={icon4}
               color="#2696e5"
               bgStartColor="#79dbfb "
               bgEndColor="#2794e5"
             ></Withdraw>
-          </Col>
+          </Col> */}
           <span className="spn"></span>
-          <Col lg={6} xs={6} className="withdraw-cards">
+          {/* <Col lg={6} xs={6} className="withdraw-cards">
             <Withdraw
               heading="Number of total deposits"
-              data={props.noOfTotalDeposits?props.noOfTotalDeposits:0}
+              data={props.noOfTotalDeposits ? props.noOfTotalDeposits : 0}
               icon={icon10}
               color="#dc5063"
               bgStartColor="#f19539"
               bgEndColor="#f3037e"
             ></Withdraw>
-          </Col>
+          </Col> */}
         </Row>
       </Row>
 

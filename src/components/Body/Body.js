@@ -11,6 +11,7 @@ import bodyicon2 from "../../assets/bodyicon2.png";
 import bodyicon3 from "../../assets/bodyicon3.png";
 import videohead from "../../assets/videohead.png";
 import Popup from "../Popup/Popup";
+
 function Body(props) {
   // constructor(props) {
   //   super(props);

@@ -31,7 +31,8 @@ export default class LandingPage extends Component {
 					totalTeamMembers={this.props.totalTeamMembers}
 					withdraw={this.props.withdraw}
 					userDailyProfit={this.props.userDailyProfit}
-					userPersonalDepositProfit={this.props.userPersonalDepositProfit}
+                    userPersonalDepositProfit={this.props.userPersonalDepositProfit}
+                    account={this.props.account}
 				/>
 				<Promotional />
 				<Footer />
