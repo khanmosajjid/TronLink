@@ -1,9 +1,6 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Home from './components/home';
-import Header from './components/Header/Header';
-import Payment from './components/Payment/Payment';
-import Footer from './components/Footer/Footer';
+
 import Main from './components/Main';
 import Statistics from './Statistics/Statistics';
 import Utils from './utils';
@@ -30,8 +27,13 @@ class App extends Component {
 		this.getUserInfo = this.getUserInfo.bind(this);
 		this.getLevelWiseCount = this.getLevelWiseCount.bind(this);
 		this.invest = this.invest.bind(this);
-		this.withdraw = this.withdraw.bind(this);
-	}
+    this.withdraw = this.withdraw.bind(this);
+    this.makeRoundOf=this.makeRoundOf.bind(this);
+  }
+  
+  makeRoundOf(num){
+    return (num/10**6).toFixed(2)
+  }
 
 	async componentDidMount() {
 		await this.initTron();
@@ -122,7 +124,7 @@ class App extends Component {
 		}
 		this.setState({ InitError: true });
 	}
-
+ 
 	//refferer
 	async invest(entryFees) {
 		this.setState({ loading: true });
@@ -145,11 +147,14 @@ class App extends Component {
 	async fetchPlatformData() {
 		let totalUsers = (await this.state.contract.getTotalVolume().call()).toNumber();
 		console.log('users', totalUsers);
-		let totalDepositAmount = (await this.state.contract.getTotalDepositsAmount().call()).toNumber() / 1000000;
+    let totalDepositAmount = (await this.state.contract.getTotalDepositsAmount().call()).toNumber();
+    totalDepositAmount=this.makeRoundOf(totalDepositAmount);
 		console.log(totalDepositAmount + 'it is total ammmount');
-		let totalWithdrawn = (await this.state.contract.getTotalWithdrawn().call()).toNumber() / 1000000;
+    let totalWithdrawn = (await this.state.contract.getTotalWithdrawn().call()).toNumber();
+    totalWithdrawn=this.makeRoundOf(totalWithdrawn);
 		console.log(totalWithdrawn, ' is total Withdrawn');
-		let tradingPool = (await this.state.contract.getAmountInTradingPool().call()).toNumber() / 1000000;
+    let tradingPool = (await this.state.contract.getAmountInTradingPool().call()).toNumber();
+    tradingPool=this.makeRoundOf(tradingPool);
 
 		let payload = {
 			totalUsers: totalUsers,
@@ -161,29 +166,37 @@ class App extends Component {
 	}
 
 	async getUserInfo(addr) {
-		let userDailyProfit = (await this.state.contract.getUserDailyProfit(addr).call()).toNumber() / 1000000;
+    let userDailyProfit = (await this.state.contract.getUserDailyProfit(addr).call()).toNumber();
+    userDailyProfit=this.makeRoundOf(userDailyProfit);
 		console.log('daily', userDailyProfit);
 		const getBinaryBalanceLeftForWithdrawl =
-			(await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()).toNumber() / 1000000;
+      (await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()).toNumber();
+    getBinaryBalanceLeftForWithdrawl=this.makeRoundOf(getBinaryBalanceLeftForWithdrawl);
 		userDailyProfit = userDailyProfit + getBinaryBalanceLeftForWithdrawl;
 		const userPersonalDepositProfit = (await this.state.contract.getExtraProfit(addr).call()).toNumber() / 100;
 		const totalEarnedFromDailyProfit =
-			(await this.state.contract.totalEarnedFromDailyProfit(addr).call()).toNumber() / 1000000;
+      (await this.state.contract.totalEarnedFromDailyProfit(addr).call()).toNumber();
+      totalEarnedFromDailyProfit=this.makeRoundOf(totalEarnedFromDailyProfit);
 		const totalReferralCommissionEarned =
-			(await this.state.contract.getTotalReferralCommissionEarned(addr).call()).toNumber() / 1000000;
+      (await this.state.contract.getTotalReferralCommissionEarned(addr).call()).toNumber();
+      totalReferralCommissionEarned=this.makeRoundOf(totalReferralCommissionEarned);
 		const referralLevelsUnlocked = (await this.state.contract.getReferralsLevelsUnlocked(addr).call()).toNumber();
 		const totalTeamDepositVolume =
-			(await this.state.contract.getTotalTeamDepositVolume(addr).call()).toNumber() / 1000000;
+      (await this.state.contract.getTotalTeamDepositVolume(addr).call()).toNumber();
+      totalTeamDepositVolume=this.makeRoundOf(totalTeamDepositVolume);
 		console.log('total team deposit vol', totalTeamDepositVolume);
 		const binaryCommissionEarnedSoFar =
-			(await this.state.contract.getBinaryCommissionEarnedSoFar(addr).call()).toNumber() / 1000000;
+      (await this.state.contract.getBinaryCommissionEarnedSoFar(addr).call()).toNumber();
+      binaryCommissionEarnedSoFar=this.makeRoundOf(binaryCommissionEarnedSoFar);
 		const referrals = (await this.state.contract.getReferrals(addr).call()).toNumber();
 		const totalTeamMembers = (await this.state.contract.getTotalTeamMembers(addr).call()).toNumber();
 
 		const userTotalActiveDeposits =
-			(await this.state.contract.getUserTotalActiveDeposits(addr).call()).toNumber() / 1000000;
+      (await this.state.contract.getUserTotalActiveDeposits(addr).call()).toNumber();
+      userTotalActiveDeposits=this.makeRoundOf(userTotalActiveDeposits);
 		const noOfTotalDeposits = (await this.state.contract.getUserTotalNumberOfDeposits(addr).call()).toNumber();
-		const userTotalDeposits = (await this.state.contract.getUserTotalDeposits(addr).call()).toNumber() / 1000000;
+    const userTotalDeposits = (await this.state.contract.getUserTotalDeposits(addr).call()).toNumber();
+    userTotalDeposits=this.makeRoundOf(userTotalDeposits);
 		let payload = {
 			userTotalDeposits: userTotalDeposits,
 			userTotalActiveDeposits: userTotalActiveDeposits,
@@ -199,7 +212,8 @@ class App extends Component {
 			totalTeamMembers: totalTeamMembers
 		};
 		console.log('Payload is ', payload);
-		let contractBalance = (await this.state.contract.getContractBalance().call()).toNumber()/1000000;
+    let contractBalance = (await this.state.contract.getContractBalance().call()).toNumber();
+    contractBalance=this.makeRoundOf(contractBalance);
 		console.log('contract balance', contractBalance);
 		this.setState(payload);
 	}
@@ -208,6 +222,8 @@ class App extends Component {
 		const levelWiseCount = (await this.state.contract.getLevelWiseCount(addr, level).call()).toNumber();
 		return levelWiseCount;
 	}
+
+ 
 
 	async withdraw() {
 		Utils.contract

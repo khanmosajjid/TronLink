@@ -16,7 +16,7 @@ import icon9 from "../../assets/icon9.png";
 import icon10 from "../../assets/icon10.png";
 import icon11 from "../../assets/icon11.png";
 import deposit from "../../assets/deposit.png";
-import volumebg from "../../assets/volume_bg.png";
+
 import Popup from "../../components/Popup/Popup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
