@@ -335,7 +335,7 @@ function Main(props) {
         <Col lg={6} xs={6} className="withdraw-cards">
           <Withdraw
             heading="Active deposit Sums"
-            data={props.referrals}
+            data={props.userTotalActiveDeposits}
             icon={icon4}
             color="#2696e5"
             bgStartColor="#79dbfb "

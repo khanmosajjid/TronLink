@@ -6,7 +6,7 @@ contract MyTron{
     uint256 constant MIN_AMOUNT =100000000;             // 100 TRX
     uint256 constant BASE_PERCENT = 120;                // 1.2% base profit
     uint256 constant internal MILLION = 1000;
-    uint256 constant internal TIME_STAMP = 2;      // 1 day
+    uint256 constant internal TIME_STAMP = 1;      // 1 day
     uint256 constant internal TRX = 1000000;
     uint256 constant internal THOUS = 1;
     
@@ -422,7 +422,7 @@ contract MyTron{
 			
 		uint256 binaryBalance;
 		if(getBinaryBalance(msg.sender)>0 && block.timestamp.sub(users[msg.sender].weeklyLastWithdraw)>TIME_STAMP.mul(7)){
-		   binaryBalance = getBinaryBalance(msg.sender).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw)).div(TIME_STAMP.mul(7));
+		   binaryBalance = getBinaryBalance(msg.sender).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw).div(TIME_STAMP.mul(7)));
 	        emit binaryEvent(binaryBalance,user.weeklyLastWithdraw,block.timestamp,block.timestamp.sub(user.weeklyLastWithdraw));
 	        user.weeklyLastWithdraw = block.timestamp;
 		    user.binaryCommissionEarned = user.binaryCommissionEarned.add(binaryBalance);
@@ -526,6 +526,7 @@ contract MyTron{
         if(isActive(_user)){
          binaryBalance = getBinaryBalance(_user).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw)).div(TIME_STAMP.mul(7));
         }
+        return binaryBalance;
     }
         
     // function to check if user is active ie. it has withdrawn 200% of all investment
