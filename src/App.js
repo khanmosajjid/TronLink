@@ -16,6 +16,8 @@ class App extends Component {
     this.state = {
       loading: false,
       totalUsers: null,
+      activeDeposits:[],
+      expiredDeposits:[],
       
       tronWeb: {
         installed: false,
@@ -30,10 +32,9 @@ class App extends Component {
     this.invest = this.invest.bind(this);
     this.withdraw = this.withdraw.bind(this);
     this.makeRoundOf = this.makeRoundOf.bind(this);
-    this.setRef = this.setRef.bind(this);
   }
 
-  parsParams() {
+  parseParams() {
     let ref
     function getUrlVars() {
       var vars = [],
@@ -72,8 +73,7 @@ class App extends Component {
       console.log(result, " level", i + 1, "-----");
     }
     this.fetchPlatformData();
-    this.setRef();
-    this.parsParams();
+    this.parseParams();
     console.log(this.state);
   }
 
@@ -163,9 +163,13 @@ class App extends Component {
     this.setState({ loading: true });
     let ref=Utils.adminAddress;
     let  localStorageId=localStorage.getItem('ref');
-    if(localStorageId!=null){
+    if(localStorageId){
            ref=localStorageId;
     }
+
+
+
+    console.log("refADDDD",ref,localStorageId)
     Utils.contract
       .invest(ref)
       .send({
@@ -180,6 +184,56 @@ class App extends Component {
       .catch((err) => {
         console.log("error while investing", err);
       });
+  }
+
+
+
+  async getMyDeposits(address,maxDeposit){
+
+    let activeDeposits =[]
+    let expiredDeposits = []
+
+    for(let i = 0;i<maxDeposit;i++){
+
+      let deposit = await this.getMyDeposit(address,i)
+      console.log("depoistPre",deposit,);
+      if(deposit){
+        if(deposit.isExpired){
+          expiredDeposits.push(deposit)
+        }else{
+          activeDeposits.push(deposit)
+
+        }
+      }
+
+     
+    }
+
+
+    this.setState({activeDeposits,expiredDeposits})
+  }
+
+
+
+
+  async getMyDeposit(add,index){
+
+    console.log("getMyDeposit", this.state.contract)
+    let deposit = await  this.state.contract.getUserDepositInfo(add,index).call();
+    console.log("deposi",deposit)
+    if(deposit){
+      let payload = {
+        id:index,
+        date:deposit._start.toNumber(),
+        amount:deposit._amount.toNumber()/10**6,
+        withdrawn:deposit._withdrawn.toNumber()/10**6,
+        isExpired:deposit._isExpired
+      }
+      console.log("depoist",payload)
+
+      return payload
+    }
+     
   }
 
   async fetchPlatformData() {
@@ -287,6 +341,9 @@ class App extends Component {
     contractBalance = this.makeRoundOf(contractBalance);
     console.log("contract balance", contractBalance);
     this.setState(payload);
+
+    this.getMyDeposits(window.tronWeb.defaultAddress.base58,noOfTotalDeposits);
+
   }
 
   async getLevelWiseCount(addr, level) {
@@ -307,16 +364,7 @@ class App extends Component {
         console.log("error while withdrawing", err);
       });
   }
-  setRef() {
-    let ref = window.location.href;
-    // let user=this.props.match.params.ref;
-    // console.log(user,"-----------is user ref")
 
-    console.log("is user id", ref);
-    if (ref != null) {
-      localStorage.setItem("ref", ref);
-    }
-  }
 
   render() {
     return (
@@ -332,8 +380,11 @@ class App extends Component {
               />
             </Route>
 
-            <Route exact path="/landing">
+            <Route exact path="/stats">
               <Statistics
+                activeDeposits={this.state.activeDeposits}
+                expiredDeposits={this.state.expiredDeposits}
+
                 userTotalDeposits={this.state.userTotalDeposits}
                 invest={this.invest}
                 totalEarnedFromDailyProfit={

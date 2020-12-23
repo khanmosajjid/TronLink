@@ -13,11 +13,14 @@ export default class LandingPage extends Component {
 		return (
 			<div>
 				<div className="header-component">
-					<Header backgroundImage="#00000000" />
+					<Header backgroundImage="#00000000"                     
+ />
 					<h1>User Statistics</h1>
 				</div>
 
 				<Main
+				  activeDeposits={this.props.activeDeposits}
+				  expiredDeposits={this.props.expiredDeposits}
 					userTotalDeposits={this.props.userTotalDeposits}
 					invest={this.props.invest}
 					userTotalActiveDeposits={this.props.userTotalActiveDeposits}
@@ -34,7 +37,8 @@ export default class LandingPage extends Component {
                     userPersonalDepositProfit={this.props.userPersonalDepositProfit}
                     account={this.props.account}
 				/>
-				<Promotional />
+				<Promotional                     account={this.props.account}
+/>
 				<Footer />
 			</div>
 		);

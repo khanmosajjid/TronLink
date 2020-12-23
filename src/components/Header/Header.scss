@@ -33,19 +33,20 @@
 }
 .header__containt-dailyreport {
   display: flex;
-  // align-items: center;
+  align-items: center;
   border: 1px solid blue;
   border-radius: 20px;
   font-size: small;
   height: fit-content;
+  // overflow: hidden;
   padding-top: 7px;
   padding-bottom: 5px;
   justify-content: center;
   margin-right: 10px;
   padding-right: 0px !important;
   padding-left: 0px !important;
-  margin-top: 4%;
-  margin-bottom: 4%;
+  // margin-top: 4%;
+  // margin-bottom: 4%;
 }
 .header__containt-weeklyreport {
   display: flex;
@@ -95,15 +96,15 @@
 
 .header__containt-dailyreport:hover{
   cursor: pointer;
-  // background-image: linear-gradient(to right, #eb4657, #ec6a66);
-  // border:none;
-  // transition: 0.3s;
+  background-image: linear-gradient(to right, #eb4657, #ec6a66);
+  border:none;
+  transition: 0.3s;
 }
 .header__containt-weeklyreport:hover{
   cursor: pointer;
-  // transition: 0.3s;
-  // border: none;
-  // background-image: linear-gradient(to right, #eb4657, #ec6a66);
+  transition: 0.3s;
+  border: none;
+  background-image: linear-gradient(to right, #eb4657, #ec6a66);
 }
 .tron-logo{
   height: 20px;

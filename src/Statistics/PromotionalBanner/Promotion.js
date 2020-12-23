@@ -4,6 +4,18 @@ import "./Promotion.scss";
 import banner1 from "../../assets/banner1.png";
 
 export default class Promotion extends Component {
+
+
+  constructor(props){
+    super(props)
+  }
+
+
+  getMyRefLink=()=>{
+    if(this.props.account){
+      return "https://trontiply.com/?ref="+this.props.account
+    }
+  }
   render() {
     return (
       <Container className="promotion">
@@ -16,7 +28,8 @@ export default class Promotion extends Component {
             type="text"
             name="amount"
             className="input-box"
-            placeholder="Enter Amount"
+            value={this.getMyRefLink()}
+
           />
           <Button className="promotion__button">Copy</Button>
         </Row>
@@ -27,8 +40,8 @@ export default class Promotion extends Component {
           <Input
             type="text"
             name="amount"
+            value={this.getMyRefLink()}
             className="input-box"
-            placeholder="Enter Amount"
           />
           <Button className="promotion__button">Copy</Button>
         </Row>
