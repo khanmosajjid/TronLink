@@ -9,7 +9,9 @@ export default class Withdraw extends Component{
     }
     render(){
         return(
-            <Container fluid={true} className="withdraw-card">
+            <Container fluid={true} className="withdraw-card" style={{background:"linear-gradient(262deg,"+
+            this.props.bgStartColor +" 8%," 
+            + this.props.bgEndColor+ " 98%)",height:"100%"}}>
                 <Row className="withdraw-card__main">
                     <Col lg={3} xs={12} style={{padding:"0px !important"}} className="card-head">
                         <div className="icon"
@@ -20,9 +22,9 @@ export default class Withdraw extends Component{
                           <img src={this.props.icon} style={{padding:"8px"}}></img>
                         </div>
                     </Col>
-                    <Col lg={9} xs={12} style={{padding:"0px !important"}} className="card-body">
-                         <h6>{this.props.heading}</h6>
-                         <h2 style={{color:""+this.props.color}}>{this.props.data}</h2>
+                    <Col lg={9} xs={12} style={{padding:"0px !important",color:"white"}} className="card-body">
+                         <h6 style={{fontWeight:"600"}}>{this.props.heading}</h6>
+                         <h2 style={{color:"white"}}>{this.props.data}</h2>
                     </Col>
                 </Row>
             </Container>

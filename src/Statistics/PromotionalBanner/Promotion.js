@@ -31,7 +31,9 @@ export default class Promotion extends Component {
             value={this.getMyRefLink()}
 
           />
-          <Button className="promotion__button">Copy</Button>
+          <Button className="promotion__button" onClick={()=>{
+            
+          }}>Copy</Button>
         </Row>
 
         <img src={banner1}></img>
