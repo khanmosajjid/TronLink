@@ -37,9 +37,16 @@ function Main(props) {
     setActiveDeposits(props.activeDeposits);
   }, [props.activeDeposits]);
 
+
+  useEffect(() => {
+    setLevelTree(props.levelTree);
+  }, [props.levelTree]);
+
+
   useEffect(() => {
     setExpiredDeposits(props.expiredDeposits);
   }, [props.expiredDeposits]);
+  const [levelTree, setLevelTree] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
@@ -54,6 +61,20 @@ function Main(props) {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+
+
+  const renderLevelTree=()=>{
+      let tree = []
+      
+      for(let level of levelTree){
+        tree.push(<Col lg={2} xs={3} className="box">
+        Level {level.levelNumber} | Members {level.members}
+      </Col>)
+      }
+
+
+      return tree;
+  }
 
   const getLevelRank = () => {
     let number = props.referralLevelsUnlocked;
@@ -142,13 +163,9 @@ function Main(props) {
 
   return (
     <div className="main">
-      <Row className="main__header">
-        <h2>Daily Profit</h2>
-        <span></span>
-      </Row>
+      
       <Row className="main__resultcard">
-        <Col lg={8} xs={12}>
-          <Row className="total-result1">
+      <Row className="total-result1">
             <Col lg={4} className="card1">
               <QRCode value={getMyRefLink()} />
             </Col>
@@ -179,17 +196,15 @@ function Main(props) {
               </div>
             </Col>
           </Row>
-        </Col>
-        <span style={{ marginLeft: "2%", marginRight: "2%" }}></span>
       </Row>
-      <Row className="main__refferral-link">
+      {/* <Row className="main__refferral-link">
         <p>
           <span>
             <Icon name="paperclip"></Icon>Refferal Link :{" "}
           </span>
           QR code for Refferral link
         </p>
-      </Row>
+      </Row> */}
       <Row className="main__deposit">
         <div className="deposit-icon">
           <img src={deposit}></img>
@@ -427,9 +442,12 @@ function Main(props) {
         </div>
 
         <Row className="level-box">
-          <Col lg={2} xs={3} className="box">
+
+          {renderLevelTree()}
+          {/* <Col lg={2} xs={3} className="box">
             Level 1
           </Col>
+          
           <Col lg={2} xs={3} className="box">
             Level 2
           </Col>
@@ -457,7 +475,7 @@ function Main(props) {
           </Col>
           <Col lg={2} xs={3} className="box">
             Level 10
-          </Col>
+          </Col> */}
           
         </Row>
       </Row>

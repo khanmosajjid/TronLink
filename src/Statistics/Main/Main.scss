@@ -31,7 +31,9 @@
     }
   }
   & .total-result1 {
-    height: fit-content;
+    // height: fit-content;
+    width: 99%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,6 +117,8 @@
   }
   & .total-result2 {
     height: fit-content;
+    width: 99%;
+
     display: flex;
     justify-content: center;
     align-items: center;

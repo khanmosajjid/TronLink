@@ -18,7 +18,7 @@ class App extends Component {
       totalUsers: null,
       activeDeposits:[],
       expiredDeposits:[],
-      
+      levelTree:[],
       tronWeb: {
         installed: false,
         loggedIn: false,
@@ -68,10 +68,6 @@ class App extends Component {
     console.log("tron initiated", this.state);
 
     this.getUserInfo(this.state.account);
-    for (var i = 0; i < 10; i++) {
-      const result = await this.getLevelWiseCount(this.state.account, i + 1);
-      console.log(result, " level", i + 1, "-----");
-    }
     this.fetchPlatformData();
     this.parseParams();
     console.log(this.state);
@@ -269,7 +265,6 @@ class App extends Component {
     let userDailyProfit = (
       await this.state.contract.getUserDailyProfit(addr).call()
     ).toNumber();
-    userDailyProfit = this.makeRoundOf(userDailyProfit);
     console.log("daily", userDailyProfit);
     let getBinaryBalanceLeftForWithdrawl = (
       await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()
@@ -277,7 +272,18 @@ class App extends Component {
     getBinaryBalanceLeftForWithdrawl = this.makeRoundOf(
       getBinaryBalanceLeftForWithdrawl
     );
-    userDailyProfit = userDailyProfit + getBinaryBalanceLeftForWithdrawl;
+
+
+    userDailyProfit = userDailyProfit+getBinaryBalanceLeftForWithdrawl;
+    userDailyProfit = this.makeRoundOf(userDailyProfit);
+
+
+    console.log("getBinaryBalanceLeftForWithdrawl",getBinaryBalanceLeftForWithdrawl)
+    
+    
+    
+    
+    
     const userPersonalDepositProfit =
       (await this.state.contract.getExtraProfit(addr).call()).toNumber() / 100;
     let totalEarnedFromDailyProfit = (
@@ -344,6 +350,32 @@ class App extends Component {
 
     this.getMyDeposits(window.tronWeb.defaultAddress.base58,noOfTotalDeposits);
 
+    let levelTree = []
+    for (var i = 0; i < 10; i++) {
+      let result = await this.getLevelWiseCount(this.state.account, i + 1);
+      console.log(result, " level", i + 1, "-----");
+
+      if(!result){
+        result = 0
+      }
+      let payload = {
+        levelNumber:i+1,
+        members:result
+
+      }
+
+      levelTree.push(payload)
+
+    }
+
+
+
+    this.setState({levelTree})
+
+
+
+
+
   }
 
   async getLevelWiseCount(addr, level) {
@@ -384,7 +416,7 @@ class App extends Component {
               <Statistics
                 activeDeposits={this.state.activeDeposits}
                 expiredDeposits={this.state.expiredDeposits}
-
+                levelTree={this.state.levelTree}
                 userTotalDeposits={this.state.userTotalDeposits}
                 invest={this.invest}
                 totalEarnedFromDailyProfit={
