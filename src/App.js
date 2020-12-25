@@ -23,11 +23,10 @@ class App extends Component {
         installed: false,
         loggedIn: false,
       },
-      account: "0x0",
+      account: "",
       // levels: [],
     };
     this.fetchPlatformData = this.fetchPlatformData.bind(this);
-    this.getUserInfo = this.getUserInfo.bind(this);
     this.getLevelWiseCount = this.getLevelWiseCount.bind(this);
     this.invest = this.invest.bind(this);
     this.withdraw = this.withdraw.bind(this);
@@ -65,93 +64,88 @@ class App extends Component {
 
   async componentDidMount() {
     await this.initTron();
-    console.log("tron initiated", this.state);
 
-    this.getUserInfo(this.state.account);
-    this.fetchPlatformData();
-    this.parseParams();
-    console.log(this.state);
+  
+   
+    
   }
 
   async initTron() {
-    await new Promise((resolve) => {
-      const tronWebState = {
-        installed: !!window.tronWeb,
-        loggedIn: window.tronWeb && window.tronWeb.ready,
-      };
+    // await new Promise((resolve) => {
+    //   const tronWebState = {
+    //     installed: !!window.tronWeb,
+    //     loggedIn: window.tronWeb && window.tronWeb.ready,
+    //   };
 
-      if (tronWebState.installed) {
-        this.setState({
-          tronWeb: tronWebState,
-        });
+    //   if (tronWebState.installed) {
+    //     this.setState({
+    //       tronWeb: tronWebState,
+    //     });
 
-        return resolve();
-      }
+    //     return resolve();
+    //   }
 
-      let tries = 0;
+    //   let tries = 0;
 
-      const timer = setInterval(() => {
-        if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+    //   const timer = setInterval(() => {
+    //     if (tries >= 10) {
+    //       const TRONGRID_API = "https://api.shasta.trongrid.io";
 
-          window.tronWeb = new TronWeb(
-            TRONGRID_API,
-            TRONGRID_API,
-            TRONGRID_API
-          );
+    //       window.tronWeb = new TronWeb(
+    //         TRONGRID_API,
+    //         TRONGRID_API,
+    //         TRONGRID_API
+    //       );
 
-          this.setState({
-            tronWeb: {
-              installed: false,
-              loggedIn: false,
-            },
-          });
+    //       this.setState({
+    //         tronWeb: {
+    //           installed: false,
+    //           loggedIn: false,
+    //         },
+    //       });
 
-          clearInterval(timer);
-          return resolve();
+    //       clearInterval(timer);
+    //       return resolve();
+    //     }
+
+    //     tronWebState.installed = !!window.tronWeb;
+    //     tronWebState.loggedIn = window.tronWeb && window.tronWeb.ready;
+
+    //     if (!tronWebState.installed) return tries++;
+
+    //     this.setState({
+    //       tronWeb: tronWebState,
+    //     });
+
+    //     resolve();
+    //   }, 100);
+    // });
+
+
+
+    
+    await new Promise(resolve => {
+      const tronLoader = setInterval( async () => {
+        if (window.tronWeb && window.tronWeb.ready) {
+          await Utils.setTronWeb(window.tronWeb);
+          this.setState({ account: window.tronWeb.defaultAddress.base58,
+            contract: Utils.contract });
+          clearInterval(tronLoader)
+
+          this.getUserInfo(window.tronWeb.defaultAddress.base58);
+          this.fetchPlatformData();
+          this.parseParams();
+          console.log("window.tronWeb.defaultAddress.base58 ,",window.tronWeb.defaultAddress.base58 )
+          resolve()
         }
-
-        tronWebState.installed = !!window.tronWeb;
-        tronWebState.loggedIn = window.tronWeb && window.tronWeb.ready;
-
-        if (!tronWebState.installed) return tries++;
-
-        this.setState({
-          tronWeb: tronWebState,
-        });
-
-        resolve();
-      }, 100);
+      }, 500)
     });
 
-    if (!this.state.tronWeb.loggedIn) {
-      // Set default address (foundation address) used for contract calls
-      // Directly overwrites the address object as TronLink disabled the
-      // function call
-      window.tronWeb.defaultAddress = {
-        hex: window.tronWeb.address.toHex(FOUNDATION_ADDRESS),
-        base58: FOUNDATION_ADDRESS,
-      };
-      window.tronWeb.on("addressChanged", () => {
-        if (this.state.tronWeb.loggedIn) {
-          return;
-        }
-        this.setState({
-          tronWeb: {
-            installed: true,
-            loggedIn: true,
-          },
-        });
-      });
-    }
-    await Utils.setTronWeb(window.tronWeb);
-    if (Utils) {
-      //setting account in tron web
-      this.setState({ account: window.tronWeb.defaultAddress.base58 });
-      this.setState({ contract: Utils.contract });
-      console.log("contract", Utils.contract);
-    }
-    this.setState({ InitError: true });
+
+   
+
+   
+
   }
 
   //refferer
@@ -214,8 +208,8 @@ class App extends Component {
 
   async getMyDeposit(add,index){
 
-    console.log("getMyDeposit", this.state.contract)
-    let deposit = await  this.state.contract.getUserDepositInfo(add,index).call();
+    console.log("getMyDeposit", Utils.contract)
+    let deposit = await  Utils.contract.getUserDepositInfo(add,index).call();
     console.log("deposi",deposit)
     if(deposit){
       let payload = {
@@ -234,21 +228,21 @@ class App extends Component {
 
   async fetchPlatformData() {
     let totalUsers = (
-      await this.state.contract.getTotalVolume().call()
+      await Utils.contract.getTotalVolume().call()
     ).toNumber();
     console.log("users", totalUsers);
     let totalDepositAmount = (
-      await this.state.contract.getTotalDepositsAmount().call()
+      await Utils.contract.getTotalDepositsAmount().call()
     ).toNumber();
     totalDepositAmount = this.makeRoundOf(totalDepositAmount);
     console.log(totalDepositAmount + "it is total ammmount");
     let totalWithdrawn = (
-      await this.state.contract.getTotalWithdrawn().call()
+      await Utils.contract.getTotalWithdrawn().call()
     ).toNumber();
     totalWithdrawn = this.makeRoundOf(totalWithdrawn);
     console.log(totalWithdrawn, " is total Withdrawn");
     let tradingPool = (
-      await this.state.contract.getAmountInTradingPool().call()
+      await Utils.contract.getAmountInTradingPool().call()
     ).toNumber();
     tradingPool = this.makeRoundOf(tradingPool);
 
@@ -262,12 +256,17 @@ class App extends Component {
   }
 
   async getUserInfo(addr) {
-    let userDailyProfit = (
-      await this.state.contract.getUserDailyProfit(addr).call()
-    ).toNumber();
+
+    console.log("fdfdd",addr)
+    let userDailyProfit =  await Utils.contract.getUserDailyProfit(addr).call();
+    if(userDailyProfit){
+      userDailyProfit = userDailyProfit.toNumber()
+    }else{
+      userDailyProfit = 0
+    }
     console.log("daily", userDailyProfit);
     let getBinaryBalanceLeftForWithdrawl = (
-      await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()
+      await Utils.contract.getBinaryBalanceLeftForWithdrawl(addr).call()
     ).toNumber();
     getBinaryBalanceLeftForWithdrawl = this.makeRoundOf(
       getBinaryBalanceLeftForWithdrawl
@@ -285,45 +284,45 @@ class App extends Component {
     
     
     const userPersonalDepositProfit =
-      (await this.state.contract.getExtraProfit(addr).call()).toNumber() / 100;
+      (await Utils.contract.getExtraProfit(addr).call()).toNumber() / 100;
     let totalEarnedFromDailyProfit = (
-      await this.state.contract.totalEarnedFromDailyProfit(addr).call()
+      await Utils.contract.totalEarnedFromDailyProfit(addr).call()
     ).toNumber();
     totalEarnedFromDailyProfit = this.makeRoundOf(totalEarnedFromDailyProfit);
     let totalReferralCommissionEarned = (
-      await this.state.contract.getTotalReferralCommissionEarned(addr).call()
+      await Utils.contract.getTotalReferralCommissionEarned(addr).call()
     ).toNumber();
     totalReferralCommissionEarned = this.makeRoundOf(
       totalReferralCommissionEarned
     );
     const referralLevelsUnlocked = (
-      await this.state.contract.getReferralsLevelsUnlocked(addr).call()
+      await Utils.contract.getReferralsLevelsUnlocked(addr).call()
     ).toNumber();
     let totalTeamDepositVolume = (
-      await this.state.contract.getTotalTeamDepositVolume(addr).call()
+      await Utils.contract.getTotalTeamDepositVolume(addr).call()
     ).toNumber();
     totalTeamDepositVolume = this.makeRoundOf(totalTeamDepositVolume);
     console.log("total team deposit vol", totalTeamDepositVolume);
     let binaryCommissionEarnedSoFar = (
-      await this.state.contract.getBinaryCommissionEarnedSoFar(addr).call()
+      await Utils.contract.getBinaryCommissionEarnedSoFar(addr).call()
     ).toNumber();
     binaryCommissionEarnedSoFar = this.makeRoundOf(binaryCommissionEarnedSoFar);
     const referrals = (
-      await this.state.contract.getReferrals(addr).call()
+      await Utils.contract.getReferrals(addr).call()
     ).toNumber();
     const totalTeamMembers = (
-      await this.state.contract.getTotalTeamMembers(addr).call()
+      await Utils.contract.getTotalTeamMembers(addr).call()
     ).toNumber();
 
     let userTotalActiveDeposits = (
-      await this.state.contract.getUserTotalActiveDeposits(addr).call()
+      await Utils.contract.getUserTotalActiveDeposits(addr).call()
     ).toNumber();
     userTotalActiveDeposits = this.makeRoundOf(userTotalActiveDeposits);
     const noOfTotalDeposits = (
-      await this.state.contract.getUserTotalNumberOfDeposits(addr).call()
+      await Utils.contract.getUserTotalNumberOfDeposits(addr).call()
     ).toNumber();
     let userTotalDeposits = (
-      await this.state.contract.getUserTotalDeposits(addr).call()
+      await Utils.contract.getUserTotalDeposits(addr).call()
     ).toNumber();
     userTotalDeposits = this.makeRoundOf(userTotalDeposits);
     let payload = {
@@ -342,7 +341,7 @@ class App extends Component {
     };
     console.log("Payload is ", payload);
     let contractBalance = (
-      await this.state.contract.getContractBalance().call()
+      await Utils.contract.getContractBalance().call()
     ).toNumber();
     contractBalance = this.makeRoundOf(contractBalance);
     console.log("contract balance", contractBalance);
@@ -380,7 +379,7 @@ class App extends Component {
 
   async getLevelWiseCount(addr, level) {
     const levelWiseCount = (
-      await this.state.contract.getLevelWiseCount(addr, level).call()
+      await Utils.contract.getLevelWiseCount(addr, level).call()
     ).toNumber();
     return levelWiseCount;
   }

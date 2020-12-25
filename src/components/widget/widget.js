@@ -44,7 +44,7 @@ export default class Widget extends Component {
           </Col>
           <Col lg={9} className="widget-details">
             <h3>
-              <span style={{ color: "" + this.props.color }}>
+              <span style={{ color: "" + this.props.color ,fontSize:32}}>
                 {this.props.levelName}{" "}
               </span>
             </h3>

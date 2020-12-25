@@ -47,6 +47,7 @@
          
          padding-left: 11%;
          padding-right: 11%
+       
     }
     & .cards__body3{
         padding: 20px;
@@ -81,6 +82,10 @@
          
          padding-left: 11%;
          padding-right: 11%
+    }
+
+    &.value{
+         font-size: 28px;
     }
 }
 @media(max-width:700px){

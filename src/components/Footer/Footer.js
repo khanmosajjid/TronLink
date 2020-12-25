@@ -12,7 +12,7 @@ export default class Footer extends Component {
 
                 </Row>
                 <Row className="footer-copyright">
-                    CopyRight @ 2020 All Rights Reserved
+                    Copyright @ 2020 All Rights Reserved
                 </Row>
 
             </Container>

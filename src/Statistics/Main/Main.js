@@ -30,6 +30,7 @@ function Main(props) {
 
   const [expiredDeposits, setExpiredDeposits] = useState([]);
   const [tableData,setTableData]=useState(false)
+  const [walletAddress,setWalletAddress]=useState(false)
 
   const getReadableTime = (time) => {
     return moment(time * 1000).format("DD/MMM/YYYY");
@@ -45,6 +46,17 @@ function Main(props) {
   }, [props.levelTree]);
 
 
+
+  useEffect(() => {
+    setWalletAddress(props.account);
+    setRefLink(getMyRefLink(props.account))
+    console.log("pros.accout",props.account)
+  }, [props.account]);
+
+
+
+  
+
   useEffect(() => {
     setExpiredDeposits(props.expiredDeposits);
   }, [props.expiredDeposits]);
@@ -53,11 +65,9 @@ function Main(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
   const [tableHeading, setTableHeading] = useState("Active Deposit");
-  const [isActiveDepositTableActive, setActiveDepositTableActive] = useState(
-    false
-  );
+  const [isActiveDepositTableActive, setActiveDepositTableActive] = useState(false);
   const [copySuccess, setCopySuccess] = useState("");
-
+  const [refLink,setRefLink]= useState()
   const textAreaRef = useRef(null);
 
   const togglePopup = () => {
@@ -104,11 +114,17 @@ function Main(props) {
     }
   };
   function copyToClipboard(e) {
-    textAreaRef.current.select();
-    document.execCommand("copy");
+    // textAreaRef.current.select();
+    // document.execCommand("copy");
+    var textField = document.createElement('textarea')
+    textField.innerText =refLink
+    document.body.appendChild(textField)
+    textField.select()
+    document.execCommand('copy')
+    textField.remove()
     // This is just personal preference.
     // I prefer to not show the whole text area selected.
-    e.target.focus();
+    // e.target.focus();
     setCopySuccess("Copied!");
     toast.success("copy to clipboard");
   }
@@ -145,11 +161,24 @@ function Main(props) {
     }
   };
 
-  const getMyRefLink = () => {
-    if (props.account) {
-      return "https://trontiply.com/?ref=" + props.account;
-    }
+  const getMyRefLink = (addr) => {
+    return "https://trontiply.com/?ref=" + addr;
+
   };
+
+
+
+  const getIfHideTable=()=>{
+    if(isActiveDepositTableActive){
+      if(activeDeposits.length ==0){
+        return true
+      }
+    }else{
+      if(expiredDeposits.length ==0){
+        return true
+      }
+    }
+  }
   const makeDeposit = () => {
     let depositAmount = depositAmount;
 
@@ -174,34 +203,56 @@ function Main(props) {
       <Row className="main__resultcard">
       <Row className="total-result1">
             <Col lg={4} className="card1">
-              <QRCode value={getMyRefLink()} />
+             {refLink ?<QRCode value={refLink} />:null}
             </Col>
             <Col lg={8} className="card2">
+
+              <Row>
+
               <div className="refferal-logo">
               <img
                 src={money_transfer}
-                style={{ height: "70px", marginTop: "10px" }}
+                style={{ height: "70px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                display: "block" }}
               ></img>
-
               </div>
-              
+
+
+              <div>
               <h3>Refferral Link</h3>
               <div className="volume">
-                <textarea
+                {/* <textarea
                   id="link"
-                  style={{ margin: "0px", color: "white", fontWeight: "600" }}
+                  style={{ margin: "0px", color: "white", fontWeight: "600",width:"100%" }}
                   ref={textAreaRef}
                   onClick={copyToClipboard}
-                >
-                  {getMyRefLink()}
-                </textarea>
+                  value={refLink}
+                > */}
+
+<h4 onClick={()=>{
+  copyToClipboard()
+}}
+                  id="link">
+ {refLink}
+                  </h4>
+                 
+                  
+                {/* </textarea> */}
               </div>
               <div className="volume2">
                 <Button className="copy-address" onClick={copyToClipboard}>
                   <h5>Copy</h5>
                 </Button>
               </div>
-            </Col>
+           
+              </div>
+              </Row>
+           
+              
+             
+              </Col>
           </Row>
       </Row>
       {/* <Row className="main__refferral-link">
@@ -293,7 +344,7 @@ function Main(props) {
                 </span>
                 <h1 style={{ color: "#a7651b" }}>{tableHeading}</h1>
                 <Table hover responsive borderless>
-                  <thead  >
+                  <thead  hidden={getIfHideTable()} >
                     <tr>
                       <th>Date</th>
                       <th>Amount</th>
@@ -451,7 +502,7 @@ function Main(props) {
         <Row className="level-box">
 
           {renderLevelTree()}
-          <h1>hello</h1>
+          
           
           {/* <Col lg={2} xs={3} className="box">
             Level 1
