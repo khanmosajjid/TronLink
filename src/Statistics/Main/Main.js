@@ -28,6 +28,7 @@ function Main(props) {
   const [activeDeposits, setActiveDeposits] = useState([]);
 
   const [expiredDeposits, setExpiredDeposits] = useState([]);
+  const [tableData,setTableData]=useState(false)
 
   const getReadableTime = (time) => {
     return moment(time * 1000).format("DD/MMM/YYYY");
@@ -111,7 +112,10 @@ function Main(props) {
     }
 
     if (items.length == 0) {
-      return <h3>No Data</h3>;
+      // setTableData(true)
+      console.log(tableData);
+      return  <h3>No data</h3>
+    
     } else {
       return items;
     }
@@ -271,7 +275,7 @@ function Main(props) {
                 </span>
                 <h1 style={{ color: "white" }}>{tableHeading}</h1>
                 <Table hover responsive>
-                  <thead>
+                  <thead  >
                     <tr>
                       <th>Date</th>
                       <th>Amount</th>
@@ -282,7 +286,7 @@ function Main(props) {
                 </Table>
               </>
             }
-            handleClose={togglePopup}
+            
           />
         )}
         <span></span>
