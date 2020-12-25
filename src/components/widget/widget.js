@@ -11,7 +11,7 @@ export default class Widget extends Component {
       name: this.props.name,
       trx: this.props.trx,
       logo: this.props.logo,
-      level: this.props.level,
+      // level: this.props.level,
       binaryCommision: this.props.binaryCommision,
     };
   }
@@ -61,8 +61,7 @@ export default class Widget extends Component {
                   >
                     {this.props.levelamount}
                   </span>
-                  TRX Deposit (you must deposit 100 TRX in order to earn from
-                  your referrals)
+                  {this.props.requirement}
                 </p>
               </Col>
             </Row>
@@ -75,13 +74,15 @@ export default class Widget extends Component {
                 <img src={this.props.icon2} style={{ height: "20px" }}></img>
 
                 <p style={{ fontWeight: "600" ,marginLeft:"5px"}}>
-                  Commission upto {this.props.levelNumber} Levels
+                  Commission upto {this.props.level} Levels
                 </p>
               </Col>
             </Row>
 
             <Row className="widgets-level-box">
-              {[...Array(parseInt(this.props.levelNumber))].map(
+              {
+          
+              [...Array(parseInt(this.props.levelNumber.length))].map(
                 (elementInArray, index) => (
                   <Col
                     lg={3}
@@ -89,14 +90,14 @@ export default class Widget extends Component {
                     key={index}
                   >
                     <p>
-                      Level {index + 1} ={" "}
+                      Level {index + 1} =
                       <span
                         style={{
                           color: "" + this.props.color,
                           fontWeight: "600",
                         }}
                       >
-                        4%
+                        {this.props.levelNumber[index]}
                       </span>
                     </p>
                   </Col>

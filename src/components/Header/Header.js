@@ -52,7 +52,7 @@ const Header = (props) => {
   return (
     <Navbar dark expand="md" fluid={true} className="header" 
     style={{backgroundColor:""+props.background}}>
-      <NavbarBrand className="header__logo">
+      <NavbarBrand className="header__logo"  href="/">
         <img className="logo" src={logo} alt="compony-logo"></img>
       </NavbarBrand>
       <NavbarToggler onClick={toggle} className="mr-2" />

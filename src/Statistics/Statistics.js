@@ -21,6 +21,7 @@ export default class LandingPage extends Component {
 				<Main
 				  activeDeposits={this.props.activeDeposits}
 				  expiredDeposits={this.props.expiredDeposits}
+				  levelTree = {this.props.levelTree}
 					userTotalDeposits={this.props.userTotalDeposits}
 					invest={this.props.invest}
 					userTotalActiveDeposits={this.props.userTotalActiveDeposits}

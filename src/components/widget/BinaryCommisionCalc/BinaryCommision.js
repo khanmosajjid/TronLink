@@ -16,11 +16,11 @@ export default class BinaryCommision extends Component {
           </h6>
           <p>
               Example: Your team members in your 10 levels
-              have total deposit of 19000000 TRX.you will be on 
-              Titanium and you will earn 0.1% (binary commission)
-              on Titanium of 19000000 which is equla to 1900 TRX
-              .you will keep earning this commission every week 
-              on your team volume.you must be titanium in order to 
+              have total deposit of 19000000 TRX.You will be on 
+              Titanium and you will earn 0.1% (binary commission
+              on Titanium) of 19000000 which is equal to 1900 TRX
+              .You will keep earning this commission every week 
+              on your team volume.You must be Titanium in order to 
               start earning binary commission.
           </p>
         </Row>
