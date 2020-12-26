@@ -118,7 +118,6 @@ function Main(props) {
 
     setCopySuccess("Copied!");
     toast.success("copy to clipboard");
-   
   }
 
   const renderDepositTableItem = () => {
@@ -341,7 +340,7 @@ function Main(props) {
           />
         )}
         <span></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Total Earned From Daily Profits"
             data={props.totalEarnedFromDailyProfit}
@@ -352,7 +351,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Earning Cap"
             data={
@@ -367,7 +366,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Total Refferal Commision Earned"
             data={props.totalReferralCommissionEarned}
@@ -378,7 +377,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Refferals Level Unlocked"
             data={props.referralLevelsUnlocked}
@@ -389,7 +388,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Total Team Deposits Volume in 10 levels"
             data={props.totalTeamDepositVolume}
@@ -400,7 +399,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Your Current rank"
             icon={icon5}
@@ -411,7 +410,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Binary Qualification"
             data={props.referralLevelsUnlocked >= 7 ? "Yes" : "No"}
@@ -422,7 +421,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Binary Commision Earned so far"
             data={props.binaryCommissionEarnedSoFar}
@@ -433,7 +432,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Refferals"
             data={props.referrals}
@@ -444,7 +443,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Total Team Members"
             data={props.totalTeamMembers}
@@ -454,7 +453,7 @@ function Main(props) {
             bgEndColor="#f3037e"
           ></Withdraw>
         </Col>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Active Deposits Sums"
             data={props.userTotalActiveDeposits}
@@ -465,7 +464,7 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards">
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
           <Withdraw
             heading="Number of Total Deposits"
             data={props.noOfTotalDeposits}
@@ -481,8 +480,22 @@ function Main(props) {
           <img src={icon11} style={{ height: "50px" }}></img>
         </div>
 
-        <Row className="level-box">
+        <Row className="widget-level-box">
           {renderLevelTree()}
+
+          <Col lg={3} style={{ marginBottom: "2%", fontWeight: "600" }}>
+            <p>
+              Level 1 =
+              <span
+                style={{
+                 
+                  fontWeight: "600",
+                }}
+              >
+                2
+              </span>
+            </p>
+          </Col>
 
           {/* <Col lg={2} xs={3} className="box">
             Level 1
