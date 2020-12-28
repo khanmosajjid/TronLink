@@ -23,7 +23,7 @@ export default class Promotion extends Component {
    
 
     // setCopySuccess("Copied!");
-    toast.success("copy to clipboard");
+    toast.success("Referral Link Copied");
   }
 
 

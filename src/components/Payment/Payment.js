@@ -28,7 +28,7 @@ export default class Payment extends Component {
         <Row className="payment-header">
           <h1>Payment Plan</h1>
           <span style={{ border: "1px solid orange", width: "5%" }}></span>
-          <h5>EARN 1% DAILY PROFIT EVERDAY</h5>
+          <h5>EARN 1.20% DAILY PROFIT EVERDAY</h5>
           <p className="personal-detail">
             <span>Personal Detail Bonus :</span>
             For Every 100k of your own deposit you will earn 0.02% extra profit
@@ -36,9 +36,9 @@ export default class Payment extends Component {
           </p>
           <p className="example">
             <span>Example :</span>
-            If you deposit 9900 TRX you will earn 1% daily. If your deposit is
-            100k your daily profit will increse to 1.02% and it will increase
-            0.02% for every 100k in your deposit
+            If you deposit 99k TRX you will earn 1.20% daily. If your deposit is
+            100k your daily profit will increse to 1.22% and it will increase
+            0.02% for every 100k in your deposit. Max daily profit will be 1.40%.
           </p>
           <h3>Referral Commision</h3>
         </Row>
@@ -62,7 +62,7 @@ export default class Payment extends Component {
             icon2={level_icon_4b}
             levelName="Bronze"
             level="4"
-            levelNumber={["4%", "3%", "2%", "1"]}
+            levelNumber={["4%", "3%", "2%", "1%"]}
             levelamount=" 100k "
             requirement="TRX Total Team Deposit Volume"
             color="#ff3c5e"
@@ -103,7 +103,7 @@ export default class Payment extends Component {
             requirement="TRX Total Team Deposit Volume "
             binaryCommision="Binary Commision: "
             binaryCommisionIcon={level_icon_1b}
-            binaryCommisionPerc=" 0.10% "
+            binaryCommisionPerc=" 0.20% "
             binaryCommisionInfo="of your Team Deposit Volume Every Week"
             level="7"
             levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%"]}
@@ -119,7 +119,7 @@ export default class Payment extends Component {
             icon2={level_icon_4b}
             requirement="TRX Total Team Deposit Volume "
             level="8"
-            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5"]}
+            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5%"]}
             levelamount=" 50 Million "
             levelName="Silver"
             color="#ff3c5e"
@@ -128,14 +128,14 @@ export default class Payment extends Component {
             image={level6}
             binaryCommision="Binary Commision: "
             binaryCommisionIcon={level_icon_4b}
-            binaryCommisionPerc=" 0.20% "
+            binaryCommisionPerc=" 0.40% "
             binaryCommisionInfo="of your Team Deposit Volume every Week"
           ></Widget>
           <Widget
             icon1={level_icon_2a}
             icon2={level_icon_2b}
             level="8"
-            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5"]}
+            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5%"]}
             levelamount=" 50 Million "
             levelName="Gold"
             requirement="TRX Total Team Deposit Volume "
@@ -145,7 +145,7 @@ export default class Payment extends Component {
             image={level7}
             binaryCommision="Binary Commision: "
             binaryCommisionIcon={level_icon_2b}
-            binaryCommisionPerc=" 0.20% "
+            binaryCommisionPerc=" 0.60% "
             binaryCommisionInfo="of your Team Deposit Volume Every Week"
           ></Widget>
 
@@ -153,7 +153,7 @@ export default class Payment extends Component {
             icon1={level_icon_3a}
             icon2={level_icon_3b}
             level="9"
-            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5","0.5"]}
+            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5%","0.5%"]}
             levelamount=" 100 Million "
             levelName="Diamond"
             requirement="TRX Total Team Deposit Volume "
@@ -163,7 +163,7 @@ export default class Payment extends Component {
             image={level8}
             binaryCommision="Binary Commision: "
             binaryCommisionIcon={level_icon_3b}
-            binaryCommisionPerc=" 0.3% "
+            binaryCommisionPerc=" 0.80% "
             binaryCommisionInfo="of your Team Deposit Volume Every Week"
           ></Widget>
 
@@ -171,7 +171,7 @@ export default class Payment extends Component {
             icon1={level_icon_4a}
             icon2={level_icon_4b}
             level="10"
-            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5","0.5"]}
+            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5%","0.5%"]}
             levelamount=" 50 Million "
             levelName="Super Gold"
             requirement="TRX Total Team Deposit Volume "
@@ -181,7 +181,7 @@ export default class Payment extends Component {
             image={level9}
             binaryCommision="Binary Commision: "
             binaryCommisionIcon={level_icon_4b}
-            binaryCommisionPerc="0.50% "
+            binaryCommisionPerc="1% "
             binaryCommisionInfo="of your Team Deposit Volume Every Week"
           ></Widget>
 
