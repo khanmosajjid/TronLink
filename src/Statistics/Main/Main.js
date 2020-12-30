@@ -367,15 +367,15 @@ function Main(props) {
         </Button>
         {isOpen && (
           <Popup
-            backGround="#19193a"
+            backGround="white"
             content={
               <>
                 <span className="close-icon" onClick={togglePopup}>
                   x
                 </span>
                 <h1 className="table-header" >{tableHeading}</h1>
-                <Table hover responsive borderless>
-                  <thead hidden={getIfHideTable()}>
+                <Table hover responsive bordered striped>
+                  <thead className="table-header-data">
                     <tr>
                       <th>Date</th>
                       <th>Amount</th>

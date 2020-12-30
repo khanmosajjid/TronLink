@@ -394,7 +394,7 @@
 }
 th{
   font-size: x-large;
-  color: #a7651b;
+  color: white;
   font-weight: 600;
 }
 .ref-main{
@@ -442,4 +442,15 @@ th{
     padding-bottom: 3%;
     padding-left: 1%;
     padding-top: 2%;
+}
+.table{
+  width: 94% !important;
+  margin-left: 3%;
+  & .table-header-data{
+    background: linear-gradient(
+        262deg,
+        rgba(14, 192, 232, 1) 58%,
+        rgba(67, 133, 227, 1) 97%
+      );
+  }
 }
