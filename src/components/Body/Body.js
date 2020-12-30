@@ -49,7 +49,7 @@ function Body(props) {
                   color: "#184fda",
                 }}
               ></Icon>
-              <p style={{marginLeft:"2px"}}>Earn 200% on your investment</p>
+              <p style={{marginLeft:"2px"}}>Earn 200% on your deposit</p>
             </Col>
             <Col lg={12} className="body-main__list">
               <Icon
@@ -60,7 +60,7 @@ function Body(props) {
                   color: "#184fda",
                 }}
               ></Icon>
-              <p style={{marginLeft:"2px"}}>Get upto 1.20% Profit every day</p>
+              <p style={{marginLeft:"2px"}}>Get upto 1.40% Profit every day</p>
             </Col>
             <Col lg={12} className="body-main__list">
               <Icon
@@ -96,7 +96,7 @@ function Body(props) {
                   color: "#184fda",
                 }}
               ></Icon>
-              <p style={{marginLeft:"2px"}}>Daily & Weekly Trading Reports for 100% transparency </p>
+              <p style={{marginLeft:"2px"}}>Weekly Trading Reports for 100% transparency </p>
             </Col>
             <Col lg={12} className="body-main__list">
               <Icon
@@ -109,7 +109,7 @@ function Body(props) {
               ></Icon>
               <p style={{marginLeft:"2px"}}>
               Massive Binary Commissions for
-               Leaders & Team builders daily & Weekly
+               Leaders & Team builders
               </p>
             </Col>
             <Button
@@ -193,7 +193,7 @@ function Body(props) {
           </Col>
           <Col lg={4} xs={12} className="footer-content">
             <img src={bodyicon3} style={{ marginRight: "10px" }}></img>
-            <p>Check Our Daily Reports</p>
+            <p>Check Our Weekly Reports</p>
           </Col>
         </Row>
       </Row>

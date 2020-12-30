@@ -19,13 +19,27 @@ import deposit from "../../assets/deposit.png";
 import QRCode from "qrcode.react";
 import reff_icon from "../../assets/reff-icon.png";
 // import money_transfer from "../../assets/money-transfer.png";
-import money_transfer from "../../assets/network.svg";
+import money_transfer from "../../assets/network.png";
 
 import Popup from "../../components/Popup/Popup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Card from "../../components/Body/Cards/Cards";
 import moment from "moment";
+
+
+const levelColors = [
+  "#0492ff",
+  "#ff3956",
+  "#ff9600",
+  "#51ce91",
+  "#0492ff",
+  "#ff3c5e",
+  "#ff9600",
+  "#51ce91",
+  "#ff3c5e",
+
+]
 function Main(props) {
   const [activeDeposits, setActiveDeposits] = useState([]);
 
@@ -75,9 +89,24 @@ function Main(props) {
 
     for (let level of levelTree) {
       tree.push(
-        <Col lg={2} xs={3} className="box">
-          Level {level.levelNumber} | Members {level.members}
-        </Col>
+        // <Col lg={2} xs={3} className="box">
+        //   Level {level.levelNumber} | Members {level.members}
+        // </Col>
+
+
+<Col lg={3} style={{ marginBottom: "2%", fontWeight: "600" }}>
+            <p>
+            Level {level.levelNumber} =
+              <span
+                style={{
+                  color:levelColors[level.levelNumber-1],
+                  fontWeight: "600",
+                }}
+              >
+               {" "} Members {level.members}
+              </span>
+            </p>
+          </Col>
       );
       // console.log("level");
     }
@@ -89,7 +118,7 @@ function Main(props) {
   const getLevelRank = () => {
     let number = props.referralLevelsUnlocked;
 
-    if (number <= 3) {
+    if (number <= 2) {
       return "Starter";
     } else if (number <= 3) {
       return "Bronze";
@@ -118,7 +147,7 @@ function Main(props) {
     textField.remove();
 
     setCopySuccess("Copied!");
-    toast.success("copy to clipboard");
+    toast.success("Referral Link Copied");
   }
 
   const renderDepositTableItem = () => {
@@ -168,20 +197,20 @@ function Main(props) {
     }
   };
   const makeDeposit = () => {
-    let depositAmount = depositAmount;
+    // let depositAmount = depositAmount;
 
     //todo 1000 krna h
     if (depositAmount < 100) {
       //Show error
 
-      toast.error("Minimum Deposit Amount is 1000trx!");
+      toast.error("Minimum Deposit Amount is 100trx!");
     } else {
       makeDepositTransaction(depositAmount);
     }
   };
 
   const makeDepositTransaction = (amount) => {
-    console.log("propos12", this.props);
+    console.log("propos12", amount);
     props.invest(amount);
   };
 
@@ -285,7 +314,8 @@ function Main(props) {
         <Button
           className="deposit__button"
           onClick={() => {
-            props.invest(document.getElementById("amount").value);
+            // props.invest(document.getElementById("amount").value);
+            makeDeposit()
           }}
         >
           Confirm Deposit
@@ -323,7 +353,7 @@ function Main(props) {
             setActiveDepositTableActive(true);
           }}
         >
-          <h5>View Active Investment</h5>
+          <h5>View Active Deposits</h5>
         </Button>
         <Button
           className="withdraw__heading"
@@ -333,7 +363,7 @@ function Main(props) {
             togglePopup();
           }}
         >
-          <h5>View Expired Investment</h5>
+          <h5>View Expired Deposits</h5>
         </Button>
         {isOpen && (
           <Popup
@@ -358,6 +388,30 @@ function Main(props) {
             }
           />
         )}
+
+<Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+          <Withdraw
+            heading="Active Deposits Sums"
+            data={props.userTotalActiveDeposits}
+            icon={icon8}
+            color="#dc5063"
+            bgStartColor="#f19539"
+            bgEndColor="#f3037e"
+          ></Withdraw>
+        </Col>
+        <span className="spn"></span>
+        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+          <Withdraw
+            heading="Number of Total Deposits"
+            data={props.noOfTotalDeposits}
+            icon={icon1}
+            color="#2696e5"
+            bgStartColor="#79dbfb "
+            bgEndColor="#2794e5"
+          ></Withdraw>
+        </Col>
+     
+     
         <span></span>
         <Col
           lg={6}
@@ -498,7 +552,7 @@ function Main(props) {
           style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
         >
           <Withdraw
-            heading="Refferals"
+            heading="Direct Refferals"
             data={props.referrals}
             icon={icon4}
             color="#2696e5"
@@ -522,37 +576,8 @@ function Main(props) {
             bgEndColor="#f3037e"
           ></Withdraw>
         </Col>
-        <Col
-          lg={6}
-          xs={6}
-          className="withdraw-cards"
-          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
-        >
-          <Withdraw
-            heading="Active Deposits Sums"
-            data={props.userTotalActiveDeposits}
-            icon={icon8}
-            color="#dc5063"
-            bgStartColor="#f19539"
-            bgEndColor="#f3037e"
-          ></Withdraw>
-        </Col>
-        <span className="spn"></span>
-        <Col
-          lg={6}
-          xs={6}
-          className="withdraw-cards"
-          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
-        >
-          <Withdraw
-            heading="Number of Total Deposits"
-            data={props.noOfTotalDeposits}
-            icon={icon1}
-            color="#2696e5"
-            bgStartColor="#79dbfb "
-            bgEndColor="#2794e5"
-          ></Withdraw>
-        </Col>
+      
+     
       </Row>
       <Row className="levels">
         <div className="level-icon">
@@ -562,18 +587,7 @@ function Main(props) {
         <Row className="widget-level-box">
           {renderLevelTree()}
 
-          <Col lg={3} style={{ marginBottom: "2%", fontWeight: "600" }}>
-            <p>
-              Level 1 =
-              <span
-                style={{
-                  fontWeight: "600",
-                }}
-              >
-                2
-              </span>
-            </p>
-          </Col>
+          
 
           {/* <Col lg={2} xs={3} className="box">
             Level 1
