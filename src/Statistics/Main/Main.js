@@ -225,7 +225,8 @@ function Main(props) {
                 <img
                   src={reff_icon}
                   style={{
-                    // height: "70px",
+                    height: "70px",
+                    width:70,
                     marginLeft: "auto",
                     marginRight: "auto",
                     display: "block",
@@ -239,12 +240,12 @@ function Main(props) {
                   <Col lg={12} style={{ display: "flex" }}>
                     <Input
                       onChange={(t) => {
-                        setDepositAmount(t.target.value);
+                        // setDepositAmount(t.target.value);
                       }}
                       type="text"
                       name="amount"
                       id="amount"
-                      value={depositAmount}
+                      value={refLink}
                       className="ref-input"
                       placeholder="Enter Amount"
                     />
