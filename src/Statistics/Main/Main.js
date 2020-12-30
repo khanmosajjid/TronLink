@@ -27,7 +27,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Card from "../../components/Body/Cards/Cards";
 import moment from "moment";
 
-
 const levelColors = [
   "#0492ff",
   "#ff3956",
@@ -38,8 +37,7 @@ const levelColors = [
   "#ff9600",
   "#51ce91",
   "#ff3c5e",
-
-]
+];
 function Main(props) {
   const [activeDeposits, setActiveDeposits] = useState([]);
 
@@ -93,20 +91,20 @@ function Main(props) {
         //   Level {level.levelNumber} | Members {level.members}
         // </Col>
 
-
-<Col lg={3} style={{ marginBottom: "2%", fontWeight: "600" }}>
-            <p>
+        <Col lg={3} style={{ marginBottom: "2%", fontWeight: "600" }}>
+          <p>
             Level {level.levelNumber} =
-              <span
-                style={{
-                  color:levelColors[level.levelNumber-1],
-                  fontWeight: "600",
-                }}
-              >
-               {" "} Members {level.members}
-              </span>
-            </p>
-          </Col>
+            <span
+              style={{
+                color: levelColors[level.levelNumber - 1],
+                fontWeight: "600",
+              }}
+            >
+              {" "}
+              Members {level.members}
+            </span>
+          </p>
+        </Col>
       );
       // console.log("level");
     }
@@ -238,7 +236,7 @@ function Main(props) {
               <Col lg={10}>
                 <Label for="amount"></Label>
                 <Row>
-                  <Col lg={12} style={{display:"flex"}}>
+                  <Col lg={12} style={{ display: "flex" }}>
                     <Input
                       onChange={(t) => {
                         setDepositAmount(t.target.value);
@@ -250,9 +248,9 @@ function Main(props) {
                       className="ref-input"
                       placeholder="Enter Amount"
                     />
-                     <Button className="ref-copy" onClick={copyToClipboard}>
-                    <h5>Copy</h5>
-                  </Button>
+                    <Button className="ref-copy" onClick={copyToClipboard}>
+                      <h5>Copy</h5>
+                    </Button>
                   </Col>
                 </Row>
 
@@ -315,7 +313,7 @@ function Main(props) {
           className="deposit__button"
           onClick={() => {
             // props.invest(document.getElementById("amount").value);
-            makeDeposit()
+            makeDeposit();
           }}
         >
           Confirm Deposit
@@ -373,7 +371,7 @@ function Main(props) {
                 <span className="close-icon" onClick={togglePopup}>
                   x
                 </span>
-                <h1 className="table-header" >{tableHeading}</h1>
+                <h1 className="table-header">{tableHeading}</h1>
                 <Table hover responsive bordered striped>
                   <thead className="table-header-data">
                     <tr>
@@ -383,13 +381,33 @@ function Main(props) {
                     </tr>
                   </thead>
                   <tbody>{renderDepositTableItem()}</tbody>
+                 
                 </Table>
+                <Row style={{ width: "100%" }}>
+                    <Col lg={12} className="table-btn">
+                      <Button
+                        className="withdraw__heading"
+                        onClick={() => {
+                          
+                          togglePopup();
+                        
+                        }}
+                      >
+                        <h5>Close</h5>
+                      </Button>
+                    </Col>
+                  </Row>
               </>
             }
           />
         )}
 
-<Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Active Deposits Sums"
             data={props.userTotalActiveDeposits}
@@ -400,7 +418,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Number of Total Deposits"
             data={props.noOfTotalDeposits}
@@ -410,8 +433,7 @@ function Main(props) {
             bgEndColor="#2794e5"
           ></Withdraw>
         </Col>
-     
-     
+
         <span></span>
         <Col
           lg={6}
@@ -576,8 +598,6 @@ function Main(props) {
             bgEndColor="#f3037e"
           ></Withdraw>
         </Col>
-      
-     
       </Row>
       <Row className="levels">
         <div className="level-icon">
@@ -586,8 +606,6 @@ function Main(props) {
 
         <Row className="widget-level-box">
           {renderLevelTree()}
-
-          
 
           {/* <Col lg={2} xs={3} className="box">
             Level 1
