@@ -17,6 +17,7 @@ import icon10 from "../../assets/icon10.png";
 import icon11 from "../../assets/icon11.png";
 import deposit from "../../assets/deposit.png";
 import QRCode from "qrcode.react";
+import reff_icon from "../../assets/reff-icon.png";
 // import money_transfer from "../../assets/money-transfer.png";
 import money_transfer from "../../assets/network.svg";
 
@@ -78,9 +79,9 @@ function Main(props) {
           Level {level.levelNumber} | Members {level.members}
         </Col>
       );
-      console.log("level");
+      // console.log("level");
     }
-    console.log("hello");
+    // console.log("hello");
     <h1>hello i am level</h1>;
     return tree;
   };
@@ -193,22 +194,42 @@ function Main(props) {
           </Col>
           <Col lg={8} className="card2">
             <Row className="ref-main">
-              <div className="refferal-logo">
+              <Col lg={2} className="refferal-logo">
                 <img
-                  src={money_transfer}
+                  src={reff_icon}
                   style={{
-                    height: "70px",
+                    // height: "70px",
                     marginLeft: "auto",
                     marginRight: "auto",
                     display: "block",
                   }}
                 ></img>
-              </div>
+              </Col>
 
-              <div>
-                <h3>Refferral Link</h3>
-                <div className="volume">
-                  {/* <textarea
+              <Col lg={10}>
+                <Label for="amount"></Label>
+                <Row>
+                  <Col lg={12} style={{display:"flex"}}>
+                    <Input
+                      onChange={(t) => {
+                        setDepositAmount(t.target.value);
+                      }}
+                      type="text"
+                      name="amount"
+                      id="amount"
+                      value={depositAmount}
+                      className="ref-input"
+                      placeholder="Enter Amount"
+                    />
+                     <Button className="ref-copy" onClick={copyToClipboard}>
+                    <h5>Copy</h5>
+                  </Button>
+                  </Col>
+                </Row>
+
+                {/* <h3>Refferral Link</h3>
+                <div className="volume"> */}
+                {/* <textarea
                   id="link"
                   style={{ margin: "0px", color: "white", fontWeight: "600",width:"100%" }}
                   ref={textAreaRef}
@@ -216,23 +237,21 @@ function Main(props) {
                   value={refLink}
                 > */}
 
-                  <h4
+                {/* <h4
                     onClick={() => {
                       copyToClipboard();
                     }}
                     id="link"
                   >
                     {refLink}
-                  </h4>
+                  </h4> */}
 
-                  {/* </textarea> */}
-                </div>
-                <div className="volume2">
-                  <Button className="copy-address" onClick={copyToClipboard}>
-                    <h5>Copy</h5>
-                  </Button>
-                </div>
-              </div>
+                {/* </textarea> */}
+                {/* </div> */}
+                {/* <div className="volume2">
+                 
+                </div> */}
+              </Col>
             </Row>
           </Col>
         </Row>
@@ -324,7 +343,7 @@ function Main(props) {
                 <span className="close-icon" onClick={togglePopup}>
                   x
                 </span>
-                <h1 style={{ color: "#a7651b" }}>{tableHeading}</h1>
+                <h1 className="table-header" >{tableHeading}</h1>
                 <Table hover responsive borderless>
                   <thead hidden={getIfHideTable()}>
                     <tr>
@@ -340,7 +359,12 @@ function Main(props) {
           />
         )}
         <span></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Total Earned From Daily Profits"
             data={props.totalEarnedFromDailyProfit}
@@ -351,7 +375,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Earning Cap"
             data={
@@ -366,7 +395,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Total Refferal Commision Earned"
             data={props.totalReferralCommissionEarned}
@@ -377,7 +411,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Refferals Level Unlocked"
             data={props.referralLevelsUnlocked}
@@ -388,7 +427,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Total Team Deposits Volume in 10 levels"
             data={props.totalTeamDepositVolume}
@@ -399,7 +443,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Your Current rank"
             icon={icon5}
@@ -410,7 +459,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Binary Qualification"
             data={props.referralLevelsUnlocked >= 7 ? "Yes" : "No"}
@@ -421,7 +475,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Binary Commision Earned so far"
             data={props.binaryCommissionEarnedSoFar}
@@ -432,7 +491,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
 
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Refferals"
             data={props.referrals}
@@ -443,7 +507,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Total Team Members"
             data={props.totalTeamMembers}
@@ -453,7 +522,12 @@ function Main(props) {
             bgEndColor="#f3037e"
           ></Withdraw>
         </Col>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#f19539 -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Active Deposits Sums"
             data={props.userTotalActiveDeposits}
@@ -464,7 +538,12 @@ function Main(props) {
           ></Withdraw>
         </Col>
         <span className="spn"></span>
-        <Col lg={6} xs={6} className="withdraw-cards" style={{boxShadow:"#79dafa -1px 1px 10px 1px"}}>
+        <Col
+          lg={6}
+          xs={6}
+          className="withdraw-cards"
+          style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
+        >
           <Withdraw
             heading="Number of Total Deposits"
             data={props.noOfTotalDeposits}
@@ -488,7 +567,6 @@ function Main(props) {
               Level 1 =
               <span
                 style={{
-                 
                   fontWeight: "600",
                 }}
               >
