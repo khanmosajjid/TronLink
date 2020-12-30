@@ -9,7 +9,8 @@ export default class Withdraw extends Component{
     }
     render(){
         return(
-            <Container fluid={true} className="withdraw-card" style={{background:"linear-gradient(262deg,"+
+            <Container fluid={true} className="withdraw-card"
+             style={{background:"linear-gradient(262deg,"+
             this.props.bgStartColor +" 8%," 
             + this.props.bgEndColor+ " 98%)",height:"100%"}}>
                 <Row className="withdraw-card__main">

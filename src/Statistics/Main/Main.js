@@ -26,6 +26,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Card from "../../components/Body/Cards/Cards";
 import moment from "moment";
+import reff_bg from "../../assets/reff-bg.png";
 
 const levelColors = [
   "#0492ff",
@@ -76,6 +77,10 @@ function Main(props) {
   );
   const [copySuccess, setCopySuccess] = useState("");
   const [refLink, setRefLink] = useState();
+  const [tableStartColor, setTableStartColor] = useState("");
+  const [tableEndColor, setTableEndColor] = useState("");
+  const [tableHeaderStartColor, setTableHeaderStartColor] = useState("");
+  const [tableHeaderEndColor, setTableHeaderEndColor] = useState("");
   const textAreaRef = useRef(null);
 
   const togglePopup = () => {
@@ -216,17 +221,17 @@ function Main(props) {
     <div className="main">
       <Row className="main__resultcard">
         <Row className="total-result1">
-          <Col lg={4} className="card1">
+          <Col lg={3} className="card1">
             {refLink ? <QRCode value={refLink} /> : null}
           </Col>
-          <Col lg={8} className="card2">
+          <Col lg={9} className="card2">
             <Row className="ref-main">
               <Col lg={2} className="refferal-logo">
                 <img
                   src={reff_icon}
                   style={{
-                    height: "70px",
-                    width:70,
+                    height: "55px",
+                    width: "55px",
                     marginLeft: "auto",
                     marginRight: "auto",
                     display: "block",
@@ -234,7 +239,8 @@ function Main(props) {
                 ></img>
               </Col>
 
-              <Col lg={10}>
+              <Col lg={10} className="input-col">
+                {/* <img src={reff_bg}></img> */}
                 <Label for="amount"></Label>
                 <Row>
                   <Col lg={12} style={{ display: "flex" }}>
@@ -350,6 +356,10 @@ function Main(props) {
             setTableHeading("Active Deposits");
             togglePopup();
             setActiveDepositTableActive(true);
+            setTableStartColor("#f19539");
+            setTableEndColor("#f3037e");
+            setTableHeaderStartColor("#79dbfb")
+            setTableHeaderEndColor("#2794e5")
           }}
         >
           <h5>View Active Deposits</h5>
@@ -360,6 +370,10 @@ function Main(props) {
             setTableHeading("Expired Deposits");
             setActiveDepositTableActive(false);
             togglePopup();
+            setTableStartColor("#79dbfb");
+            setTableEndColor("#2794e5");
+            setTableHeaderStartColor("#f19539")
+            setTableHeaderEndColor("#f3037e")
           }}
         >
           <h5>View Expired Deposits</h5>
@@ -372,9 +386,28 @@ function Main(props) {
                 <span className="close-icon" onClick={togglePopup}>
                   x
                 </span>
-                <h1 className="table-header">{tableHeading}</h1>
+                <h1
+                  style={{
+                    background:
+                      "linear-gradient(262deg,"+
+                      tableStartColor +
+                      " 8%,"+
+                      tableEndColor +
+                      " 98%)"
+                  }}
+                  className="table-header"
+                >
+                  {tableHeading}
+                </h1>
                 <Table hover responsive bordered striped>
-                  <thead className="table-header-data">
+                  <thead style={{
+                    background:
+                      "linear-gradient(262deg,"+
+                      tableHeaderStartColor +
+                      " 8%,"+
+                      tableHeaderEndColor +
+                      " 98%)"
+                  }} className="table-header-data">
                     <tr>
                       <th>Date</th>
                       <th>Amount</th>
@@ -382,22 +415,19 @@ function Main(props) {
                     </tr>
                   </thead>
                   <tbody>{renderDepositTableItem()}</tbody>
-                 
                 </Table>
                 <Row style={{ width: "100%" }}>
-                    <Col lg={12} className="table-btn">
-                      <Button
-                        className="withdraw__heading"
-                        onClick={() => {
-                          
-                          togglePopup();
-                        
-                        }}
-                      >
-                        <h5>Close</h5>
-                      </Button>
-                    </Col>
-                  </Row>
+                  <Col lg={12} className="table-btn">
+                    <Button
+                      className="withdraw__heading"
+                      onClick={() => {
+                        togglePopup();
+                      }}
+                    >
+                      <h5>Close</h5>
+                    </Button>
+                  </Col>
+                </Row>
               </>
             }
           />
