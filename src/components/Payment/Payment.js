@@ -37,7 +37,7 @@ export default class Payment extends Component {
           <p className="example">
             <span>Example :</span>
             If you deposit 99k TRX you will earn 1.20% daily. If your deposit is
-            100k your daily profit will increse to 1.22% and it will increase
+            100k your daily profit will increase to 1.22% and it will increase
             0.02% for every 100k in your deposit. Max daily profit will be 1.40%.
           </p>
           <h3>Referral Commision</h3>
@@ -171,8 +171,8 @@ export default class Payment extends Component {
             icon1={level_icon_4a}
             icon2={level_icon_4b}
             level="10"
-            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5%","0.5%"]}
-            levelamount=" 50 Million "
+            levelNumber={["4%", "3%", "2%", "1%", "1%", "1%","0.5%","0.5%","0.5%","0.5%"]}
+            levelamount=" 500 Million "
             levelName="Super Gold"
             requirement="TRX Total Team Deposit Volume "
             color="#ff3c5e"

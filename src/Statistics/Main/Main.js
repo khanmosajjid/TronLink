@@ -331,7 +331,7 @@ function Main(props) {
           card1Name="Your Daily Profit"
           card2Name="Basic Profit"
           card3Name="Personal Deposit Bonus"
-          card4Name="Availble Account Balance"
+          card4Name="Available Account Balance"
           card1Data={
             (1.2 + parseFloat(props.userPersonalDepositProfit)).toFixed(2) +
             " %"
@@ -348,7 +348,7 @@ function Main(props) {
             props.withdraw();
           }}
         >
-          <h5>Withraw Funds</h5>
+          <h5>Withdraw Funds</h5>
         </Button>
         <Button
           className="withdraw__heading"
