@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'semantic-ui-css/semantic.min.css'
+import 'react-flags-select/css/react-flags-select.css';
 
 ReactDOM.render(
   <React.StrictMode>

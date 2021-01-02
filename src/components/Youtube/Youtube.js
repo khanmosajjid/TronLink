@@ -33,8 +33,8 @@ export default class Youtube extends Component {
               <div className="detail-card">
               <img src={numberLogo} style={{height:"40px"}}></img>
               <Row className="compony-number">
-                  <h6>Company Number</h6>
-                  <p>12345678</p>
+                  <h6>Company Name</h6>
+                  <p>Trontiply Limited</p>
               </Row>
               </div>
 
@@ -46,7 +46,7 @@ export default class Youtube extends Component {
               <img src={location} style={{height:"40px"}}></img>
               <Row className="compony-number">
                   <h6>Company Number</h6>
-                  <p>12345678</p>
+                  <p>13105007</p>
               </Row>
               </div>
         </Col>

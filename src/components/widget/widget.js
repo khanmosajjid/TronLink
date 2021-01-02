@@ -52,7 +52,7 @@ export default class Widget extends Component {
               <Col className="details-requirements" style={{padding: "0px" }}>
                 <img src={this.props.icon1} style={{ height: "20px" }}></img>
 
-                <p style={{marginLeft:"5px"}}>
+                <p className="requirement">
                   <span style={{fontWeight:"600"}}>
                   Requirements:
                   </span>

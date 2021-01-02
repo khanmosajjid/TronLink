@@ -46,7 +46,7 @@ export default class Promotion extends Component {
 
   getMediumBannerCode(){
     if(this.props.account){
-      return '<a href="'+this.getMyRefLink()+'"> <img style="height:60px;width:468px" src="https://trontiply.com/static/media/mediumBanner.700dca68.gif"/> </a>'
+      return '<a href="'+this.getMyRefLink()+'"> <img  style="height:60px;width:468px" src="https://trontiply.com/static/media/mediumBanner.700dca68.gif"/> </a>'
     }
   }
 
@@ -54,7 +54,7 @@ export default class Promotion extends Component {
 
   getLargeBannerCode(){
     if(this.props.account){
-      return '<a href="'+this.getMyRefLink()+'"> <img style="height:90px;width:728px" src="https://trontiply.com/static/media/largeBanner.a434eb19.gif"/> </a>'
+      return '<a href="'+this.getMyRefLink()+'"> <img   style="height:90px;width:728px" src="https://trontiply.com/static/media/largeBanner.a434eb19.gif"/> </a>'
     }
   }
 
@@ -76,7 +76,7 @@ export default class Promotion extends Component {
       <Container className="promotion">
         <h1>Promotional Banners</h1>
         <src></src>
-        <img src={largeBanner} style={{marginTop: "25px",
+        <img className="image-1" src={largeBanner} style={{marginTop: "25px",
         height:90,width:728
         }}></img>
         <Row className="input-bar">
@@ -88,12 +88,13 @@ export default class Promotion extends Component {
             value={this.getLargeBannerCode()}
 
           />
+     
           <Button className="promotion__button" onClick={()=>{
             this.copyClipboard(this.getLargeBannerCode())
           }}>Copy</Button>
         </Row>
 
-        <img src={mediumBanner} style={{height:60,width:468}}></img>
+        <img className="image-1" src={mediumBanner} style={{height:60,width:468}}></img>
         <Row className="input-bar">
           <Label for="amount"></Label>
           <Input
@@ -112,7 +113,7 @@ export default class Promotion extends Component {
 
 
 
-        <img src={smallBanner} style={{height:125,width:125}}></img>
+        <img  src={smallBanner} style={{height:125,width:125}}></img>
         <Row className="input-bar">
           <Label for="amount"></Label>
           <Input

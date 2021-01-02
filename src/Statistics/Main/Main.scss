@@ -458,3 +458,12 @@ canvas{
   background-size: auto;
   background-position: right
 }
+@media(max-width:600px){
+  .table-btn{
+    width: 100% !important;
+  }
+  .table-popup{
+    margin: 0px !important;
+  }
+
+}

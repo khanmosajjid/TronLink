@@ -226,7 +226,7 @@ function Main(props) {
           </Col>
           <Col lg={9} className="card2">
             <Row className="ref-main">
-              <Col lg={2} className="refferal-logo">
+              <Col lg={2} xs={4} className="refferal-logo">
                 <img
                   src={reff_icon}
                   style={{
@@ -416,7 +416,7 @@ function Main(props) {
                   </thead>
                   <tbody>{renderDepositTableItem()}</tbody>
                 </Table>
-                <Row style={{ width: "100%" }}>
+                <Row style={{ width: "100%" }} className="table-popup">
                   <Col lg={12} className="table-btn">
                     <Button
                       className="withdraw__heading"

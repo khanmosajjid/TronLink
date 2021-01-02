@@ -111,3 +111,13 @@
   border-radius: 50%;
   margin-right: 10px;
 }
+.form-control{
+  background: transparent !important;
+  // color: white !important;
+}
+
+@media(min-width:600px){
+  .form-group{
+    margin-right: -200px;
+  }
+}
