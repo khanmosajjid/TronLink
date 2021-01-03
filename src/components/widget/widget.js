@@ -3,6 +3,7 @@ import { Button, Col, Container, Row } from "reactstrap";
 import "./widget.scss";
 import { Icon } from "semantic-ui-react";
 import BinaryCommision from "./BinaryCommisionCalc/BinaryCommision";
+import { Trans } from 'react-i18next';
 
 export default class Widget extends Component {
   constructor(props) {
@@ -45,14 +46,14 @@ export default class Widget extends Component {
           <Col lg={9} className="widget-details">
             <h3>
               <span style={{ color: "" + this.props.color ,fontSize:32}}>
-                {this.props.levelName}{" "}
+                <Trans>{this.props.levelName}</Trans>{" "}
               </span>
             </h3>
             <Row style={{width:"100%",marginBottom:"8px"}}>
               <Col className="details-requirements" style={{padding: "0px" }}>
                 <img src={this.props.icon1} style={{ height: "20px" }}></img>
-
-                <p style={{marginLeft:"5px"}}>
+                <Trans>
+                <p className="requirement">
                   <span style={{fontWeight:"600"}}>
                   Requirements:
                   </span>
@@ -63,6 +64,8 @@ export default class Widget extends Component {
                   </span>
                   {this.props.requirement}
                 </p>
+                </Trans>
+               
               </Col>
             </Row>
 
@@ -89,6 +92,7 @@ export default class Widget extends Component {
                     style={{ marginBottom: "2%", fontWeight: "600" }}
                     key={index}
                   >
+                    <Trans>
                     <p>
                       Level {index + 1} =
                       <span
@@ -100,6 +104,7 @@ export default class Widget extends Component {
                         {this.props.levelNumber[index]}
                       </span>
                     </p>
+                    </Trans>
                   </Col>
                 )
               )}

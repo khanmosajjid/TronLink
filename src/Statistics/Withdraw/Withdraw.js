@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container,Row,Col } from 'reactstrap';
 import './Withdraw.scss';
 import Icon1 from '../../assets/icon1.png'
+import { Trans } from 'react-i18next';
 
 export default class Withdraw extends Component{
     constructor(props){
@@ -24,7 +25,7 @@ export default class Withdraw extends Component{
                         </div>
                     </Col>
                     <Col lg={9} xs={12} style={{padding:"0px !important",color:"white"}} className="card-body">
-                         <h6 style={{fontWeight:"600"}}>{this.props.heading}</h6>
+                         <h6 style={{fontWeight:"600"}}><Trans>{this.props.heading}</Trans></h6>
                          <h2 style={{color:"white"}}>{this.props.data}</h2>
                     </Col>
                 </Row>

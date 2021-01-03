@@ -48,6 +48,12 @@
     }
    & .details-requirements{
     display: flex;
+
+    & .requirement{
+      @media(min-width: 600px){
+        margin-left: 5px;
+      }
+    }
     
    }
   }

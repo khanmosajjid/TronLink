@@ -6,6 +6,7 @@ import Utils from "./utils";
 import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TronWeb from "tronweb";
+import './i18n';
 
 const FOUNDATION_ADDRESS = "TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg";
 

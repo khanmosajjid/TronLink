@@ -4,6 +4,7 @@ import Header from '../components/Header/Header';
 import Main from './Main/Main';
 import Promotional from './PromotionalBanner/Promotion';
 import Footer from '../components/Footer/Footer';
+import { Trans } from 'react-i18next';
 
 export default class LandingPage extends Component {
 	constructor(props) {
@@ -13,9 +14,8 @@ export default class LandingPage extends Component {
 		return (
 			<div>
 				<div className="header-component">
-					<Header backgroundImage="#00000000"                     
- />
-					<h1>User Statistics</h1>
+					<Header backgroundImage="#00000000"/>
+					<h1><Trans>User Statistics</Trans></h1>
 				</div>
 
 				<Main

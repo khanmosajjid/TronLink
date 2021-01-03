@@ -20,27 +20,25 @@ import level_icon_3a from "../../assets/level_icon_3a.png";
 import level_icon_3b from "../../assets/level_icon_3b.png";
 import level_icon_4a from "../../assets/level_icon_4a.png";
 import level_icon_4b from "../../assets/level_icon_4b.png";
+import { Trans } from 'react-i18next';
 
 export default class Payment extends Component {
+
+
   render() {
     return (
       <Container fluid={true} className="payment">
         <Row className="payment-header">
-          <h1>Payment Plan</h1>
+          <h1><Trans>Payment Plan</Trans></h1>
           <span style={{ border: "1px solid orange", width: "5%" }}></span>
-          <h5>EARN 1.20% DAILY PROFIT EVERDAY</h5>
+          <h5><Trans>EARN 1.20% DAILY PROFIT EVERDAY</Trans></h5>
           <p className="personal-detail">
-            <span>Personal Detail Bonus :</span>
-            For Every 100k of your own deposit you will earn 0.02% extra profit
-            daily.Personal Detail Bonus is capped at 0.20%
+           <Trans>Personal Detail Bonus :For Every 100k of your own deposit you will earn 0.02% extra profit daily.Personal Detail Bonus is capped at 0.20%</Trans>
           </p>
           <p className="example">
-            <span>Example :</span>
-            If you deposit 99k TRX you will earn 1.20% daily. If your deposit is
-            100k your daily profit will increase to 1.22% and it will increase
-            0.02% for every 100k in your deposit. Max daily profit will be 1.40%.
+           <Trans>Example :If you deposit 99k TRX you will earn 1.20% daily. If your deposit is 100k your daily profit will increse to 1.22% and it will increase 0.02% for every 100k in your deposit. Max daily profit will be 1.40%.</Trans>
           </p>
-          <h3>Referral Commision</h3>
+          <h3><Trans>Referral Commision</Trans></h3>
         </Row>
         <Row className="widget-row">
           <Widget
@@ -50,7 +48,7 @@ export default class Payment extends Component {
             levelamount="100"
             level="3"
             levelNumber={["4%", "3%", "2%"]}
-            requirement=" TRX Deposit (You must deposit 100 TRX in order to earn from
+            requirement="TRX Deposit (You must deposit 100 TRX in order to earn from
                     your referrals)"
             color="#0492ff"
             bgStartColor="#92b0d6"
@@ -196,8 +194,9 @@ export default class Payment extends Component {
               }}
               className="widget__button"
             >
+  <Trans>
               Participate now
-            </Button>
+              </Trans>            </Button>
           </Row>
         </Row>
       </Container>

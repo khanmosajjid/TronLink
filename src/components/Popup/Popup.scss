@@ -39,3 +39,9 @@
     font-size: 20px;
     font-size: x-large;
   }
+
+  @media(max-width:600px){
+    .box{
+      width:100% !important
+    }
+  }

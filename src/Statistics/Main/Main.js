@@ -20,6 +20,7 @@ import QRCode from "qrcode.react";
 import reff_icon from "../../assets/reff-icon.png";
 // import money_transfer from "../../assets/money-transfer.png";
 import money_transfer from "../../assets/network.png";
+import { Trans } from 'react-i18next';
 
 import Popup from "../../components/Popup/Popup";
 import { ToastContainer, toast } from "react-toastify";
@@ -221,13 +222,14 @@ function Main(props) {
     <div className="main">
       <Row className="main__resultcard">
         <Row className="total-result1">
-          <Col lg={3} className="card1">
+          <Col lg={2} sm={2} md={2} className="card1">
             {refLink ? <QRCode value={refLink} /> : null}
           </Col>
-          <Col lg={9} className="card2">
+          <Col lg={10}  sm={10}  md={10}className="card2">
             <Row className="ref-main">
-              <Col lg={2} className="refferal-logo">
-                <img
+              <Col lg={2} xs={4} >
+               <div className="refferal-logo">
+               <img  
                   src={reff_icon}
                   style={{
                     height: "55px",
@@ -237,6 +239,7 @@ function Main(props) {
                     display: "block",
                   }}
                 ></img>
+               </div>
               </Col>
 
               <Col lg={10} className="input-col">
@@ -303,7 +306,7 @@ function Main(props) {
           <img src={deposit}></img>
         </div>
 
-        <h6>Make A Deposit</h6>
+        <h6><Trans>Make A Deposit</Trans></h6>
         <Label for="amount"></Label>
         <Input
           onChange={(t) => {
@@ -323,7 +326,7 @@ function Main(props) {
             makeDeposit();
           }}
         >
-          Confirm Deposit
+          <Trans>Confirm Deposit</Trans>
         </Button>
       </Row>
       <Row className="cards">
@@ -333,12 +336,13 @@ function Main(props) {
           card3Name="Personal Deposit Bonus"
           card4Name="Available Account Balance"
           card1Data={
+            props.userPersonalDepositProfit?
             (1.2 + parseFloat(props.userPersonalDepositProfit)).toFixed(2) +
-            " %"
+            " %":"-"
           }
           card2Data="1.20%"
-          card3Data={props.userPersonalDepositProfit}
-          card4Data={props.userDailyProfit}
+          card3Data={props.userPersonalDepositProfit?props.userPersonalDepositProfit:"-"}
+          card4Data={props.userDailyProfit?props.userDailyProfit:"-"}
         ></Card>
       </Row>
       <Row className="withdraw">
@@ -348,7 +352,7 @@ function Main(props) {
             props.withdraw();
           }}
         >
-          <h5>Withdraw Funds</h5>
+          <h5><Trans>Withdraw Funds</Trans></h5>
         </Button>
         <Button
           className="withdraw__heading"
@@ -362,7 +366,7 @@ function Main(props) {
             setTableHeaderEndColor("#2794e5")
           }}
         >
-          <h5>View Active Deposits</h5>
+          <h5><Trans>View Active Deposits</Trans></h5>
         </Button>
         <Button
           className="withdraw__heading"
@@ -376,7 +380,7 @@ function Main(props) {
             setTableHeaderEndColor("#f3037e")
           }}
         >
-          <h5>View Expired Deposits</h5>
+          <h5><Trans>View Expired Deposits</Trans></h5>
         </Button>
         {isOpen && (
           <Popup
@@ -416,7 +420,7 @@ function Main(props) {
                   </thead>
                   <tbody>{renderDepositTableItem()}</tbody>
                 </Table>
-                <Row style={{ width: "100%" }}>
+                <Row style={{ width: "100%" }} className="table-popup">
                   <Col lg={12} className="table-btn">
                     <Button
                       className="withdraw__heading"
@@ -440,7 +444,7 @@ function Main(props) {
           style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
         >
           <Withdraw
-            heading="Active Deposits Sums"
+            heading={<Trans>Active Deposits Sums</Trans>}
             data={props.userTotalActiveDeposits}
             icon={icon8}
             color="#dc5063"
@@ -557,7 +561,7 @@ function Main(props) {
           style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
         >
           <Withdraw
-            heading="Your Current rank"
+            heading="Your Current Rank"
             icon={icon5}
             data={getLevelRank()}
             color="#dc5063"
