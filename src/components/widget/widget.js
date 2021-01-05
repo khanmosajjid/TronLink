@@ -50,34 +50,38 @@ export default class Widget extends Component {
               </span>
             </h3>
             <Row style={{width:"100%",marginBottom:"8px"}}>
-              <Col className="details-requirements" style={{padding: "0px" }}>
+              <Col className="details-Requirements" style={{padding: "0px" }}>
                 <img src={this.props.icon1} style={{ height: "20px" }}></img>
-                <Trans>
                 <p className="requirement">
-                  <span style={{fontWeight:"600"}}>
-                  Requirements:
+                  {/* <span style={{fontWeight:"600"}}>
+                  Requirements :
                   </span>
                   <span
                     style={{ color: "" + this.props.color, fontWeight: "600" }}
                   >
                     {this.props.levelamount}
-                  </span>
-                  {this.props.requirement}
+                  </span> */}
+                                  <Trans>
+
+                 {/* Requirements- {this.props.levelamount}  {this.props.requirement} */}
+
+                 {this.props.requirementText}
+                 </Trans>
+
                 </p>
-                </Trans>
                
               </Col>
             </Row>
 
             <Row style={{ width: "100%" }}>
               <Col
-                className="details-requirements"
+                className="details-Requirements"
                 style={{padding: "0px" }}
               >
                 <img src={this.props.icon2} style={{ height: "20px" }}></img>
 
                 <p style={{ fontWeight: "600" ,marginLeft:"5px"}}>
-                  Commission upto {this.props.level} Levels
+                  <Trans>Commission upto {this.props.level} Levels</Trans>
                 </p>
               </Col>
             </Row>
@@ -92,40 +96,45 @@ export default class Widget extends Component {
                     style={{ marginBottom: "2%", fontWeight: "600" }}
                     key={index}
                   >
-                    <Trans>
                     <p>
-                      Level {index + 1} =
+                    {/* <Trans>
+
+                    </Trans> */}
+
+<Trans>Level</Trans> {index + 1} ={" "}
                       <span
                         style={{
-                          color: "" + this.props.color,
+                          color: this.props.color,
                           fontWeight: "600",
                         }}
                       >
                         {this.props.levelNumber[index]}
                       </span>
+
                     </p>
-                    </Trans>
                   </Col>
                 )
               )}
             </Row>
             <Row style={{ width: "100%" }}>
               <Col
-                className="details-requirements"
+                className="details-Requirements"
                 style={{padding: "0px" }}
               >
                 <img src={this.props.binaryCommisionIcon} style={{ height: "20px" }}></img>
 
                 <p style={{ fontWeight: "600",marginLeft:"5px" }}>
-                  {this.props.binaryCommision} <span
+                  <Trans>
+                    {/* {this.props.binaryCommision} <span
                         style={{
                           color: "" + this.props.color,
                           fontWeight: "600",
                         }}
                       >
                         {this.props.binaryCommisionPerc}
-                      </span>
-                      {this.props.binaryCommisionInfo}
+                      </span> */}
+                      {this.props.binaryCommissionText}
+                  </Trans>
                 </p>
               </Col>
             </Row>

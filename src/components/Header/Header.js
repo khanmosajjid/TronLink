@@ -39,6 +39,7 @@ const Header = (props) => {
   const availableLanguages=[
     
 
+  
     {name:"English",code:"en",
   flag:"https://www.countryflags.io/gb/flat/64.png"
    },
@@ -53,6 +54,9 @@ const Header = (props) => {
 },
     {name:"Spanish",code:"spa",    flag:"https://www.countryflags.io/es/flat/64.png"
   },
+  {name:"Russian",code:"ru",
+  flag:"https://www.countryflags.io/ru/flat/64.png"
+   },
     {name:"French",code:"fr",     flag:"https://www.countryflags.io/fr/flat/64.png"
   },
     {name:"Persian",code:"fa",    flag:"https://www.countryflags.io/ir/flat/64.png"
@@ -99,7 +103,8 @@ const Header = (props) => {
     console.log("languagePick",language)
     i18n.changeLanguage(language.code);
     localStorage.setItem("locale",JSON.stringify(language))
-    setDefaultLangauge(language)
+    setDefaultLangauge(language);
+    window.location.reload(); 
     
   }
 const renderLanguages =()=>{

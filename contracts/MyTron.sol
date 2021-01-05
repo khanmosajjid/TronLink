@@ -160,7 +160,7 @@ contract MyTron{
         }
     }
 
-    // function to give level commision (invest)   
+    // function to give level Commission (invest)   
     function giveCommission(address _user,uint256 _amount) internal{
         address _upline = users[_user].referrer;
         for(uint256 i=1;i<=10;i++){
@@ -241,7 +241,7 @@ contract MyTron{
         }
     }
     
-    // function to get binary commision (withdraw)
+    // function to get binary Commission (withdraw)
     function getBinaryBalance(address _user) public view returns(uint256){
         uint256 vol=getTotalTeamDepositVolume(_user);
         if(vol>=MILLION.mul(500).mul(TRX)){
@@ -580,7 +580,7 @@ contract MyTron{
         return users[_user].dailyProfitEarned;
     }
     
-    // function to get referral commision earned so far
+    // function to get referral Commission earned so far
     function getTotalReferralCommissionEarned(address _user)public view returns(uint256){
         return users[_user].levelIncome;
     }
@@ -595,7 +595,7 @@ contract MyTron{
         return users[_user].totalDownlineBalance;
     }
     
-    // function to get binary commision earned so far
+    // function to get binary Commission earned so far
     function getBinaryCommissionEarnedSoFar(address _user) public view returns(uint256){
         return users[_user].binaryCommissionEarned;
     }

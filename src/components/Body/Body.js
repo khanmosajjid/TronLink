@@ -43,9 +43,9 @@ function Body(props) {
           <Col lg={6} className="body-main__content">
             <h1>{t("Multiply")}</h1>
             <h2>
-            <Trans>
+            <Trans >
 
-              Your Tron With US
+              Your <span>Tron</span> With US
               </Trans>
 
             </h2>

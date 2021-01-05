@@ -78,7 +78,7 @@ export default class Promotion extends Component {
         <h1><Trans>Promotional Banners</Trans></h1>
         <src></src>
         <img className="image-1" src={largeBanner} style={{marginTop: "25px",
-        height:80,
+        height:"auto",
         width:"80%"
       }}></img>
         <Row className="input-bar">
@@ -96,9 +96,9 @@ export default class Promotion extends Component {
           }}><Trans>Copy</Trans></Button>
         </Row>
 
-        <img className="image-1" src={mediumBanner} style={{height:60,
-          // width:468
-          width:"80%"
+        <img className="image-1" src={mediumBanner} style={{height:"auto",
+          // width:468,
+          width:"60%"
 
           }}></img>
         <Row className="input-bar">
@@ -119,7 +119,7 @@ export default class Promotion extends Component {
 
 
 
-        <img  src={smallBanner} style={{height:125,width:125}}></img>
+        <img  src={smallBanner} style={{height:"auto",width:125}}></img>
         <Row className="input-bar">
           <Label for="amount"></Label>
           <Input

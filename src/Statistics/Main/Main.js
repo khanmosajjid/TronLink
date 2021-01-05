@@ -259,7 +259,7 @@ function Main(props) {
                       placeholder="Enter Amount"
                     />
                     <Button className="ref-copy" onClick={copyToClipboard}>
-                      <h5>Copy</h5>
+                      <h5><Trans>Copy</Trans></h5>
                     </Button>
                   </Col>
                 </Row>
@@ -513,7 +513,7 @@ function Main(props) {
           style={{ boxShadow: "#f19539 -1px 1px 10px 1px" }}
         >
           <Withdraw
-            heading="Total Refferal Commision Earned"
+            heading="Total Refferal Commission Earned"
             data={props.totalReferralCommissionEarned}
             icon={icon9}
             color="#dc5063"
@@ -593,7 +593,7 @@ function Main(props) {
           style={{ boxShadow: "#79dafa -1px 1px 10px 1px" }}
         >
           <Withdraw
-            heading="Binary Commision Earned so far"
+            heading="Binary Commission Earned so far"
             data={props.binaryCommissionEarnedSoFar}
             icon={icon2}
             color="#2696e5"
