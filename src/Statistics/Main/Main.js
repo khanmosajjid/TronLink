@@ -346,6 +346,7 @@ function Main(props) {
         ></Card>
       </Row>
       <Row className="withdraw">
+        <Row className="withdraw-bttn">
         <Button
           className="withdraw__heading"
           onClick={() => {
@@ -382,6 +383,8 @@ function Main(props) {
         >
           <h5><Trans>View Expired Deposits</Trans></h5>
         </Button>
+        </Row>
+        
         {isOpen && (
           <Popup
             backGround="white"

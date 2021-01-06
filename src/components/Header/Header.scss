@@ -155,9 +155,11 @@ body {
   text-align: center;
 }
   .sl-nav {
+    
   display: inline;
 }
 .sl-nav ul {
+  
   margin:0;
   padding:0;
   list-style: none;
@@ -165,13 +167,16 @@ body {
   display: inline-block;
 }
 .sl-nav li {
+ 
   cursor: pointer;
   // padding-bottom:10px;
 }
 .sl-nav li ul {
+ 
   display: none;
 }
 .sl-nav li:hover ul {
+  
   position: absolute;
   top:29px;
   right:-15px;
@@ -184,6 +189,7 @@ body {
   box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
 }
 .sl-nav li:hover .triangle {
+  // transition-delay:20s !important;
   position: absolute;
   top: 15px;
   right: -10px;
@@ -194,6 +200,8 @@ body {
   background: transparent;
 }
 .sl-nav li:hover .triangle:after {
+  // background-color: red !important;
+  // transition-delay:20s !important;
   content: '';
   display: block;
   z-index: 20;
@@ -205,6 +213,8 @@ body {
   box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
 }
 .sl-nav li ul li {
+  // transition-duration: 5s;
+  // transition-delay: 2s;
   position: relative;
   text-align: left;
   background: transparent;
@@ -215,15 +225,24 @@ body {
   color: #3c3c3c;
 }
 .sl-nav li ul li:last-of-type {
+  // transition-duration: 50s;
+  // transition-delay: 20s;
   padding-bottom: 15px;
 }
 .sl-nav li ul li span {
+  // transition-duration: 50s;
+  // transition-delay: 20s;
+
   padding-left: 5px;
 }
-.sl-nav li ul li span:hover, .sl-nav li ul li span.active {
+.sl-nav  ul li span:hover, .sl-nav li ul li span.active {
+  // transition-duration: 50s;
+  // transition-delay: 20s;
   color: #146c78;
 }
 .sl-flag {
+  // transition-duration: 50s;
+  // transition-delay: 20s;
   display: inline-block;
   box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
   width: 15px;

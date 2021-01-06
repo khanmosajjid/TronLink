@@ -131,8 +131,27 @@ iframe {
   width: 100% !important;
   height: 350px;
 }
+.certi-bttn{
+  width: 79%;
+    height: 100%;
+    margin-left: 14%;
+    background: transparent !important;
+    border: 1px solid white !important;
+    font-weight: 600;
+}
+.bottom-dot{
+  display: flex;
+  justify-content: flex-end;
+}
 
 @media(max-width:400px){
+  .bottom-dot{
+    margin-top: 10px;
+  }
+  .certi-bttn{
+    margin-left: 0px;
+    width: 100%;
+  }
   iframe{
     width: 210px !important;
     height: 200px;
@@ -142,3 +161,4 @@ iframe {
     margin-bottom: 12px !important;
   }
 }
+

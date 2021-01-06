@@ -7,8 +7,8 @@ import logo from "../../assets/logo.png";
 import { Icon } from "semantic-ui-react";
 // import "react-flags-select/scss/react-flags-select.scss";
 import tron from "../../assets/tron.jpeg";
-import india from "../../assets/india.png"
-import { useTranslation } from 'react-i18next';
+import india from "../../assets/india.png";
+import { useTranslation } from "react-i18next";
 
 import {
   Collapse,
@@ -32,40 +32,67 @@ const Header = (props) => {
   const [isWalletConnected, setWalletConected] = useState(false);
   const [walletAddress, setWalletAddress] = useState();
   const [isOpen, setIsOpen] = useState(false);
-  const [defaultLanguage, setDefaultLangauge] = useState( {name:"English",code:"en",
-  flag:"https://www.countryflags.io/gb/flat/64.png"
-   });
+  const [language, setLanguage] = useState(true);
+  const [defaultLanguage, setDefaultLangauge] = useState({
+    name: "English",
+    code: "en",
+    flag: "https://www.countryflags.io/gb/flat/64.png",
+  });
 
-  const availableLanguages=[
-    
-
-  
-    {name:"English",code:"en",
-  flag:"https://www.countryflags.io/gb/flat/64.png"
-   },
-    {name:"Arabic",code:"ar",   
-    flag:"https://www.countryflags.io/sa/flat/64.png"
- },
-    {name:"Hindi",code:"hi",
-    flag:"https://www.countryflags.io/in/flat/64.png"
-},
-    {name:"Chinese",code:"zh",
-    flag:"https://www.countryflags.io/cn/flat/64.png"
-},
-    {name:"Spanish",code:"spa",    flag:"https://www.countryflags.io/es/flat/64.png"
-  },
-  {name:"Russian",code:"ru",
-  flag:"https://www.countryflags.io/ru/flat/64.png"
-   },
-    {name:"French",code:"fr",     flag:"https://www.countryflags.io/fr/flat/64.png"
-  },
-    {name:"Persian",code:"fa",    flag:"https://www.countryflags.io/ir/flat/64.png"
-  },
-    {name:"Vietnamese",code:"vi",  flag:"https://www.countryflags.io/vn/flat/64.png"
-  },
-
-  ]
-  const toggle = () => setIsOpen(!isOpen);
+  const availableLanguages = [
+    {
+      name: "English",
+      code: "en",
+      flag: "https://www.countryflags.io/gb/flat/64.png",
+    },
+    {
+      name: "Arabic",
+      code: "ar",
+      flag: "https://www.countryflags.io/sa/flat/64.png",
+    },
+    {
+      name: "Hindi",
+      code: "hi",
+      flag: "https://www.countryflags.io/in/flat/64.png",
+    },
+    {
+      name: "Chinese",
+      code: "zh",
+      flag: "https://www.countryflags.io/cn/flat/64.png",
+    },
+    {
+      name: "Spanish",
+      code: "spa",
+      flag: "https://www.countryflags.io/es/flat/64.png",
+    },
+    {
+      name: "Russian",
+      code: "ru",
+      flag: "https://www.countryflags.io/ru/flat/64.png",
+    },
+    {
+      name: "French",
+      code: "fr",
+      flag: "https://www.countryflags.io/fr/flat/64.png",
+    },
+    {
+      name: "Persian",
+      code: "fa",
+      flag: "https://www.countryflags.io/ir/flat/64.png",
+    },
+    {
+      name: "Vietnamese",
+      code: "vi",
+      flag: "https://www.countryflags.io/vn/flat/64.png",
+    },
+  ];
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+  const toggleLanguage = () => {
+    setLanguage(!language);
+    console.log("language is ", language);
+  };
 
   useEffect(() => {
     var obj = setInterval(async () => {
@@ -79,63 +106,57 @@ const Header = (props) => {
         setWalletConected(true);
       }
     }, 10);
-  
-  
-    let locale=    localStorage.getItem("locale")
-    if(locale){
-      try{
-        locale = JSON.parse(locale)
-        console.log("locale",locale)
-        setDefaultLangauge(locale)
-      }catch(errr){
 
-      }
+    let locale = localStorage.getItem("locale");
+    if (locale) {
+      try {
+        locale = JSON.parse(locale);
+        console.log("locale", locale);
+        setDefaultLangauge(locale);
+      } catch (errr) {}
     }
-
-  
-  
-  
   }, []);
 
-
-
-  const languagePick=(language)=>{
-    console.log("languagePick",language)
+  const languagePick = (language) => {
+    console.log("languagePick", language);
     i18n.changeLanguage(language.code);
-    localStorage.setItem("locale",JSON.stringify(language))
+    localStorage.setItem("locale", JSON.stringify(language));
     setDefaultLangauge(language);
-    window.location.reload(); 
-    
-  }
-const renderLanguages =()=>{
-    let languages = []
+    window.location.reload();
+  };
+  const renderLanguages = () => {
+    let languages = [];
 
     // languages.push(<li><i className="sl-flag flag-de"><div id="germany"></div>
     // </i> <span className="active">Deutsch</span></li>)
 
     // languages.push(<li><i className="sl-flag flag-usa"><div id="english"></div>
     // </i> <span>English</span></li>)
-    
 
-    for(let language of availableLanguages){
-      languages.push(<li onClick={()=>{
-        languagePick(language)
-      }}>
-        <>
-      
-       {/* <i className={"sl-flag flag-"+language.code}>
+    for (let language of availableLanguages) {
+      languages.push(
+        <li
+          onClick={() => {
+            languagePick(language);
+          }}
+        >
+          <>
+            {/* <i className={"sl-flag flag-"+language.code}>
         <div id={language.name}></div>
     </i>  */}
-    
-    <img src={language.flag} style={{height:20,width:20,
-  borderRadius:"50%"}}></img>
 
-    <span>{language.name}</span>
-       </>
-    </li>)
+            <img
+              src={language.flag}
+              style={{ height: 20, width: 20, borderRadius: "50%" }}
+            ></img>
+
+            <span>{language.name}</span>
+          </>
+        </li>
+      );
     }
-    return languages
-}
+    return languages;
+  };
   return (
     <Navbar
       dark
@@ -157,7 +178,7 @@ const renderLanguages =()=>{
                 style={{ color: "#eb475b" }}
                 size={20}
               ></Icon>
-              <p>{t('Weekly Trading reports')}</p>
+              <p>{t("Weekly Trading reports")}</p>
             </Col>
             <Col
               lg={6}
@@ -168,34 +189,30 @@ const renderLanguages =()=>{
               {isWalletConnected ? <p>{walletAddress}</p> : t("Connect Wallet")}
             </Col>
 
-
-
             <Col
               lg={2}
               className="header__containt-languages sl-nav"
               style={{ marginRight: "0px !important" }}
+              // onClick={toggleLanguage()}
             >
-                  <div className="sl-nav">
-
-  <ul>
-    <li><img src={defaultLanguage.flag} style={{height:20,width:20,
-  borderRadius:"50%"}}></img>
-<b style={{marginLeft:2}}>{defaultLanguage.name}</b> <i className="fa fa-angle-down" aria-hidden="true"></i>
-      <div className="triangle"></div>
-      <ul>
-        {renderLanguages()}
-      </ul>
-    </li>
-  </ul>
-</div>
-
-
-          
-          
+              <div className="sl-nav">
+                <ul>
+                  {/* {language && renderLanguages()} */}
+                   
+                    <li>
+                      <img
+                        src={defaultLanguage.flag}
+                        style={{ height: 20, width: 20, borderRadius: "50%" }}
+                      ></img>
+                      <b style={{ marginLeft: 2 }}>{defaultLanguage.name}</b>{" "}
+                      <i className="fa fa-angle-down"></i>
+                      <div className="triangle"></div>
+                      <ul>{renderLanguages()}</ul>
+                    </li>
+                  
+                </ul>
+              </div>
             </Col>
-
-
-        
           </Row>
         </Nav>
       </Collapse>

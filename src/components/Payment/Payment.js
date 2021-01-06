@@ -49,7 +49,7 @@ export default class Payment extends Component {
           
 
           <p className="example">
-           <Trans>Example If you deposit 99k TRX you will earn 1.20% daily. If your deposit is 100k your daily profit will increse to 1.22% and it will increase 0.02% for every 100k in your deposit. Max daily profit will be 1.40%.</Trans>
+           <Trans>Example If you deposit 99k TRX you will earn 1.20% daily. If your deposit is 100k your daily profit will increase to 1.22% and it will increase 0.02% for every 100k in your deposit. Max daily profit will be 1.40%.</Trans>
           </p>
           <h3><Trans>Referral Commission</Trans></h3>
         </Row>
