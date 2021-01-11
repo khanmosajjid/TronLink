@@ -23,8 +23,7 @@ import money_transfer from "../../assets/network.png";
 import { Trans } from 'react-i18next';
 import utils from "../../utils"
 import Popup from "../../components/Popup/Popup";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import Card from "../../components/Body/Cards/Cards";
 import moment from "moment";
 import reff_bg from "../../assets/reff-bg.png";
@@ -149,7 +148,6 @@ function Main(props) {
     textField.remove();
 
     setCopySuccess("Copied!");
-    toast.success("Referral Link Copied");
   }
 
   const renderDepositTableItem = () => {
@@ -205,7 +203,6 @@ function Main(props) {
     if (depositAmount < 100) {
       //Show error
 
-      toast.error("Minimum Deposit Amount is 100trx!");
     } else {
       makeDepositTransaction(depositAmount);
     }
@@ -701,7 +698,6 @@ function Main(props) {
         </Row>
       </Row>
 
-      <ToastContainer />
     </div>
   );
 }

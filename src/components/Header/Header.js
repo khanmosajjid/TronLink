@@ -14,6 +14,7 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
+  Dropdown,
   NavbarBrand,
   Nav,
   NavItem,
@@ -33,6 +34,7 @@ const Header = (props) => {
   const [walletAddress, setWalletAddress] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState(true);
+  const [isLanguageDropdownOpened,setLanguageDropdownOpened]= useState(false)
   const [defaultLanguage, setDefaultLangauge] = useState({
     name: "English",
     code: "en",
@@ -135,7 +137,7 @@ const Header = (props) => {
 
     for (let language of availableLanguages) {
       languages.push(
-        <li
+        <DropdownItem
           onClick={() => {
             languagePick(language);
           }}
@@ -152,7 +154,7 @@ const Header = (props) => {
 
             <span>{language.name}</span>
           </>
-        </li>
+        </DropdownItem>
       );
     }
     return languages;
@@ -172,7 +174,11 @@ const Header = (props) => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <Row className="header__containt-report" noGutters>
-            <Col lg={3} className="header__containt-weeklyreport">
+            <Col lg={3} className="header__containt-weeklyreport" onClick={()=>{
+              
+              var win = window.open("/weeklyreports", '');
+              win.focus();  
+            }}>
               <Icon
                 name="calendar"
                 style={{ color: "#eb475b" }}
@@ -191,13 +197,12 @@ const Header = (props) => {
 
             <Col
               lg={2}
-              className="header__containt-languages sl-nav"
-              style={{ marginRight: "0px !important" }}
+              className="header__containt-languages"
+              // style={{ marginRight: "0px !important" }}
               // onClick={toggleLanguage()}
             >
-              <div className="sl-nav">
+              {/* <div className="sl-nav">
                 <ul>
-                  {/* {language && renderLanguages()} */}
                    
                     <li>
                       <img
@@ -211,7 +216,50 @@ const Header = (props) => {
                     </li>
                   
                 </ul>
-              </div>
+                
+              </div> */}
+
+
+<Dropdown isOpen={isLanguageDropdownOpened} toggle={()=>{
+
+  console.log("dssdsds",isLanguageDropdownOpened)
+setLanguageDropdownOpened(!isLanguageDropdownOpened)
+}}>
+     
+
+     <DropdownToggle style={{padding:0,background:"none",border:0,fontWeight:"normal"}}>
+     <img
+                        src={defaultLanguage.flag}
+                        style={{ height: 20, width: 20, borderRadius: "50%" }}
+                      ></img>
+                      <b style={{ marginLeft: 2 }}>{defaultLanguage.name}</b>{" "}
+        </DropdownToggle>
+
+
+     {/* <div onClick={()=>{
+       setLanguageDropdownOpened(true)
+     }}>
+     <img
+                        src={defaultLanguage.flag}
+                        style={{ height: 20, width: 20, borderRadius: "50%" }}
+                      ></img>
+                      <b style={{ marginLeft: 2 }}>{defaultLanguage.name}</b>{" "}
+     </div> */}
+      <DropdownMenu style={{marginTop:25}}>
+        {/* <DropdownItem header>Header</DropdownItem>
+        <DropdownItem>Some Action</DropdownItem>
+        <DropdownItem text>Dropdown Item Text</DropdownItem>
+        <DropdownItem disabled>Action (disabled)</DropdownItem>
+        <DropdownItem divider />
+        <DropdownItem>Foo Action</DropdownItem>
+        <DropdownItem>Bar Action</DropdownItem>
+        <DropdownItem>Quo Action</DropdownItem> */}
+
+        {renderLanguages()}
+      </DropdownMenu>
+    </Dropdown>
+          
+          
             </Col>
           </Row>
         </Nav>

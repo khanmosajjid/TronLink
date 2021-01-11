@@ -1,0 +1,39 @@
+.promotion{
+    background-image:url("../../assets/Rectangle\ 114@1X.png");
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    & span{
+        width: 5%;
+    border-bottom: 1px solid orange;
+    }
+
+    & .input-bar{
+     padding: 1%;
+     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .input-box{
+        width: 70%;
+        margin-right: 10px;
+    }
+    }
+   
+}
+ .promotion__button{
+background-image: linear-gradient(to right, #eb4657, #ec6a66);
+
+
+
+}
+
+// @media(max-width:600px){
+//     .image-1{
+//         width:360px !important;
+//     }
+// }

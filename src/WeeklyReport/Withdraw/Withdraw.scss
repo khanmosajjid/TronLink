@@ -1,0 +1,48 @@
+.withdraw-card {
+  & .withdraw-card__main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    & .icon {
+      width: fit-content;
+      height: fit-content;
+
+    //   background: linear-gradient(
+    //     262deg,
+    //     rgba(14, 192, 232, 1) 58%,
+    //     rgba(67, 133, 227, 1) 97%
+    //   );
+      border-radius: 50%;
+      
+    } 
+    & h2{
+        width: fit-content;
+    /* padding: 0px; */
+    margin: 0px;
+    margin-left: 5%;
+    
+    
+    }
+    & h6{
+        width: fit-content;
+    }
+
+
+  }
+}
+@media(max-width:700px){
+  .card-head{
+    display: flex;
+    justify-content: center;
+  }
+  .card-body{
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

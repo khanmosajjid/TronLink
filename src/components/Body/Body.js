@@ -13,6 +13,7 @@ import videohead from "../../assets/videohead.png";
 import Popup from "../Popup/Popup";
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next';
+import utils from "../../utils";
 
 function Body(props) {
   // constructor(props) {
@@ -26,6 +27,12 @@ function Body(props) {
   //   this.state.isOpen=!this.state.isOpen;
   //   console.log(this.state.isOpen);
   // }
+
+  function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -187,13 +194,20 @@ function Body(props) {
       </Row>
       <Row className="body-main__footer">
         <Row className="footer-body">
-          <Col lg={4} xs={12} className="footer-content">
+          <Col lg={4} xs={12} className="footer-content hoverable" 
+           onClick={()=>{
+openInNewTab("https://tronscan.org/#/contract/"+utils.contractAddress)
+          }}>
             <img src={bodyicon1} style={{ marginRight: "37px" }}></img>
             <p><Trans>Check Our Contract</Trans></p>
           </Col>
           <Col
             lg={4}
             xs={12}
+            className="footer-content hoverable" 
+            onClick={()=>{
+              openInNewTab("/planEN.pdf")
+                        }}
             className="footer-content"
             style={{
               borderRight: "2px solid #39475b",
@@ -203,7 +217,13 @@ function Body(props) {
             <img src={bodyicon2} style={{ marginRight: "10px" }}></img>
             <p><Trans>Check Our Complete Plan</Trans></p>
           </Col>
-          <Col lg={4} xs={12} className="footer-content">
+          <Col lg={4} xs={12} 
+            className="footer-content hoverable" 
+            onClick={()=>{
+              
+              var win = window.open("/weeklyreports", '');
+              win.focus();  
+            }}>
             <img src={bodyicon3} style={{ marginRight: "10px" }}></img>
             <p><Trans>Check Our Weekly Reports</Trans></p>
           </Col>
@@ -216,10 +236,10 @@ function Body(props) {
           card2Name={<Trans>Total Members</Trans>}
           card3Name={<Trans>Total Withdrawn</Trans>}
           card4Name={<Trans>Amount in Trading Pool</Trans>}
-          card1Data={props.totalDepositAmount?props.totalDepositAmount:0}
-          card2Data={props.totalMembers?props.totalMembers:0}
-          card3Data={props.totalWithdraw?props.totalWithdraw:0}
-          card4Data={props.tradingPool?props.tradingPool:0}
+          card1Data={props.totalDepositAmount?props.totalDepositAmount:"-"}
+          card2Data={props.totalMembers?props.totalMembers:"-"}
+          card3Data={props.totalWithdraw?props.totalWithdraw:"-"}
+          card4Data={props.tradingPool?props.tradingPool:"-"}
         ></Cards>
       </Row>
       <Row style={{ marginBottom: "-5%", marginTop: "-7%" }}>

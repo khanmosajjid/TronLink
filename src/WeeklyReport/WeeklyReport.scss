@@ -1,0 +1,28 @@
+.header-component{ 
+    height:fit-content;
+    padding-bottom: 5%;
+    background-color: #000;
+    background-image: url("../assets/bg3dark.png");
+    background-size: cover;
+    background-position: center;
+
+    
+    & h1{
+        color: white !important;
+        width: 90% !important;
+    }
+}
+
+.cardHeading{
+    background: linear-gradient(to right, #eb4657, #ec6a66);
+  -webkit-background-clip: text;
+  font-family:'Roboto';
+  -webkit-text-fill-color: transparent;
+}
+.cardItem{
+    // border: 1px solid;
+    padding: 10px;
+    box-shadow:0px 0px 8px 0px grey;
+        margin: 15px;
+        border-radius: 8px;
+}

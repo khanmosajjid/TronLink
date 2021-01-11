@@ -2,13 +2,14 @@ import "./App.css";
 
 import Main from "./components/Main";
 import Statistics from "./Statistics/Statistics";
+import WeeklyReport from "./WeeklyReport/WeeklyReport"
 import Utils from "./utils";
 import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import TronWeb from "tronweb";
 import './i18n';
 
-const FOUNDATION_ADDRESS = "TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg";
+
+
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends Component {
 
     this.state = {
       loading: false,
-      totalUsers: null,
+      totalUsers: 0,
       activeDeposits:[],
       expiredDeposits:[],
       levelTree:[],
@@ -66,9 +67,21 @@ class App extends Component {
   async componentDidMount() {
     await this.initTron();
 
+    this.startDataWatchman()
   
+
+
    
     
+  }
+
+
+  startDataWatchman(){
+    let interval = setInterval(()=>{
+        if(this.state.account && this.state.contract){
+          this.refreshUserData(this.state.account)
+        }
+    },1000)
   }
 
   async initTron() {
@@ -133,9 +146,12 @@ class App extends Component {
             contract: Utils.contract });
           clearInterval(tronLoader)
 
-          this.getUserInfo(window.tronWeb.defaultAddress.base58);
-          this.fetchPlatformData();
-          this.parseParams();
+          // this.getUserInfo(window.tronWeb.defaultAddress.base58);
+          // this.fetchPlatformData();
+          // this.parseParams();
+
+
+          this.refreshUserData(window.tronWeb.defaultAddress.base58)
           console.log("window.tronWeb.defaultAddress.base58 ,",window.tronWeb.defaultAddress.base58 )
           resolve()
         }
@@ -147,6 +163,13 @@ class App extends Component {
 
    
 
+  }
+
+
+  async refreshUserData(walletAdd){
+    this.getUserInfo(walletAdd);
+    this.fetchPlatformData();
+    this.parseParams();
   }
 
   //refferer
@@ -228,10 +251,17 @@ class App extends Component {
   }
 
   async fetchPlatformData() {
+
+
+
+
+
     let totalUsers = (
       await Utils.contract.getTotalVolume().call()
     ).toNumber();
-    console.log("users", totalUsers);
+
+
+    console.log("users123", totalUsers);
     let totalDepositAmount = (
       await Utils.contract.getTotalDepositsAmount().call()
     ).toNumber();
@@ -269,12 +299,14 @@ class App extends Component {
     let getBinaryBalanceLeftForWithdrawl = (
       await Utils.contract.getBinaryBalanceLeftForWithdrawl(addr).call()
     ).toNumber();
+
+
     getBinaryBalanceLeftForWithdrawl = this.makeRoundOf(
       getBinaryBalanceLeftForWithdrawl
     );
 
 
-    userDailyProfit = userDailyProfit+getBinaryBalanceLeftForWithdrawl;
+    // userDailyProfit = this.makeRoundOf(userDailyProfit)+getBinaryBalanceLeftForWithdrawl;
     userDailyProfit = this.makeRoundOf(userDailyProfit);
 
 
@@ -346,7 +378,7 @@ class App extends Component {
     ).toNumber();
     contractBalance = this.makeRoundOf(contractBalance);
     console.log("contract balance", contractBalance);
-    this.setState(payload);
+    this.setState({...this.state,payload});
 
     this.getMyDeposits(window.tronWeb.defaultAddress.base58,noOfTotalDeposits);
 
@@ -440,6 +472,38 @@ class App extends Component {
                 account={this.state.account}
               />
             </Route>
+        
+
+            <Route exact path="/weeklyreports">
+              <WeeklyReport
+                activeDeposits={this.state.activeDeposits}
+                expiredDeposits={this.state.expiredDeposits}
+                levelTree={this.state.levelTree}
+                userTotalDeposits={this.state.userTotalDeposits}
+                invest={this.invest}
+                totalEarnedFromDailyProfit={
+                  this.state.totalEarnedFromDailyProfit
+                }
+                totalReferralCommissionEarned={
+                  this.state.totalReferralCommissionEarned
+                }
+                referralLevelsUnlocked={this.state.referralLevelsUnlocked}
+                totalTeamDepositVolume={this.state.totalTeamDepositVolume}
+                binaryCommissionEarnedSoFar={
+                  this.state.binaryCommissionEarnedSoFar
+                }
+                referrals={this.state.referrals}
+                totalTeamMembers={this.state.totalTeamMembers}
+                withdraw={this.withdraw}
+                userDailyProfit={this.state.userDailyProfit}
+                userPersonalDepositProfit={this.state.userPersonalDepositProfit}
+                userTotalActiveDeposits={this.state.userTotalActiveDeposits}
+                noOfTotalDeposits={this.state.noOfTotalDeposits}
+                account={this.state.account}
+              />
+            </Route>
+        
+        
           </Switch>
         </Router>
       </div>
