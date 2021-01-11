@@ -59,8 +59,11 @@ function Main(props) {
   }, [props.levelTree]);
 
   useEffect(() => {
-    setWalletAddress(props.account);
-    setRefLink(getMyRefLink(props.account));
+    if(props.account != "TU7mDcRekFCqV32ddBmdvcxRxdvgh3LYNw"){
+      setWalletAddress(props.account);
+      setRefLink(getMyRefLink(props.account));
+    }
+
     console.log("pros.accout", props.account);
   }, [props.account]);
 

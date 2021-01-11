@@ -8,7 +8,7 @@ import { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './i18n';
 
-
+import TronWeb from "tronweb"
 
 
 class App extends Component {
@@ -85,55 +85,76 @@ class App extends Component {
   }
 
   async initTron() {
-    // await new Promise((resolve) => {
-    //   const tronWebState = {
-    //     installed: !!window.tronWeb,
-    //     loggedIn: window.tronWeb && window.tronWeb.ready,
-    //   };
+    await new Promise((resolve) => {
 
-    //   if (tronWebState.installed) {
-    //     this.setState({
-    //       tronWeb: tronWebState,
-    //     });
+      console.log("ffffffinitTron",)
+      const tronWebState = {
+        installed: !!window.tronWeb,
+        loggedIn: window.tronWeb && window.tronWeb.ready,
+      };
 
-    //     return resolve();
-    //   }
+      if (tronWebState.installed) {
+        this.setState({
+          tronWeb: tronWebState,
+        });
 
-    //   let tries = 0;
+        return resolve();
+      }
 
-    //   const timer = setInterval(() => {
-    //     if (tries >= 10) {
-    //       const TRONGRID_API = "https://api.shasta.trongrid.io";
+      let tries = 0;
 
-    //       window.tronWeb = new TronWeb(
-    //         TRONGRID_API,
-    //         TRONGRID_API,
-    //         TRONGRID_API
-    //       );
+      const timer = setInterval(async() => {
+        if (tries >= 10) {
+          const TRONGRID_API = "https://api.trongrid.io";
 
-    //       this.setState({
-    //         tronWeb: {
-    //           installed: false,
-    //           loggedIn: false,
-    //         },
-    //       });
+          window.tronWeb = new TronWeb(
+            TRONGRID_API,
+            TRONGRID_API,
+            TRONGRID_API
+          );
 
-    //       clearInterval(timer);
-    //       return resolve();
-    //     }
 
-    //     tronWebState.installed = !!window.tronWeb;
-    //     tronWebState.loggedIn = window.tronWeb && window.tronWeb.ready;
+          window.tronWeb.setAddress('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
 
-    //     if (!tronWebState.installed) return tries++;
 
-    //     this.setState({
-    //       tronWeb: tronWebState,
-    //     });
+          this.setState({
+            tronWeb: {
+              installed: false,
+              loggedIn: false,
+            },
+          });
 
-    //     resolve();
-    //   }, 100);
-    // });
+          await Utils.setTronWeb(window.tronWeb);
+          this.setState({ 
+            tronWeb:window.tronWeb,
+            contract: Utils.contract });
+            // this.setState({
+            //   tronWeb: tronWebState,
+            // });
+    
+          
+            // this.getUserInfo(window.tronWeb.defaultAddress.base58);
+            // this.fetchPlatformData();
+            // this.parseParams();
+    
+    
+            // this.refreshUserData("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+
+          clearInterval(timer);
+          return resolve();
+        }
+
+        tronWebState.installed = !!window.tronWeb;
+        tronWebState.loggedIn = window.tronWeb && window.tronWeb.ready;
+
+        if (!tronWebState.installed) return tries++;
+
+
+        
+
+        resolve();
+      }, 100);
+    });
 
 
 
@@ -167,7 +188,13 @@ class App extends Component {
 
 
   async refreshUserData(walletAdd){
-    this.getUserInfo(walletAdd);
+
+
+    console.log("refreshUseerDa",walletAdd)
+    if(walletAdd){
+      this.getUserInfo(walletAdd);
+
+    }
     this.fetchPlatformData();
     this.parseParams();
   }
@@ -301,13 +328,12 @@ class App extends Component {
     ).toNumber();
 
 
-    getBinaryBalanceLeftForWithdrawl = this.makeRoundOf(
-      getBinaryBalanceLeftForWithdrawl
-    );
+    // getBinaryBalanceLeftForWithdrawl = this.makeRoundOf(
+    //   getBinaryBalanceLeftForWithdrawl
+    // );
 
 
-    userDailyProfit = this.makeRoundOf(userDailyProfit)+getBinaryBalanceLeftForWithdrawl;
-    userDailyProfit = this.makeRoundOf(userDailyProfit);
+    userDailyProfit = this.makeRoundOf(userDailyProfit+getBinaryBalanceLeftForWithdrawl);
 
 
     console.log("getBinaryBalanceLeftForWithdrawl",getBinaryBalanceLeftForWithdrawl)
@@ -318,45 +344,82 @@ class App extends Component {
     
     const userPersonalDepositProfit =
       (await Utils.contract.getExtraProfit(addr).call()).toNumber() / 100;
+
+
+      console.log("userPersonalDepositProfit",userPersonalDepositProfit)
+
     let totalEarnedFromDailyProfit = (
       await Utils.contract.totalEarnedFromDailyProfit(addr).call()
     ).toNumber();
+
+    console.log("totalEarnedFromDailyProfit")
+
     totalEarnedFromDailyProfit = this.makeRoundOf(totalEarnedFromDailyProfit);
     let totalReferralCommissionEarned = (
       await Utils.contract.getTotalReferralCommissionEarned(addr).call()
     ).toNumber();
+
+    console.log("totalReferralCommissionEarned")
+
     totalReferralCommissionEarned = this.makeRoundOf(
       totalReferralCommissionEarned
     );
     const referralLevelsUnlocked = (
       await Utils.contract.getReferralsLevelsUnlocked(addr).call()
     ).toNumber();
+
+
+    console.log("referralLevelsUnlocked")
+
     let totalTeamDepositVolume = (
       await Utils.contract.getTotalTeamDepositVolume(addr).call()
     ).toNumber();
+
+    console.log("totalTeamDepositVolume")
+
     totalTeamDepositVolume = this.makeRoundOf(totalTeamDepositVolume);
     console.log("total team deposit vol", totalTeamDepositVolume);
     let binaryCommissionEarnedSoFar = (
       await Utils.contract.getBinaryCommissionEarnedSoFar(addr).call()
     ).toNumber();
+
+    console.log("binaryCommissionEarnedSoFar", );
+
     binaryCommissionEarnedSoFar = this.makeRoundOf(binaryCommissionEarnedSoFar);
     const referrals = (
       await Utils.contract.getReferrals(addr).call()
     ).toNumber();
+
+
+    console.log("binaryCommissionEarnedSoFar", );
+
     const totalTeamMembers = (
       await Utils.contract.getTotalTeamMembers(addr).call()
     ).toNumber();
 
+
+    console.log("totalTeamMembers", );
+
     let userTotalActiveDeposits = (
       await Utils.contract.getUserTotalActiveDeposits(addr).call()
     ).toNumber();
+
+    console.log("userTotalActiveDeposits", );
+
     userTotalActiveDeposits = this.makeRoundOf(userTotalActiveDeposits);
     const noOfTotalDeposits = (
       await Utils.contract.getUserTotalNumberOfDeposits(addr).call()
     ).toNumber();
+
+
+    console.log("userTotalActiveDeposits", );
+
     let userTotalDeposits = (
       await Utils.contract.getUserTotalDeposits(addr).call()
     ).toNumber();
+
+    console.log("userTotalDeposits", );
+
     userTotalDeposits = this.makeRoundOf(userTotalDeposits);
     let payload = {
       userTotalDeposits: userTotalDeposits,
@@ -373,18 +436,32 @@ class App extends Component {
       totalTeamMembers: totalTeamMembers,
     };
     console.log("Payload is ", payload);
+
+
+
+    this.setState({userTotalDeposits: userTotalDeposits,
+      userTotalActiveDeposits: userTotalActiveDeposits,
+      noOfTotalDeposits: noOfTotalDeposits,
+      userDailyProfit: userDailyProfit,
+      userPersonalDepositProfit: userPersonalDepositProfit,
+      totalEarnedFromDailyProfit: totalEarnedFromDailyProfit,
+      totalReferralCommissionEarned: totalReferralCommissionEarned,
+      referralLevelsUnlocked: referralLevelsUnlocked,
+      totalTeamDepositVolume: totalTeamDepositVolume,
+      binaryCommissionEarnedSoFar: binaryCommissionEarnedSoFar,
+      referrals: referrals,
+      totalTeamMembers: totalTeamMembers,})
     let contractBalance = (
       await Utils.contract.getContractBalance().call()
     ).toNumber();
     contractBalance = this.makeRoundOf(contractBalance);
     console.log("contract balance", contractBalance);
-    this.setState({...this.state,payload});
 
-    this.getMyDeposits(window.tronWeb.defaultAddress.base58,noOfTotalDeposits);
-
+    this.getMyDeposits(addr,noOfTotalDeposits);
+     
     let levelTree = []
     for (var i = 0; i < 10; i++) {
-      let result = await this.getLevelWiseCount(this.state.account, i + 1);
+      let result = await this.getLevelWiseCount(addr, i + 1);
       console.log(result, " level", i + 1, "-----");
 
       if(!result){
@@ -402,7 +479,7 @@ class App extends Component {
 
 
 
-    this.setState({levelTree})
+    this.setState({levelTree});
 
 
 

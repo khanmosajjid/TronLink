@@ -102,10 +102,11 @@ const Header = (props) => {
         clearInterval(obj);
 
         let rawAdd = window.tronWeb.defaultAddress.base58;
-        let address =
-          rawAdd.substring(0, 6) + "..." + rawAdd.substr(rawAdd.length - 6);
-        setWalletAddress(rawAdd);
-        setWalletConected(true);
+        if(rawAdd !== "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"){
+          setWalletAddress(rawAdd);
+          setWalletConected(true);
+        }
+       
       }
     }, 10);
 

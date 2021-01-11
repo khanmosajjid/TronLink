@@ -1,11 +1,11 @@
-const contractAddress = 'TRVHySRG9YudsvhYTEF6Cg4qNcFFxdLwcL';
+const contractAddress = 'TGakrQDsjSBVSFYq23BVKJYC7VJQFEHHTr';
 
 
 const utils = {
 	tronWeb: false,
   contract: false,
   contractAddress:contractAddress,
- adminAddress:"TYPGbv47eFGBCDvjrPZNgXs3JfrqPMTWS9",
+ adminAddress:"TRVHySRG9YudsvhYTEF6Cg4qNcFFxdLwcL",
 
 	async setTronWeb(tronWeb) {
 		this.tronWeb = tronWeb;

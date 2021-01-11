@@ -58,10 +58,10 @@ export default class Payment extends Component {
             levelName="Starter"
             icon1={level_icon_1a}
             icon2={level_icon_1b}
-            levelamount="100"
+            levelamount="500"
             level="3"
             levelNumber={["4%", "3%", "2%"]}
-            requirement="TRX Deposit (You must deposit 100 TRX in order to earn from
+            requirement="TRX Deposit (You must deposit 500 TRX in order to earn from
                     your referrals)"
             color="#0492ff"
             requirementText="Requirements-100 TRX Deposit (You must deposit 100 TRX in order to earn from your referrals)"

@@ -46,7 +46,7 @@ function Main(props) {
   const [expiredDeposits, setExpiredDeposits] = useState([]);
   const [tableData, setTableData] = useState(false);
   const [walletAddress, setWalletAddress] = useState(false);
-
+  const [userPersonalDepositProfit,setUserPersonalDepositProfit] = useState(0)
   const getReadableTime = (time) => {
     return moment(time * 1000).format("DD/MMM/YYYY");
   };
@@ -60,8 +60,11 @@ function Main(props) {
   }, [props.levelTree]);
 
   useEffect(() => {
-    setWalletAddress(props.account);
-    setRefLink(getMyRefLink(props.account));
+    if(props.account != "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"){
+      setWalletAddress(props.account);
+      setRefLink(getMyRefLink(props.account));
+    }
+  
     console.log("pros.accout", props.account);
   }, [props.account]);
 
@@ -115,7 +118,6 @@ function Main(props) {
       // console.log("level");
     }
     // console.log("hello");
-    <h1>hello i am level</h1>;
     return tree;
   };
 
@@ -202,10 +204,10 @@ function Main(props) {
     // let depositAmount = depositAmount;
 
     //todo 1000 krna h
-    if (depositAmount < 100) {
+    if (depositAmount < 500) {
       //Show error
 
-      toast.error("Minimum Deposit Amount is 100trx!");
+      toast.error("Minimum Deposit Amount is 500trx!");
     } else {
       makeDepositTransaction(depositAmount);
     }
@@ -215,6 +217,15 @@ function Main(props) {
     console.log("propos12", amount);
     props.invest(amount);
   };
+
+
+
+
+useEffect(()=>{
+  console.log("userPersonalDepositProfit1",props.userPersonalDepositProfit)
+
+  setUserPersonalDepositProfit(props.userPersonalDepositProfit)
+},[props.userPersonalDepositProfit])
 
   return (
     <div className="main">
@@ -343,12 +354,13 @@ function Main(props) {
           card3Name="Personal Deposit Bonus"
           card4Name="Available Account Balance"
           card1Data={
-            props.userPersonalDepositProfit?
-            (1.2 + parseFloat(props.userPersonalDepositProfit)).toFixed(2) +
-            " %":"-"
+            isNaN(userPersonalDepositProfit)?"1.2%":
+            1.2 +userPersonalDepositProfit
+             +
+            " %"
           }
           card2Data="1.20%"
-          card3Data={props.userPersonalDepositProfit?props.userPersonalDepositProfit:"-"}
+          card3Data={userPersonalDepositProfit}
           card4Data={props.userDailyProfit?props.userDailyProfit:"-"}
         ></Card>
      

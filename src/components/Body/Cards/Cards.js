@@ -9,6 +9,13 @@ import icon13 from '../../../assets/icon13.png';
 import { Trans } from 'react-i18next';
 
 export default class Cards extends Component{
+
+
+    componentWillReceiveProps(props){
+        console.log("propsss123",props)
+    }
+
+
     render(){
         return(
             <Row className={this.props.dontAllowMarginBottom? "cards ":"bottomMargin cards "} 
@@ -17,7 +24,7 @@ export default class Cards extends Component{
                 <Col lg={2} xs={5} className="cards__body1">
                     <img src={icon1} alt="totalDeposit"></img>
         <p style={{fontSize:18,marginTop:5}}><Trans>{this.props.card1Name}</Trans></p>
-                    <p style={{fontSize:22}}><Trans>{this.props.card1Data}</Trans></p>
+                    <p style={{fontSize:22}}>{this.props.card1Data}</p>
                 </Col>
                 <Col lg={2} xs={5} className="cards__body2">
                 <img src={icon10} alt="totalDeposit"></img>

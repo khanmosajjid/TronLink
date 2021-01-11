@@ -17,13 +17,19 @@ function Youtube(props){
     return (
       <Container className="youtube">
         <Row className="youtube__card">
-          <iframe
-            src="https://www.youtube.com/embed/E7wJTI-1dvQ"
+          {/* <iframe
+            src="https://www.youtube.com/watch?v=4GF5N3PGRPk"
             frameborder="0"
             allow="autoplay; encrypted-media"
             allowfullscreen
             title="video"
-          />
+          /> */}
+
+<iframe 
+src="https://www.youtube.com/embed/4GF5N3PGRPk"
+ frameborder="0" 
+ allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+ allowfullscreen></iframe>
         </Row>
         <Row className="compony-detail">
           <Row style={{width:"93%"}}>
