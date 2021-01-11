@@ -1,14 +1,14 @@
 pragma solidity >=0.5.4;
 
-contract MyTron{
+contract Trontiply{
     using SafeMath for uint256;
     
     uint256 constant MIN_AMOUNT =100000000;             // 100 TRX
     uint256 constant BASE_PERCENT = 120;                // 1.2% base profit
-    uint256 constant internal MILLION = 1000;
-    uint256 constant internal TIME_STAMP = 1;      // 1 day
-    uint256 constant internal TRX = 1000000;
-    uint256 constant internal THOUS = 1;
+    uint256 constant internal MILLION = 1000000;        // 1 million
+    uint256 constant internal TIME_STAMP = 1 days;      // 1 day
+    uint256 constant internal TRX = 1000000;            // 1 trx
+    uint256 constant internal THOUS = 1000;
     
     uint256 public totalUsers;
 	uint256 public totalInvested;
@@ -77,18 +77,21 @@ contract MyTron{
         
 	    User storage user = users[msg.sender];
 	    _referrer = setReferrer(_referrer);
-	    
+	   
+	    users[msg.sender].referrer = _referrer;
 	    if (user.deposits.length == 0) {
     		user.checkpoint = block.timestamp;
     		user.weeklyLastWithdraw = block.timestamp;
     		user.level = 3;
     		user.isExist=true;
+             users[_referrer].referrals =  users[_referrer].referrals.add(1);
     		totalUsers = totalUsers.add(1);
+            setUplines(msg.sender);
     		emit Newbie(msg.sender);
+            
     	}
     	
-	    users[_referrer].referrals =  users[_referrer].referrals.add(1);
-	    users[msg.sender].referrer = _referrer;
+	  
 	    
 	    user.deposits.push(Deposit(msg.value, 0, block.timestamp, false));
 	    emit NewDeposit(msg.sender, msg.value);
@@ -106,7 +109,7 @@ contract MyTron{
         adminWallet = adminWallet.add(msg.value.mul(7).div(10));
         tradingPool.transfer(msg.value.mul(7).div(10));
         
-        setUplines(msg.sender);
+        
         giveCommission(msg.sender,msg.value);
     }
     
@@ -245,25 +248,25 @@ contract MyTron{
     function getBinaryBalance(address _user) public view returns(uint256){
         uint256 vol=getTotalTeamDepositVolume(_user);
         if(vol>=MILLION.mul(500).mul(TRX)){
-            return vol.mul(2).div(100);
+            return vol.mul(1).div(100);
         }
          if(vol>=MILLION.mul(100).mul(TRX)){
-            return vol.mul(15).div(1000);
+            return vol.mul(6).div(1000);
         }
         
         if(vol>=MILLION.mul(50).mul(TRX)){
-            return vol.mul(1).div(100);
+            return vol.mul(4).div(1000);
         }
        
         if(vol>=MILLION.mul(10).mul(TRX)){
-            return (vol.mul(5).div(1000));
+            return (vol.mul(2).div(1000));
         }
         return 0;
     }
     
     // function to unlock levels of upline when downline invests (invest) 
     function setLevel(address _user) internal{
-         uint256 vol=getTotalTeamDepositVolume(_user);
+        uint256 vol=getTotalTeamDepositVolume(_user);
    
         if(vol>=TRX.mul(500).mul(MILLION)){
             if(users[_user].level<10)
@@ -357,12 +360,11 @@ contract MyTron{
 	// function to get personal referral bonus %
 	function getExtraProfit(address _user) public view returns(uint256){
 	    uint256 percent = 0;
-	    if(getUserTotalDeposits(_user)>=TRX.mul(100).mul(THOUS)){
-	        percent = (getUserTotalDeposits(_user).div(TRX.mul(100).mul(THOUS))).mul(5);
-	    }
+	        percent = (getUserTotalDeposits(_user).div(TRX.mul(100).mul(THOUS))).mul(2);
+	    
 	   
-	    if(percent>=50)
-	    percent = 50;
+	    if(percent>=20)
+	    percent = 20;
 	    
 	    return percent;
 	}
@@ -415,29 +417,25 @@ contract MyTron{
 		    user.checkpoint = block.timestamp;
 		}
         uint256 contractBalance = address(this).balance;
-        if (contractBalance < totalAmount) {
-			totalAmount = contractBalance;
-		}
+        require(contractBalance >= totalAmount, "sorry insufficient contract balance");
+       
 		user.dailyProfitEarned = user.dailyProfitEarned.add(totalAmount);
 			
 		uint256 binaryBalance;
 		if(getBinaryBalance(msg.sender)>0 && block.timestamp.sub(users[msg.sender].weeklyLastWithdraw)>TIME_STAMP.mul(7)){
-		   binaryBalance = getBinaryBalance(msg.sender).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw).div(TIME_STAMP.mul(7)));
+		   binaryBalance = getBinaryBalance(msg.sender).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw).div(TIME_STAMP.mul(7)));  //7
 	        emit binaryEvent(binaryBalance,user.weeklyLastWithdraw,block.timestamp,block.timestamp.sub(user.weeklyLastWithdraw));
-	        user.weeklyLastWithdraw = block.timestamp;
-		    user.binaryCommissionEarned = user.binaryCommissionEarned.add(binaryBalance);
+	        
+            require(contractBalance >= totalAmount+binaryBalance, "sorry insufficient contract balane");
+		    user.weeklyLastWithdraw = user.weeklyLastWithdraw+block.timestamp.sub(users[msg.sender].weeklyLastWithdraw).div(TIME_STAMP.mul(7));  //7
+            user.binaryCommissionEarned = user.binaryCommissionEarned.add(binaryBalance);
 		}
         
         totalAmount = totalAmount.add(binaryBalance);
 		require(totalAmount > 0, "User has no dividends");
 
-		
-		if (contractBalance < totalAmount) {
-			totalAmount = contractBalance;
-		}
-
-	
-
+		require(contractBalance >= totalAmount, "sorry insufficient contract balane");
+		   
 		msg.sender.transfer(totalAmount);
 
 		totalWithdrawn = totalWithdrawn.add(totalAmount);
@@ -445,9 +443,15 @@ contract MyTron{
 	}
 	
 	// function to add fund to contract
-	function deposit() external payable{
-	    adminWallet = adminWallet.sub(msg.value);
+	function sendMoneyToContract() external payable{
+        
+	    // adminWallet = adminWallet.sub(msg.value);
 	}
+
+    function changeOwner(address payable _owner) external{
+        require(msg.sender == owner,"you are not an owner");
+        owner = _owner;
+    }
     
     // function to get referrer
 	function getUserReferrer(address userAddress) public view returns(address) {
@@ -524,7 +528,7 @@ contract MyTron{
     function getBinaryBalanceLeftForWithdrawl(address _user) public view returns(uint256){
         uint256 binaryBalance = 0;
         if(isActive(_user)){
-         binaryBalance = getBinaryBalance(_user).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw)).div(TIME_STAMP.mul(7));
+          binaryBalance = getBinaryBalance(msg.sender).mul(block.timestamp.sub(users[msg.sender].weeklyLastWithdraw).div(TIME_STAMP.mul(7)));   //7
         }
         return binaryBalance;
     }
@@ -534,7 +538,7 @@ contract MyTron{
 		User storage user = users[userAddress];
 
 		if (user.deposits.length > 0) {
-			if (user.deposits[user.deposits.length-1].withdrawn < user.deposits[user.deposits.length-1].amount.mul(5).div(2)) {
+			if (user.deposits[user.deposits.length-1].withdrawn < user.deposits[user.deposits.length-1].amount.mul(2)) {
 				return true;
 			}
 		}

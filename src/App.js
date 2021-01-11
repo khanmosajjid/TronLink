@@ -38,11 +38,11 @@ class App extends Component {
 		console.log('tron initiated', this.state);
 
 		this.getUserInfo(this.state.account);
-		for (var i = 0; i < 10; i++) {
-			const result = await this.getLevelWiseCount(this.state.account, i + 1);
-			console.log(result, ' level', i + 1, '-----');
-		}
+
 		this.fetchPlatformData();
+		for (let i = 0; i < 3; i++) {
+			this.getUserDepositInfo(this.state.account, i);
+		}
 		console.log(this.state);
 	}
 
@@ -130,7 +130,7 @@ class App extends Component {
 			.invest('TYPGbv47eFGBCDvjrPZNgXs3JfrqPMTWS9')
 			.send({
 				from: window.tronWeb.defaultAddress.base58,
-				callValue: entryFees*1000000,
+				callValue: entryFees * 1000000,
 				shouldPollResponse: true
 			})
 			.then((receipt) => {
@@ -163,10 +163,13 @@ class App extends Component {
 	async getUserInfo(addr) {
 		let userDailyProfit = (await this.state.contract.getUserDailyProfit(addr).call()).toNumber() / 1000000;
 		console.log('daily', userDailyProfit);
-		const getBinaryBalanceLeftForWithdrawl =
+		let binaryBalanceLeftForWithdrawl =
 			(await this.state.contract.getBinaryBalanceLeftForWithdrawl(addr).call()).toNumber() / 1000000;
-		userDailyProfit = userDailyProfit + getBinaryBalanceLeftForWithdrawl;
+		userDailyProfit = userDailyProfit + binaryBalanceLeftForWithdrawl;
+		console.log('binarr left', binaryBalanceLeftForWithdrawl);
+		// userDailyProfit = userDailyProfit + getBinaryBalanceLeftForWithdrawl;
 		const userPersonalDepositProfit = (await this.state.contract.getExtraProfit(addr).call()).toNumber() / 100;
+		console.log("personal",userPersonalDepositProfit)
 		const totalEarnedFromDailyProfit =
 			(await this.state.contract.totalEarnedFromDailyProfit(addr).call()).toNumber() / 1000000;
 		const totalReferralCommissionEarned =
@@ -184,6 +187,7 @@ class App extends Component {
 			(await this.state.contract.getUserTotalActiveDeposits(addr).call()).toNumber() / 1000000;
 		const noOfTotalDeposits = (await this.state.contract.getUserTotalNumberOfDeposits(addr).call()).toNumber();
 		const userTotalDeposits = (await this.state.contract.getUserTotalDeposits(addr).call()).toNumber() / 1000000;
+
 		let payload = {
 			userTotalDeposits: userTotalDeposits,
 			userTotalActiveDeposits: userTotalActiveDeposits,
@@ -199,9 +203,18 @@ class App extends Component {
 			totalTeamMembers: totalTeamMembers
 		};
 		console.log('Payload is ', payload);
-		let contractBalance = (await this.state.contract.getContractBalance().call()).toNumber()/1000000;
+		let contractBalance = (await this.state.contract.getContractBalance().call()).toNumber() / 1000000;
 		console.log('contract balance', contractBalance);
 		this.setState(payload);
+		for (var i = 0; i < 10; i++) {
+			const result = await this.getLevelWiseCount(this.state.account, i + 1);
+			console.log(result, ' level', i + 1, '-----');
+		}
+	}
+
+	async getUserDepositInfo(addr, index) {
+		let res = await this.state.contract.getUserDepositInfo(addr, index).call();
+		console.log('deposit info..', res._amount.toNumber());
 	}
 
 	async getLevelWiseCount(addr, level) {

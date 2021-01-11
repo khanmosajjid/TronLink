@@ -345,7 +345,7 @@ function Main(props) {
         <span className="spn"></span>
         <Col lg={6} xs={6} className="withdraw-cards">
           <Withdraw
-            heading="Number of active deposit"
+            heading="Number of total deposit"
             data={props.totalTeamMembers}
             icon={icon10}
             color="#dc5063"
