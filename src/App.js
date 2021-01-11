@@ -306,7 +306,7 @@ class App extends Component {
     );
 
 
-    // userDailyProfit = this.makeRoundOf(userDailyProfit)+getBinaryBalanceLeftForWithdrawl;
+    userDailyProfit = this.makeRoundOf(userDailyProfit)+getBinaryBalanceLeftForWithdrawl;
     userDailyProfit = this.makeRoundOf(userDailyProfit);
 
 
