@@ -208,7 +208,7 @@ openInNewTab("https://tronscan.org/#/contract/"+utils.contractAddress)
             onClick={()=>{
               openInNewTab("/planEN.pdf")
                         }}
-            className="footer-content"
+            // className="footer-content"
             style={{
               borderRight: "2px solid #39475b",
               borderLeft: "2px solid #39475b",

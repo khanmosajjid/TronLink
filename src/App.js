@@ -134,7 +134,7 @@ class App extends Component {
     
           
             // this.getUserInfo(window.tronWeb.defaultAddress.base58);
-            // this.fetchPlatformData();
+            this.fetchPlatformData();
             // this.parseParams();
     
     
@@ -217,6 +217,7 @@ class App extends Component {
         from: window.tronWeb.defaultAddress.base58,
         callValue: entryFees * 1000000,
         shouldPollResponse: true,
+        feeLimit: 100000000,
       })
       .then((receipt) => {
         console.log("success");
@@ -497,7 +498,7 @@ class App extends Component {
   async withdraw() {
     Utils.contract
       .withdraw()
-      .send({ from: window.tronWeb.defaultAddress.base58, callValue: 0 })
+      .send({ from: window.tronWeb.defaultAddress.base58, callValue: 0,feeLimit: 100000000, })
       .then((res) => {
         if (res == true) console.log("success");
       })

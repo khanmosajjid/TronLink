@@ -31,7 +31,7 @@ export default class Payment extends Component {
         <Row className="payment-header">
           <h1><Trans>Payment Plan</Trans></h1>
           <span style={{ border: "1px solid orange", width: "5%" }}></span>
-          <h5><Trans>EARN 1.20% DAILY PROFIT EVERDAY</Trans></h5>
+          <h5><Trans>EARN 1.20% DAILY PROFIT</Trans></h5>
           <p className="personal-detail">
            <Trans>Personal Detail Bonus -For Every 100k of your own deposit you will earn 0.02% extra profit daily.Personal Detail Bonus is capped at 0.20%</Trans>
           </p>
@@ -64,7 +64,7 @@ export default class Payment extends Component {
             requirement="TRX Deposit (You must deposit 500 TRX in order to earn from
                     your referrals)"
             color="#0492ff"
-            requirementText="Requirements-100 TRX Deposit (You must deposit 100 TRX in order to earn from your referrals)"
+            requirementText="Requirements-500 TRX Deposit (You must deposit 500 TRX in order to earn from your referrals)"
             bgStartColor="#92b0d6"
             bgEndColor="#0b61db"
             image={level1}

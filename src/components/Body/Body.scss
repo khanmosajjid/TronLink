@@ -129,7 +129,7 @@
     align-items: center;
 }
 .body1{
-    display: flex;
+    // display: flex;
     justify-content: center;
     margin-left: 0px !important;
     margin-right: 0px !important;
@@ -138,7 +138,7 @@
    
     background-image: url("../../assets/header-img.jpg");
     background-size: cover;
-    // background-position: bottom;
+    background-position:center
 }
 
 @media(max-width:700px){

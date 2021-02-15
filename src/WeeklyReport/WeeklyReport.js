@@ -50,8 +50,12 @@ export default function WeekyReport(){
 		}
 		
 
+
+
 		try {
 			db.ref("reports").once('value', snapshot => {
+
+			
 			  let viewItems = []
 			  snapshot.forEach((snap) => {
 				//   console.log("vd",snap.val().endWeek)
@@ -78,7 +82,7 @@ export default function WeekyReport(){
 
 
 		  } catch (error) {
-
+				console.log("firebaseErr")
 		  }
 	},[])
 
